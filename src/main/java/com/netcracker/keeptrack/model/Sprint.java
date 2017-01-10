@@ -14,7 +14,7 @@ public class Sprint extends BaseEntity {
     /**
      * The project, part of which is the current sprint.
      */
-    private Object project;
+    private Project project;
 
     /**
      * Current status of sprint execution.
@@ -31,7 +31,7 @@ public class Sprint extends BaseEntity {
      */
     private String description;
 
-    public Sprint(int id, Object project, SprintStatus status, List<Task> tasks, String description) {
+    public Sprint(int id, Project project, SprintStatus status, List<Task> tasks, String description) {
         super(id);
         this.project = project;
         this.status = status;
@@ -39,11 +39,11 @@ public class Sprint extends BaseEntity {
         this.description = description;
     }
 
-    public Object getProject() {
+    public Project getProject() {
         return project;
     }
 
-    public void setProject(Object project) {
+    public void setProject(Project project) {
         this.project = project;
     }
 
