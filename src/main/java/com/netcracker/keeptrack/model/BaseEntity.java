@@ -8,17 +8,17 @@ public class BaseEntity {
     /**
      * Unique identifier for storage in data base.
      */
-    protected int id;
+    protected Integer id;
 
-    public BaseEntity(int id) {
+    public BaseEntity(Integer id) {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
