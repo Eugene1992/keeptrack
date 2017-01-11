@@ -1,12 +1,14 @@
 package com.netcracker.keeptrack.service;
 
 import com.netcracker.keeptrack.model.Project;
+import org.springframework.stereotype.Service;
 
 /**
  * Project interface that describes methods for Project entity business logic.
  *
  * @see Project
  */
+@Service
 public interface ProjectService {
 
     void addProject(Project project);
