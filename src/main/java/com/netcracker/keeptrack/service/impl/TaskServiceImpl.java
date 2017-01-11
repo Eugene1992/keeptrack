@@ -6,6 +6,13 @@ import com.netcracker.keeptrack.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of {@link TaskService} interface that provides methods for Task
+ * entity business logic.
+ *
+ * @see TaskService
+ * @see Task
+ */
 @Service
 public class TaskServiceImpl implements TaskService {
 
