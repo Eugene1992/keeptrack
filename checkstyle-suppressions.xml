@@ -27,6 +27,9 @@
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 <suppressions>
    <suppress checks="AvoidStarImport" files="[\\/]src[\\/]test[\\/]java[\\/]"/>
+   <suppress checks="AvoidInlineConditionals" files="[\\/]model[\\/]"/>
+   <suppress checks="MagicNumber" files="[\\/]model[\\/]"/>
+   <suppress checks="NeedBraces" files="[\\/]model[\\/]"/>
    <suppress checks="[a-zA-Z0-9]*" files="[\\/]src[\\/]test[\\/]resources[\\/]"/>
    <suppress checks="[a-zA-Z0-9]*" files="[\\/]build[\\/]generated-sources[\\/]"/>
    <suppress checks="[a-zA-Z0-9]*" files="[\\/]src[\\/]main[\\/]resources[\\/]"/>

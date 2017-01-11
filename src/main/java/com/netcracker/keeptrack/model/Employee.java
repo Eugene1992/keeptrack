@@ -1,12 +1,14 @@
 package com.netcracker.keeptrack.model;
 
 import java.time.LocalDate;
+import javax.persistence.Entity;
 
 /**
  * A person who is hired to work for a project.
  *
  * @see Gender
  */
+@Entity
 public class Employee extends BaseEntity {
 
     /**
@@ -44,8 +46,7 @@ public class Employee extends BaseEntity {
      */
     private LocalDate hireDay;
 
-    public Employee(int id, String firstName, String lastName, int salary, String email, Gender gender, LocalDate birthday, LocalDate hireDay) {
-        super(id);
+    public Employee(String firstName, String lastName, int salary, String email, Gender gender, LocalDate birthday, LocalDate hireDay) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
@@ -53,6 +54,9 @@ public class Employee extends BaseEntity {
         this.gender = gender;
         this.birthday = birthday;
         this.hireDay = hireDay;
+    }
+
+    public Employee() {
     }
 
     public String getFirstName() {
@@ -109,5 +113,33 @@ public class Employee extends BaseEntity {
 
     public void setHireDay(LocalDate hireDay) {
         this.hireDay = hireDay;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        if (salary != employee.salary) return false;
+        if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
+        if (email != null ? !email.equals(employee.email) : employee.email != null) return false;
+        if (gender != employee.gender) return false;
+        if (birthday != null ? !birthday.equals(employee.birthday) : employee.birthday != null) return false;
+        return hireDay != null ? hireDay.equals(employee.hireDay) : employee.hireDay == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firstName != null ? firstName.hashCode() : 0;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + salary;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (hireDay != null ? hireDay.hashCode() : 0);
+        return result;
     }
 }
