@@ -31,8 +31,7 @@ public class Sprint extends BaseEntity {
      */
     private String description;
 
-    public Sprint(int id, Project project, SprintStatus status, List<Task> tasks, String description) {
-        super(id);
+    public Sprint(Project project, SprintStatus status, List<Task> tasks, String description) {
         this.project = project;
         this.status = status;
         this.tasks = tasks;

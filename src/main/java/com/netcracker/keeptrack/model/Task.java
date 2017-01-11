@@ -1,11 +1,18 @@
 package com.netcracker.keeptrack.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 /**
  * The smallest piece of a job that serves as a unit of work a project.
  *
  * @see BaseEntity
  * @see TaskStatus
  */
+@Entity
 public class Task extends BaseEntity {
 
     /**
@@ -16,11 +23,15 @@ public class Task extends BaseEntity {
     /**
      * The employee who created the task.
      */
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "creator_id")
     private Employee creator;
 
     /**
      * The employee to whom the task is assigned.
      */
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "assigner_id")
     private Employee assigner;
 
     /**
@@ -38,14 +49,16 @@ public class Task extends BaseEntity {
      */
     private String description;
 
-    public Task(int id, String name, Employee creator, Employee assigner, int estimate, TaskStatus status, String description) {
-        super(id);
+    public Task(String name, Employee creator, Employee assigner, int estimate, TaskStatus status, String description) {
         this.name = name;
         this.creator = creator;
         this.assigner = assigner;
         this.estimate = estimate;
         this.status = status;
         this.description = description;
+    }
+
+    public Task() {
     }
 
     public String getName() {
@@ -94,5 +107,31 @@ public class Task extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        if (estimate != task.estimate) return false;
+        if (name != null ? !name.equals(task.name) : task.name != null) return false;
+        if (creator != null ? !creator.equals(task.creator) : task.creator != null) return false;
+        if (assigner != null ? !assigner.equals(task.assigner) : task.assigner != null) return false;
+        if (status != task.status) return false;
+        return description != null ? description.equals(task.description) : task.description == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (creator != null ? creator.hashCode() : 0);
+        result = 31 * result + (assigner != null ? assigner.hashCode() : 0);
+        result = 31 * result + estimate;
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
     }
 }
