@@ -1,0 +1,12 @@
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+    <definition name="home" template="/WEB-INF/views/template/home.jsp">
+        <put-attribute name="title" value="Main page" />
+        <put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
+        <put-attribute name="side-bar" value="/WEB-INF/views/tiles/side-bar.jsp" />
+    </definition>
+
+</tiles-definitions>
