@@ -19,4 +19,9 @@ public class HomeController {
     public String employees() {
         return "employees";
     }
+
+    @RequestMapping(value = "/dashboards", method = RequestMethod.GET)
+    public String dashboards() {
+        return "dashboards";
+    }
 }
