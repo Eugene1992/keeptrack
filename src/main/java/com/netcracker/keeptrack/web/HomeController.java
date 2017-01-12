@@ -14,4 +14,9 @@ public class HomeController {
     public String home() {
         return "home";
     }
+
+    @RequestMapping(value = "/employees", method = RequestMethod.GET)
+    public String employees() {
+        return "employees";
+    }
 }

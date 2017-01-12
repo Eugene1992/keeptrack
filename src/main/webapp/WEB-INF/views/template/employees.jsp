@@ -24,8 +24,8 @@
 </head>
 <body>
 <div id="wrapper">
-    <tiles:insertAttribute name="navigation" />
-
+    <tiles:insertAttribute name="navigation"/>
+    <tiles:insertAttribute name="employees-menu"/>
 </div>
 
 <!-- isteven multi select -->

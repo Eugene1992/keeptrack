@@ -4,9 +4,12 @@
 
 <tiles-definitions>
     <definition name="home" template="/WEB-INF/views/template/home.jsp">
-        <put-attribute name="title" value="Main page" />
-        <put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
-        <put-attribute name="side-bar" value="/WEB-INF/views/tiles/side-bar.jsp" />
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
     </definition>
-
+    <definition name="employees" template="/WEB-INF/views/template/employees.jsp">
+        <put-attribute name="title" value="Employees" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="employees-menu" value="/WEB-INF/views/tiles/employees-menu.jsp" />
+    </definition>
 </tiles-definitions>
