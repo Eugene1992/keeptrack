@@ -3,7 +3,7 @@ package com.netcracker.keeptrack.model;
 /**
  *  The state of being male or female.
  *
- *  @see Employee
+ *  @see User
  */
 public enum Gender {
 
