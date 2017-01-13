@@ -3,7 +3,8 @@ package com.netcracker.keeptrack.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import javax.persistence.Entity;
+import java.util.Set;
+import javax.persistence.*;
 
 /**
  * A person who is hired to work for a project.
@@ -49,6 +50,13 @@ public class Employee extends BaseEntity {
      */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate hireDay;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private Project project;
+
+    @OneToMany(mappedBy = "assigner")
+    private Set<Task> tasks;
 
     public Employee(String firstName, String lastName, int salary, String email, Gender gender, LocalDate birthday, LocalDate hireDay) {
         this.firstName = firstName;

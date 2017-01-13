@@ -1,10 +1,6 @@
 package com.netcracker.keeptrack.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * The smallest piece of a job that serves as a unit of work a project.
@@ -23,15 +19,15 @@ public class Task extends BaseEntity {
     /**
      * The employee who created the task.
      */
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "creator_id")
-    private Employee creator;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private ProjectManager creator;
 
     /**
      * The employee to whom the task is assigned.
      */
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "assigner_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
     private Employee assigner;
 
     /**
@@ -49,14 +45,9 @@ public class Task extends BaseEntity {
      */
     private String description;
 
-    public Task(String name, Employee creator, Employee assigner, int estimate, TaskStatus status, String description) {
-        this.name = name;
-        this.creator = creator;
-        this.assigner = assigner;
-        this.estimate = estimate;
-        this.status = status;
-        this.description = description;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private Sprint sprint;
 
     public Task() {
     }
@@ -69,15 +60,15 @@ public class Task extends BaseEntity {
         this.name = name;
     }
 
-    public Object getCreator() {
+    public ProjectManager getCreator() {
         return creator;
     }
 
-    public void setCreator(Employee creator) {
+    public void setCreator(ProjectManager creator) {
         this.creator = creator;
     }
 
-    public Object getAssigner() {
+    public Employee getAssigner() {
         return assigner;
     }
 
@@ -109,6 +100,14 @@ public class Task extends BaseEntity {
         this.description = description;
     }
 
+    public Sprint getSprint() {
+        return sprint;
+    }
+
+    public void setSprint(Sprint sprint) {
+        this.sprint = sprint;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -121,7 +120,8 @@ public class Task extends BaseEntity {
         if (creator != null ? !creator.equals(task.creator) : task.creator != null) return false;
         if (assigner != null ? !assigner.equals(task.assigner) : task.assigner != null) return false;
         if (status != task.status) return false;
-        return description != null ? description.equals(task.description) : task.description == null;
+        if (description != null ? !description.equals(task.description) : task.description != null) return false;
+        return sprint != null ? sprint.equals(task.sprint) : task.sprint == null;
     }
 
     @Override
@@ -132,6 +132,7 @@ public class Task extends BaseEntity {
         result = 31 * result + estimate;
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (sprint != null ? sprint.hashCode() : 0);
         return result;
     }
 }

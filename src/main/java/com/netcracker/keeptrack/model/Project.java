@@ -1,5 +1,7 @@
 package com.netcracker.keeptrack.model;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import java.util.List;
  * @see Task
  * @see Sprint
  */
+@Entity
 public class Project {
 
     /**
@@ -36,11 +39,13 @@ public class Project {
     /**
      * The sprints of the project.
      */
+    @OneToMany(mappedBy = "project")
     private List<Sprint> sprints;
 
     /**
      * Employees who work on a current project.
      */
+    @OneToMany(mappedBy = "project")
     private List<Employee> employees;
 
     public Project(String name, Employee manager, ProjectStatus status, LocalDate startDate, List<Sprint> sprints, List<Employee> employees) {
