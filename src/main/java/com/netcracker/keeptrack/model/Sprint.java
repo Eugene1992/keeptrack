@@ -1,11 +1,10 @@
 package com.netcracker.keeptrack.model;
 
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Period of time during which specific work has to be completed and made ready for review.

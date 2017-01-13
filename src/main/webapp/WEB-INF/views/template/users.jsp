@@ -27,7 +27,7 @@
 <body>
 <div id="wrapper">
     <tiles:insertAttribute name="navigation"/>
-    <tiles:insertAttribute name="employees-menu"/>
+    <tiles:insertAttribute name="users-menu"/>
 </div>
 
 <!-- isteven multi select -->
@@ -44,7 +44,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#employees-table').DataTable( {
+        $('#users-table').DataTable( {
             "pagingType": "full_numbers"
         } );
     } );

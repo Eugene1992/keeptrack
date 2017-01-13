@@ -1,6 +1,8 @@
 package com.netcracker.keeptrack.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * The smallest piece of a job that serves as a unit of work a project.

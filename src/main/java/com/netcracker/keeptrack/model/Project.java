@@ -1,11 +1,10 @@
 package com.netcracker.keeptrack.model;
 
-import javax.persistence.CascadeType;
+import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.time.LocalDate;
-import java.util.List;
 
 /**
  * The project is a collection of tasks or activities related to the achievement of the planned goals.
