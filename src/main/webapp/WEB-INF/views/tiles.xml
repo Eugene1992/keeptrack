@@ -1,0 +1,20 @@
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+    <definition name="home" template="/WEB-INF/views/template/home.jsp">
+        <put-attribute name="title" value="Home" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+    </definition>
+    <definition name="employees" template="/WEB-INF/views/template/employees.jsp">
+        <put-attribute name="title" value="Employees" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="employees-menu" value="/WEB-INF/views/tiles/employees-menu.jsp" />
+    </definition>
+    <definition name="dashboards" template="/WEB-INF/views/template/dashboards.jsp">
+        <put-attribute name="title" value="Dashboards" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="dashboards-menu" value="/WEB-INF/views/tiles/dashboards-menu.jsp" />
+    </definition>
+</tiles-definitions>

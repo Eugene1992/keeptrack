@@ -1,0 +1,26 @@
+package com.netcracker.keeptrack.web;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+/**
+ * Return Apache Tiles 'home' definition by '/' GET request.
+ */
+@Controller
+public class HomeController {
+
+    /**
+     * Home page controller.
+     * @return tiles 'home' definition
+     */
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home() {
+        return "home";
+    }
+
+    @RequestMapping(value = "/dashboards", method = RequestMethod.GET)
+    public String dashboards() {
+        return "dashboards";
+    }
+}
