@@ -267,3 +267,7 @@ ul.alert-dropdown {
     text-align: center;
     color: #337AB7;;
 }
+
+#employees-table {
+    margin: 10px 0;
+}

@@ -1,31 +1,19 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12"><br>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <i class="fa fa-users fa-fw"></i> Employee list
-                        </h3>
+                        <span class="panel-title">
+                            Employee list
+                        </span>
+                        <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal"
+                                data-target="#newEmpModal">New Employee
+                        </button>
                     </div>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="input-group">
-                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                                            data-target="#newEmpModal">New Employee
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="input-group pull-right">
-                                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="employees-table">
                             <thead>
                                 <tr>
                                     <th>First Name</th>
@@ -42,15 +30,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:forEach items="${employeesList}" var="employee">
+                            <jsp:useBean id="employee" scope="page" type="com.netcracker.keeptrack.model.Employee"/>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>${employee.firstName}</td>
+                                    <td>${employee.lastName}</td>
+                                    <td>${employee.birthday}</td>
+                                    <td>${employee.birthday}</td>
+                                    <td>${employee.hireDay}</td>
+                                    <td>${employee.gender}</td>
+                                    <td>${employee.email}</td>
+                                    <td>${employeeProjects}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
                                                 data-target="#updEmpModal">Update</button>
@@ -62,24 +52,9 @@
                                         <button type="button" class="btn btn-success btn-xs">Profile</button>
                                     </td>
                                 </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>
-                                        <select class="form-control" ng-model="tableSize">
-                                            <option>5</option>
-                                            <option>10</option>
-                                            <option>25</option>
-                                            <option>50</option>
-                                            <option>100</option>
-                                        </select>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
                     </div>
                 </div>
             </div>
