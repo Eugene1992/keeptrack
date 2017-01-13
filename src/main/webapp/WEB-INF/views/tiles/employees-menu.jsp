@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -37,7 +38,7 @@
                                     <td>${employee.lastName}</td>
                                     <td>${employee.birthday}</td>
                                     <td>${employee.birthday}</td>
-                                    <td>${employee.hireDay}</td>
+                                    <td>${employee.salary}</td>
                                     <td>${employee.gender}</td>
                                     <td>${employee.email}</td>
                                     <td>${employeeProjects}</td>
@@ -68,58 +69,58 @@
                         <h4 class="modal-title">Add new Employee</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="newEmpForm" name="newEmpForm">
+                        <form:form action="/addEmployee" method="POST" modelAttribute="employee" id="newEmpForm" name="newEmpForm">
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-6">
                                     <label for="firstName">First name:</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" pattern="/^[a-zA-Z]{2,10}$/" required/>
+                                    <form:input path="firstName" type="text" class="form-control" id="firstName" name="firstName" pattern="[a-zA-Z]{2,10}" />
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label for="lastName">Last name:</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" pattern="/^[a-zA-Z]{2,10}$/" required/>
+                                    <form:input path="lastName" type="text" class="form-control" id="lastName" name="lastName" pattern="[a-zA-Z]{2,10}" />
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-3">
                                     <label for="salary">Salary:</label>
-                                    <input type="text" class="form-control" id="salary" name="salary" required/>
+                                    <form:input path="salary" type="text" class="form-control" id="salary" name="salary" />
                                 </div>
                                 <div class="form-group form-group-sm col-md-3">
                                     <label for="gender">Gender:</label>
-                                    <select class="form-control custom-select-height" id="gender" name="gender" required>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                    </select>
+                                    <form:select path="gender" class="form-control custom-select-height" id="gender" name="gender">
+                                        <form:option value="MALE" />
+                                        <form:option value="FEMALE" />
+                                    </form:select>
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" required/>
+                                    <form:input path="email" type="email" class="form-control" id="email" name="email"/>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-6">
                                     <label for="birthday">Birthday:</label>
-                                    <input type="date" class="form-control" id="birthday" name="birthday" required/>
+                                    <form:input path="birthday" type="date" class="form-control" id="birthday" name="birthday"/>
                                 </div>
 
                                 <div class="form-group col-lg-6">
                                     <label for="hiredate">Hiredate:</label>
-                                    <input type="date" class="form-control" id="hiredate" name="hiredate" required/>
+                                    <form:input path="hireDay" type="date" class="form-control" id="hiredate" name="hiredate"/>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-12 outer">
+                            <%--<div class="form-group col-lg-12 outer">
                                 <div class="form-group form-group-sm col-md-6" id="npm">
                                     <label for="npm">Assign as PM for the project:</label>
-                                    <select class="form-control custom-select-height" required>
-                                        <option>Minerva</option>
-                                    </select>
+                                    <form:select path="" class="form-control custom-select-height">
+                                        <form:option value="Minerva" />
+                                    </form:select>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close menu</button>
                             </div>
-                        </form>
+                        </form:form>
                     </div>
                 </div>
             </div>

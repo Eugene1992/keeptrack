@@ -1,5 +1,7 @@
 package com.netcracker.keeptrack.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import javax.persistence.Entity;
 
@@ -39,11 +41,13 @@ public class Employee extends BaseEntity {
     /**
      * Employee birthday.
      */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
     /**
      * Employee hire day.
      */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate hireDay;
 
     public Employee(String firstName, String lastName, int salary, String email, Gender gender, LocalDate birthday, LocalDate hireDay) {
