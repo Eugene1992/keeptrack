@@ -22,7 +22,7 @@ import java.time.LocalDate;
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml",
 })
-@ActiveProfiles("postgres")
+@ActiveProfiles("hsql")
 public class UserServiceImplTest {
 
     @Autowired
