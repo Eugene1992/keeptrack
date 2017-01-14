@@ -14,7 +14,7 @@
                         </button>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-bordered table-hover" id="employees-table">
+                        <table class="table table-bordered table-hover" id="users-table">
                             <thead>
                                 <tr>
                                     <th>First Name</th>
@@ -31,16 +31,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${employeesList}" var="employee">
-                            <jsp:useBean id="employee" scope="page" type="com.netcracker.keeptrack.model.Employee"/>
+                            <c:forEach items="${usersList}" var="user">
+                            <jsp:useBean id="user" scope="page" type="com.netcracker.keeptrack.model.User"/>
                                 <tr>
-                                    <td>${employee.firstName}</td>
-                                    <td>${employee.lastName}</td>
-                                    <td>${employee.birthday}</td>
-                                    <td>${employee.birthday}</td>
-                                    <td>${employee.salary}</td>
-                                    <td>${employee.gender}</td>
-                                    <td>${employee.email}</td>
+                                    <td>${user.firstName}</td>
+                                    <td>${user.lastName}</td>
+                                    <td>${user.birthday}</td>
+                                    <td>${user.birthday}</td>
+                                    <td>${user.salary}</td>
+                                    <td>${user.gender}</td>
+                                    <td>${user.email}</td>
                                     <td>${employeeProjects}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <!-- New Employee Modal -->
+        <!-- New User Modal -->
         <div class="modal fade" id="newEmpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -69,7 +69,7 @@
                         <h4 class="modal-title">Add new Employee</h4>
                     </div>
                     <div class="modal-body">
-                        <form:form action="/addEmployee" method="POST" modelAttribute="employee" id="newEmpForm" name="newEmpForm">
+                        <form:form action="/addUser" method="POST" modelAttribute="user" id="newEmpForm" name="newUserForm">
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-6">
                                     <label for="firstName">First name:</label>
@@ -125,7 +125,7 @@
                 </div>
             </div>
         </div>
-        <!-- Update Employee Modal -->
+        <!-- Update User Modal -->
         <div class="modal fade" id="updEmpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog" role="document">

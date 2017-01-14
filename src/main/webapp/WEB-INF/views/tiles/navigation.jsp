@@ -78,7 +78,7 @@
                 <a href="#"><i class="fa fa-fw fa-edit"></i> Projects</a>
             </li>
             <li>
-                <a href="/employees"><i class="fa fa-fw fa-user"></i> Employees</a>
+                <a href="/users"><i class="fa fa-fw fa-user"></i> Employees</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-fw fa-wrench"></i> Tasks</a>

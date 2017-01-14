@@ -1,10 +1,8 @@
 package com.netcracker.keeptrack.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  * The smallest piece of a job that serves as a unit of work a project.
@@ -21,18 +19,25 @@ public class Task extends BaseEntity {
     private String name;
 
     /**
-     * The employee who created the task.
+     * Project manager which creates current task.
      */
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "creator_id")
-    private Employee creator;
+    private User creator;
 
     /**
      * The employee to whom the task is assigned.
      */
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "assigner_id")
-    private Employee assigner;
+    private User assigner;
+
+    /**
+     * Task sprint.
+     */
+    @ManyToOne
+    @JoinColumn(name = "sprint_id")
+    private Sprint sprint;
 
     /**
      * Estimated time to complete the task.
@@ -49,16 +54,18 @@ public class Task extends BaseEntity {
      */
     private String description;
 
-    public Task(String name, Employee creator, Employee assigner, int estimate, TaskStatus status, String description) {
+    public Task() {
+    }
+
+    public Task(String name, User creator, User assigner, Sprint sprint,
+                int estimate, TaskStatus status, String description) {
         this.name = name;
         this.creator = creator;
         this.assigner = assigner;
+        this.sprint = sprint;
         this.estimate = estimate;
         this.status = status;
         this.description = description;
-    }
-
-    public Task() {
     }
 
     public String getName() {
@@ -69,20 +76,28 @@ public class Task extends BaseEntity {
         this.name = name;
     }
 
-    public Object getCreator() {
+    public User getCreator() {
         return creator;
     }
 
-    public void setCreator(Employee creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
 
-    public Object getAssigner() {
+    public User getAssigner() {
         return assigner;
     }
 
-    public void setAssigner(Employee assigner) {
+    public void setAssigner(User assigner) {
         this.assigner = assigner;
+    }
+
+    public Sprint getSprint() {
+        return sprint;
+    }
+
+    public void setSprint(Sprint sprint) {
+        this.sprint = sprint;
     }
 
     public int getEstimate() {
@@ -120,8 +135,10 @@ public class Task extends BaseEntity {
         if (name != null ? !name.equals(task.name) : task.name != null) return false;
         if (creator != null ? !creator.equals(task.creator) : task.creator != null) return false;
         if (assigner != null ? !assigner.equals(task.assigner) : task.assigner != null) return false;
+        if (sprint != null ? !sprint.equals(task.sprint) : task.sprint != null) return false;
         if (status != task.status) return false;
         return description != null ? description.equals(task.description) : task.description == null;
+
     }
 
     @Override
@@ -129,6 +146,7 @@ public class Task extends BaseEntity {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (creator != null ? creator.hashCode() : 0);
         result = 31 * result + (assigner != null ? assigner.hashCode() : 0);
+        result = 31 * result + (sprint != null ? sprint.hashCode() : 0);
         result = 31 * result + estimate;
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);

@@ -1,6 +1,10 @@
 package com.netcracker.keeptrack.model;
 
-import java.util.List;
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Period of time during which specific work has to be completed and made ready for review.
@@ -9,12 +13,26 @@ import java.util.List;
  * @see BaseEntity
  * @see Task
  */
+@Entity
 public class Sprint extends BaseEntity {
 
     /**
-     * The project, part of which is the current sprint.
+     * Sprint name.
      */
+    private String name;
+
+    /**
+     * Sprint project.
+     */
+    @ManyToOne
+    @JoinColumn(name = "project_id")
     private Project project;
+
+    /**
+     * Sprint tasks.
+     */
+    @OneToMany(mappedBy = "sprint")
+    private Set<Task> tasks;
 
     /**
      * Current status of sprint execution.
@@ -22,20 +40,27 @@ public class Sprint extends BaseEntity {
     private SprintStatus status;
 
     /**
-     * Tasks included in the sprint.
-     */
-    private List<Task> tasks;
-
-    /**
      * Brief description of the sprint.
      */
     private String description;
 
-    public Sprint(Project project, SprintStatus status, List<Task> tasks, String description) {
+    public Sprint() {
+    }
+
+    public Sprint(String name, Project project, Set<Task> tasks, SprintStatus status, String description) {
+        this.name = name;
         this.project = project;
-        this.status = status;
         this.tasks = tasks;
+        this.status = status;
         this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Project getProject() {
@@ -46,6 +71,14 @@ public class Sprint extends BaseEntity {
         this.project = project;
     }
 
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     public SprintStatus getStatus() {
         return status;
     }
@@ -54,19 +87,36 @@ public class Sprint extends BaseEntity {
         this.status = status;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Sprint sprint = (Sprint) o;
+
+        if (name != null ? !name.equals(sprint.name) : sprint.name != null) return false;
+        if (project != null ? !project.equals(sprint.project) : sprint.project != null) return false;
+        if (tasks != null ? !tasks.equals(sprint.tasks) : sprint.tasks != null) return false;
+        if (status != sprint.status) return false;
+        return description != null ? description.equals(sprint.description) : sprint.description == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (project != null ? project.hashCode() : 0);
+        result = 31 * result + (tasks != null ? tasks.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
     }
 }

@@ -2,16 +2,20 @@ package com.netcracker.keeptrack.model;
 
 import java.time.LocalDate;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * The project is a collection of tasks or activities related to the achievement of the planned goals.
  * Consists of sprints.
  *
- * @see Employee
+ * @see User
  * @see Task
  * @see Sprint
  */
-public class Project {
+@Entity
+public class Project extends BaseEntity {
 
     /**
      * Project title.
@@ -21,7 +25,20 @@ public class Project {
     /**
      * The manager of the current project.
      */
-    private Employee manager;
+    @OneToOne(mappedBy = "managedProject")
+    private User manager;
+
+    /**
+     * Employees who works on a current project.
+     */
+    @OneToMany(mappedBy = "project")
+    private List<User> users;
+
+    /**
+     * The sprints of the project.
+     */
+    @OneToMany(mappedBy = "project")
+    private List<Sprint> sprints;
 
     /**
      * Current status of sprint execution.
@@ -33,23 +50,17 @@ public class Project {
      */
     private LocalDate startDate;
 
-    /**
-     * The sprints of the project.
-     */
-    private List<Sprint> sprints;
+    public Project() {
+    }
 
-    /**
-     * Employees who work on a current project.
-     */
-    private List<Employee> employees;
-
-    public Project(String name, Employee manager, ProjectStatus status, LocalDate startDate, List<Sprint> sprints, List<Employee> employees) {
+    public Project(String name, User manager, List<User> users, List<Sprint> sprints,
+                   ProjectStatus status, LocalDate startDate) {
         this.name = name;
         this.manager = manager;
+        this.users = users;
+        this.sprints = sprints;
         this.status = status;
         this.startDate = startDate;
-        this.sprints = sprints;
-        this.employees = employees;
     }
 
     public String getName() {
@@ -60,12 +71,28 @@ public class Project {
         this.name = name;
     }
 
-    public Employee getManager() {
+    public User getManager() {
         return manager;
     }
 
-    public void setManager(Employee manager) {
+    public void setManager(User manager) {
         this.manager = manager;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public List<Sprint> getSprints() {
+        return sprints;
+    }
+
+    public void setSprints(List<Sprint> sprints) {
+        this.sprints = sprints;
     }
 
     public ProjectStatus getStatus() {
@@ -84,19 +111,30 @@ public class Project {
         this.startDate = startDate;
     }
 
-    public List<Sprint> getSprints() {
-        return sprints;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Project project = (Project) o;
+
+        if (name != null ? !name.equals(project.name) : project.name != null) return false;
+        if (manager != null ? !manager.equals(project.manager) : project.manager != null) return false;
+        if (users != null ? !users.equals(project.users) : project.users != null) return false;
+        if (sprints != null ? !sprints.equals(project.sprints) : project.sprints != null) return false;
+        if (status != project.status) return false;
+        return startDate != null ? startDate.equals(project.startDate) : project.startDate == null;
+
     }
 
-    public void setSprints(List<Sprint> sprints) {
-        this.sprints = sprints;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (manager != null ? manager.hashCode() : 0);
+        result = 31 * result + (users != null ? users.hashCode() : 0);
+        result = 31 * result + (sprints != null ? sprints.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        return result;
     }
 }

@@ -7,10 +7,10 @@
         <put-attribute name="title" value="Home" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
     </definition>
-    <definition name="employees" template="/WEB-INF/views/template/employees.jsp">
-        <put-attribute name="title" value="Employees" />
+    <definition name="users" template="/WEB-INF/views/template/users.jsp">
+        <put-attribute name="title" value="Users" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
-        <put-attribute name="employees-menu" value="/WEB-INF/views/tiles/employees-menu.jsp" />
+        <put-attribute name="users-menu" value="/WEB-INF/views/tiles/users-menu.jsp" />
     </definition>
     <definition name="dashboards" template="/WEB-INF/views/template/dashboards.jsp">
         <put-attribute name="title" value="Dashboards" />
