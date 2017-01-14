@@ -4,7 +4,17 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Set;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * A person who is hired to work for a project.
@@ -54,16 +64,19 @@ public class User extends BaseEntity {
     /**
      * User role for system functions separation.
      */
+    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     /**
      * User first name.
      */
+    @Column(name = "first_name")
     private String firstName;
 
     /**
      * User last name.
      */
+    @Column(name = "last_name")
     private String lastName;
 
     /**
@@ -79,6 +92,7 @@ public class User extends BaseEntity {
     /**
      * User gender.
      */
+    @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
     /**
@@ -241,21 +255,21 @@ public class User extends BaseEntity {
 
     @Override
     public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", project=" + project +
-                ", managedProject=" + managedProject +
-                ", createdTasks=" + createdTasks +
-                ", assignedTasks=" + assignedTasks +
-                ", role=" + role +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", salary=" + salary +
-                ", email='" + email + '\'' +
-                ", gender=" + gender +
-                ", birthday=" + birthday +
-                ", hireDay=" + hireDay +
-                '}';
+        return "User{"
+                + "username='" + username + '\''
+                + ", password='" + password + '\''
+                + ", project=" + project
+                + ", managedProject=" + managedProject
+                + ", createdTasks=" + createdTasks
+                + ", assignedTasks=" + assignedTasks
+                + ", role=" + role
+                + ", firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + ", salary=" + salary
+                + ", email='" + email + '\''
+                + ", gender=" + gender
+                + ", birthday=" + birthday
+                + ", hireDay=" + hireDay
+                + '}';
     }
 }

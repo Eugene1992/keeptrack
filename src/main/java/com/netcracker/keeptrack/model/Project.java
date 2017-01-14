@@ -3,6 +3,8 @@ package com.netcracker.keeptrack.model;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -43,6 +45,7 @@ public class Project extends BaseEntity {
     /**
      * Current status of sprint execution.
      */
+    @Enumerated(value = EnumType.STRING)
     private ProjectStatus status;
 
     /**
@@ -50,17 +53,23 @@ public class Project extends BaseEntity {
      */
     private LocalDate startDate;
 
+    /**
+     * Date of end of the project.
+     */
+    private LocalDate endDate;
+
     public Project() {
     }
 
     public Project(String name, User manager, List<User> users, List<Sprint> sprints,
-                   ProjectStatus status, LocalDate startDate) {
+                   ProjectStatus status, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.manager = manager;
         this.users = users;
         this.sprints = sprints;
         this.status = status;
         this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public String getName() {
@@ -109,6 +118,14 @@ public class Project extends BaseEntity {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     @Override
