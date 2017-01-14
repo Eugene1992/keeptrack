@@ -24,12 +24,12 @@ public class UserController {
 
     {
         users = new ArrayList<>();
-        users.add(new User("legendary", "qwerty", Role.ADMIN, "Evgeniy", "Deyneka", 1,
+        /*users.add(new User("legendary", "qwerty", Role.ADMIN, "Evgeniy", "Deyneka", 1,
                 "deyneko55@gmail.com", Gender.MALE, LocalDate.now(), LocalDate.now()));
         users.add(new User("kinder", "qwerty", Role.EMPLOYEE, "Dmitriy", "Titov", 1,
                 "titov5@gmail.com", Gender.MALE, LocalDate.now(), LocalDate.now()));
         users.add(new User("zayka", "qwerty", Role.ADMIN, "Anna", "Zaika", 1,
-                "zayka@gmail.com", Gender.FEMALE, LocalDate.now(), LocalDate.now()));
+                "zayka@gmail.com", Gender.FEMALE, LocalDate.now(), LocalDate.now()));*/
     }
 
     @ModelAttribute("user")

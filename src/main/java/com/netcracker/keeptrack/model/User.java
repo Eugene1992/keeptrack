@@ -4,12 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * A person who is hired to work for a project.
@@ -17,7 +12,7 @@ import javax.persistence.Table;
  * @see Gender
  */
 @Entity
-@Table(name = "app_User")
+@Table(name = "app_User", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class User extends BaseEntity {
 
     /**
@@ -47,13 +42,13 @@ public class User extends BaseEntity {
     /**
      * The tasks are created by the user if he is a project manager.
      */
-    @OneToMany(mappedBy = "creator")
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     private Set<Task> createdTasks;
 
     /**
      * The tasks are assigned by the user if he is an employee.
      */
-    @OneToMany(mappedBy = "assigner")
+    @OneToMany(mappedBy = "assigner", fetch = FetchType.EAGER)
     private Set<Task> assignedTasks;
 
     /**
@@ -101,10 +96,14 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    public User(String username, String password, Role role, String firstName, String lastName,
-                int salary, String email, Gender gender, LocalDate birthday, LocalDate hireDay) {
+    public User(String username, String password, Project project, Project managedProject, Set<Task> createdTasks, Set<Task> assignedTasks, Role role,
+                String firstName, String lastName, int salary, String email, Gender gender, LocalDate birthday, LocalDate hireDay) {
         this.username = username;
         this.password = password;
+        this.project = project;
+        this.managedProject = managedProject;
+        this.createdTasks = createdTasks;
+        this.assignedTasks = assignedTasks;
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -238,5 +237,25 @@ public class User extends BaseEntity {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (hireDay != null ? hireDay.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", project=" + project +
+                ", managedProject=" + managedProject +
+                ", createdTasks=" + createdTasks +
+                ", assignedTasks=" + assignedTasks +
+                ", role=" + role +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", salary=" + salary +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                ", birthday=" + birthday +
+                ", hireDay=" + hireDay +
+                '}';
     }
 }
