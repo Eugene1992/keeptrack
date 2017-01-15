@@ -17,4 +17,9 @@
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
         <put-attribute name="dashboards-menu" value="/WEB-INF/views/tiles/dashboards-menu.jsp" />
     </definition>
+    <definition name="projects" template="/WEB-INF/views/template/projects.jsp">
+        <put-attribute name="title" value="Projects" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="dashboards-menu" value="/WEB-INF/views/tiles/projects-menu.jsp" />
+    </definition>
 </tiles-definitions>

@@ -2,6 +2,8 @@ package com.netcracker.keeptrack.model;
 
 import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -37,6 +39,7 @@ public class Sprint extends BaseEntity {
     /**
      * Current status of sprint execution.
      */
+    @Enumerated(value = EnumType.STRING)
     private SprintStatus status;
 
     /**
@@ -103,18 +106,13 @@ public class Sprint extends BaseEntity {
         Sprint sprint = (Sprint) o;
 
         if (name != null ? !name.equals(sprint.name) : sprint.name != null) return false;
-        if (project != null ? !project.equals(sprint.project) : sprint.project != null) return false;
-        if (tasks != null ? !tasks.equals(sprint.tasks) : sprint.tasks != null) return false;
         if (status != sprint.status) return false;
         return description != null ? description.equals(sprint.description) : sprint.description == null;
-
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (project != null ? project.hashCode() : 0);
-        result = 31 * result + (tasks != null ? tasks.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;

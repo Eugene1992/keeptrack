@@ -75,7 +75,7 @@
                 <a href="#"><i class="fa fa-fw fa-money"></i> Customers</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-edit"></i> Projects</a>
+                <a href="/projects"><i class="fa fa-fw fa-edit"></i> Projects</a>
             </li>
             <li>
                 <a href="/users"><i class="fa fa-fw fa-user"></i> Employees</a>

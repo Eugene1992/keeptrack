@@ -218,12 +218,6 @@ public class User extends BaseEntity {
         if (salary != user.salary) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (project != null ? !project.equals(user.project) : user.project != null) return false;
-        if (managedProject != null ? !managedProject.equals(user.managedProject) : user.managedProject != null)
-            return false;
-        if (createdTasks != null ? !createdTasks.equals(user.createdTasks) : user.createdTasks != null) return false;
-        if (assignedTasks != null ? !assignedTasks.equals(user.assignedTasks) : user.assignedTasks != null)
-            return false;
         if (role != user.role) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
@@ -238,10 +232,6 @@ public class User extends BaseEntity {
     public int hashCode() {
         int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (project != null ? project.hashCode() : 0);
-        result = 31 * result + (managedProject != null ? managedProject.hashCode() : 0);
-        result = 31 * result + (createdTasks != null ? createdTasks.hashCode() : 0);
-        result = 31 * result + (assignedTasks != null ? assignedTasks.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);

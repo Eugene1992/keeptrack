@@ -3,13 +3,10 @@ package com.netcracker.keeptrack.service.impl;
 import com.netcracker.keeptrack.model.*;
 import com.netcracker.keeptrack.service.UserService;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -19,9 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-
-import java.time.LocalDate;
-import java.util.Collections;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -54,7 +48,7 @@ public class UserServiceImplTest {
         em = emf.createEntityManager();
         db = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
-                .addScript("db_scripts/create-db.sql")
+                .addScript("db_scripts/sprints.sql")
                 .build();
     }
 

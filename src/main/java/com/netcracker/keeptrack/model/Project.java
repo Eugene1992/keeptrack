@@ -1,10 +1,11 @@
 package com.netcracker.keeptrack.model;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -33,14 +34,14 @@ public class Project extends BaseEntity {
     /**
      * Employees who works on a current project.
      */
-    @OneToMany(mappedBy = "project")
-    private List<User> users;
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private Set<User> users;
 
     /**
      * The sprints of the project.
      */
     @OneToMany(mappedBy = "project")
-    private List<Sprint> sprints;
+    private Set<Sprint> sprints;
 
     /**
      * Current status of sprint execution.
@@ -61,7 +62,7 @@ public class Project extends BaseEntity {
     public Project() {
     }
 
-    public Project(String name, User manager, List<User> users, List<Sprint> sprints,
+    public Project(String name, User manager, Set<User> users, Set<Sprint> sprints,
                    ProjectStatus status, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.manager = manager;
@@ -88,19 +89,19 @@ public class Project extends BaseEntity {
         this.manager = manager;
     }
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    public List<Sprint> getSprints() {
+    public Set<Sprint> getSprints() {
         return sprints;
     }
 
-    public void setSprints(List<Sprint> sprints) {
+    public void setSprints(Set<Sprint> sprints) {
         this.sprints = sprints;
     }
 
@@ -136,9 +137,6 @@ public class Project extends BaseEntity {
         Project project = (Project) o;
 
         if (name != null ? !name.equals(project.name) : project.name != null) return false;
-        if (manager != null ? !manager.equals(project.manager) : project.manager != null) return false;
-        if (users != null ? !users.equals(project.users) : project.users != null) return false;
-        if (sprints != null ? !sprints.equals(project.sprints) : project.sprints != null) return false;
         if (status != project.status) return false;
         return startDate != null ? startDate.equals(project.startDate) : project.startDate == null;
 
@@ -147,9 +145,6 @@ public class Project extends BaseEntity {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (manager != null ? manager.hashCode() : 0);
-        result = 31 * result + (users != null ? users.hashCode() : 0);
-        result = 31 * result + (sprints != null ? sprints.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         return result;

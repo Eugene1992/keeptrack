@@ -26,7 +26,14 @@
             <props>
                 <prop key="hibernate.hbm2ddl.auto">create</prop>
                 <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.import_files">db_scripts/create-db.sql</prop>
+                <prop key="hibernate.hbm2ddl.import_files">
+                    db_scripts/projects.sql,
+                    db_scripts/employees.sql,
+                    db_scripts/managers.sql,
+                    db_scripts/sprints.sql,
+                    db_scripts/tasks.sql
+                </prop>
+                <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
                 <!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>-->
             </props>
         </property>
@@ -46,7 +53,7 @@
 
     <beans profile="hsql">
         <jdbc:embedded-database id="dataSource" type="HSQL">
-            <jdbc:script location="classpath:db_scripts/create-db.sql" />
+            <jdbc:script location="classpath:db_scripts/sprints.sql" />
         </jdbc:embedded-database>
     </beans>
 </beans>
