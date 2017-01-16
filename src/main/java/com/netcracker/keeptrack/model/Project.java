@@ -1,5 +1,7 @@
 package com.netcracker.keeptrack.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -52,18 +54,25 @@ public class Project extends BaseEntity {
     /**
      * Date of start of the project.
      */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
 
     /**
      * Date of end of the project.
      */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
+
+    /**
+     * Date of end of the project.
+     */
+    private String description;
 
     public Project() {
     }
 
     public Project(String name, User manager, Set<User> users, Set<Sprint> sprints,
-                   ProjectStatus status, LocalDate startDate, LocalDate endDate) {
+                   ProjectStatus status, LocalDate startDate, LocalDate endDate, String description) {
         this.name = name;
         this.manager = manager;
         this.users = users;
@@ -71,6 +80,7 @@ public class Project extends BaseEntity {
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.description = description;
     }
 
     public String getName() {
@@ -129,6 +139,14 @@ public class Project extends BaseEntity {
         this.endDate = endDate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -137,6 +155,7 @@ public class Project extends BaseEntity {
         Project project = (Project) o;
 
         if (name != null ? !name.equals(project.name) : project.name != null) return false;
+        if (description != null ? !description.equals(project.description) : project.description != null) return false;
         if (status != project.status) return false;
         return startDate != null ? startDate.equals(project.startDate) : project.startDate == null;
 
@@ -145,6 +164,7 @@ public class Project extends BaseEntity {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         return result;

@@ -6,6 +6,8 @@ import com.netcracker.keeptrack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Implementation of {@link UserService} interface that provides methods for Task
  * entity business logic.
@@ -36,5 +38,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void editUser(User user) {
         repository.saveAndFlush(user);
+    }
+
+    @Override
+    public List<User> getFreeEmployees() {
+        return repository.getFreeEmployees();
+    }
+
+    @Override
+    public List<User> getFreeManagers() {
+        return repository.getFreeManagers();
     }
 }

@@ -1,3 +1,18 @@
+CREATE TABLE task
+(
+  id INTEGER PRIMARY KEY NOT NULL,
+  description VARCHAR(255),
+  estimate INTEGER NOT NULL,
+  name VARCHAR(255),
+  status VARCHAR(255),
+  assigner_id INTEGER,
+  creator_id INTEGER,
+  sprint_id INTEGER,
+  CONSTRAINT fkawitl8sxbbsoa72bvove79t51 FOREIGN KEY (assigner_id) REFERENCES app_user (id),
+  CONSTRAINT fkns5qgv3boxd8ctgte231tdvtc FOREIGN KEY (creator_id) REFERENCES app_user (id),
+  CONSTRAINT fkoew9cen5nj5c154u5y3clh90v FOREIGN KEY (sprint_id) REFERENCES sprint (id)
+);
+
 insert into task (id, name, estimate, status, description, assigner_id, creator_id, sprint_id) values (1, 'Task 1', 14, 'CREATED', 'Some description', 5, 22, 1);
 insert into task (id, name, estimate, status, description, assigner_id, creator_id, sprint_id) values (2, 'Task 2', 4, 'CLOSED', 'Some description', 5, 22, 1);
 insert into task (id, name, estimate, status, description, assigner_id, creator_id, sprint_id) values (3, 'Task 3', 17, 'OPEN', 'Some description', 6, 22, 1);

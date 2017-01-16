@@ -1,4 +1,5 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,7 @@
 <body>
 <div id="wrapper">
     <tiles:insertAttribute name="navigation" />
-    <tiles:insertAttribute name="projects-menu"/>
+    <tiles:insertAttribute name="project-details"/>
 
 </div>
 

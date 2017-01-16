@@ -15,7 +15,7 @@ public class BaseEntity {
      * Unique identifier for storage in data base.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
     public BaseEntity() {

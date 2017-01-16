@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -45,7 +46,7 @@ public class User extends BaseEntity {
     /**
      * The project is managed by the user if he is a project manager.
      */
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "managed_project_id", unique = true)
     private Project managedProject;
 
@@ -206,6 +207,38 @@ public class User extends BaseEntity {
 
     public void setHireDay(LocalDate hireDay) {
         this.hireDay = hireDay;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public Project getManagedProject() {
+        return managedProject;
+    }
+
+    public void setManagedProject(Project managedProject) {
+        this.managedProject = managedProject;
+    }
+
+    public Set<Task> getCreatedTasks() {
+        return createdTasks;
+    }
+
+    public void setCreatedTasks(Set<Task> createdTasks) {
+        this.createdTasks = createdTasks;
+    }
+
+    public Set<Task> getAssignedTasks() {
+        return assignedTasks;
+    }
+
+    public void setAssignedTasks(Set<Task> assignedTasks) {
+        this.assignedTasks = assignedTasks;
     }
 
     @Override

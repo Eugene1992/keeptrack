@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -48,7 +49,11 @@ public class UserServiceImplTest {
         em = emf.createEntityManager();
         db = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
+                .addScript("db_scripts/projects.sql")
+                .addScript("db_scripts/employees.sql")
+                .addScript("db_scripts/managers.sql")
                 .addScript("db_scripts/sprints.sql")
+                .addScript("db_scripts/tasks.sql")
                 .build();
     }
 
@@ -58,38 +63,20 @@ public class UserServiceImplTest {
         System.out.println(userById);
     }
 
-    /*@Test
-    public void getUserByNonExistentIdTest() throws Exception {
-        final User RESULT = userService.getUserById(nonExistentUserId);
-        Assert.assertNull(RESULT);
+    @Test
+    public void getFreeEmployees() throws Exception {
+        List<User> freeEmployees = userService.getFreeManagers();
+        for (User freeEmployee : freeEmployees) {
+            System.out.printf("%s %s %s %s \n", freeEmployee.getFirstName(), freeEmployee.getLastName(), freeEmployee.getProject(), freeEmployee.getRole());
+        }
     }
 
     @Test
-    public void deleteUserTest() throws Exception {
-        userService.deleteUser(userId);
-        final User RESULT = userService.getUserById(userId);
-        Assert.assertNull(RESULT);
+    public void setManager() throws Exception {
+
     }
 
-    @Test(expected = EmptyResultDataAccessException.class)
-    public void deleteByNonExistentIdTest() throws Exception {
-        userService.deleteUser(nonExistentUserId);
-    }
 
-    @Test
-    public void editUserTest() throws Exception {
-        final String NEW_USER_EMAIL = "deyneko@gmail.com";
-        testUser.setEmail(NEW_USER_EMAIL);
-        userService.editUser(testUser);
-        final User RESULT = userService.getUserById(userId);
-        Assert.assertEquals(testUser.getEmail(), RESULT.getEmail());
-    }
-
-    @Test(expected = DataIntegrityViolationException.class)
-    public void editByNonExistentIdTest() throws Exception {
-        testUser.setId(nonExistentUserId);
-        userService.editUser(testUser);
-    }*/
 
     @After
     public void tearDown() {

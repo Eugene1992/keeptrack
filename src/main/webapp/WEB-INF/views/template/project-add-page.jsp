@@ -24,8 +24,7 @@
 <body>
 <div id="wrapper">
     <tiles:insertAttribute name="navigation" />
-    <tiles:insertAttribute name="projects-menu"/>
-
+    <tiles:insertAttribute name="project-ad-form"/>
 </div>
 
 <!-- isteven multi select -->

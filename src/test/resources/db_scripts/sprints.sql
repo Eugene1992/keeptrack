@@ -1,3 +1,13 @@
+CREATE TABLE sprint
+(
+  id INTEGER PRIMARY KEY NOT NULL,
+  description VARCHAR(255),
+  name VARCHAR(255),
+  status VARCHAR(255),
+  project_id INTEGER,
+  CONSTRAINT fkep2okjn6bvwwnre5o1w7y5psd FOREIGN KEY (project_id) REFERENCES project (id)
+);
+
 insert into sprint (id, name, description, status, project_id) values (1, 'Sprint 1', 'Some sprint description', 'CLOSED', 1);
 insert into sprint (id, name, description, status, project_id) values (2, 'Sprint 2', 'Some sprint description', 'CLOSED', 1);
 
