@@ -54,7 +54,6 @@
                             </div>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-primary">Create project</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close menu</button>
                             </div>
                         </form:form>
                     </div>

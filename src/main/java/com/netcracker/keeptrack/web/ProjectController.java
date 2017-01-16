@@ -101,4 +101,16 @@ public class ProjectController {
         model.addAttribute("freeManagers", FREE_MANAGERS);
         return "new-project";
     }
+
+    /**
+     * Drop employee from current project.
+     *
+     * @return tiles 'project' definition
+     */
+    @RequestMapping(value = "project/drop-employee/{id}", method = RequestMethod.GET)
+    public String dropEmployee(@PathVariable String id) {
+        final Integer EMPLOYEE_ID = Integer.parseInt(id);
+        projectService.deleteEmployeeFormProject(EMPLOYEE_ID);
+        return "redirect:/project/" + id;
+    }
 }

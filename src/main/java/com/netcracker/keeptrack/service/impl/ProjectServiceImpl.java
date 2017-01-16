@@ -40,6 +40,19 @@ public class ProjectServiceImpl implements ProjectService {
         User manager = userRepository.findOne(managerId);
         manager.setManagedProject(project);
         userRepository.save(manager);
+        for (String employeeId : dto.getEmployees()) {
+            Integer parsedId = Integer.parseInt(employeeId);
+            User employee = userRepository.findOne(parsedId);
+            employee.setProject(project);
+            userRepository.save(employee);
+        }
+    }
+
+    @Override
+    public void deleteEmployeeFormProject(Integer id) {
+        User employee = userRepository.findOne(id);
+        employee.setProject(null);
+        userRepository.save(employee);
     }
 
     @Override

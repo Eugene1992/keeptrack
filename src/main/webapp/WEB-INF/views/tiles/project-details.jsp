@@ -79,51 +79,38 @@
                                         <button class="btn btn-info btn-xs">Details</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger btn-xs">
+                                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-employee">
                                             <i class="glyphicon glyphicon-remove"></i>
                                         </button>
                                     </td>
                                 </tr>
+                                <div class="modal fade" role="dialog" id="confirm-drop-employee">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <h4>Do you really want delete ${employee.firstName} ${employee.lastName} form ${employee.project.name} project?</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="text-center">
+                                                    <a href="/project/drop-employee/${employee.id}">
+                                                        <button  type="button" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Yes, delete</button>
+                                                    </a>
+                                                    <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </c:forEach>
                             </tbody>
                         </table>
-                        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addEmployeePopUp">
+                        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#add-employee">
                             Add Employee
                         </button>
-                    </div>
-                    <div class="modal fade" id="addEmployeePopUp" tabindex="-1" role="dialog"
-                         aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header" style="background-color: #337AB7">
-                                    <h4 class="modal-title">{{project.name}}</h4>
-                                </div>
-                                <div class="modal-body" id="setEmpModalBody">
-                                    <form id="addEmpToProjectForm" name="addEmpToProjectForm" novalidate
-                                          ng-submit="addEmployeeToProject(addEmpToProjectForm.$valid)">
-                                        <div class="form-group form-group-sm col-sm-offset-3 col-sm-6">
-                                            <label for="gender">Add employee to project:</label>
-                                            <select class="form-control custom-select-height" id="gender"
-                                                    name="selectedEmployee"
-                                                    ng-class="{'valid-border': addEmpToProjectForm.selectedEmployee.$invalid && showError}"
-                                                    ng-options="employee.lastName + ' ' + employee.firstName for employee in employees | orderBy: 'lastName'"
-                                                    ng-model="selectedEmployee" required>
-                                            </select>
-                                            <span ng-show="showError" class="valid-msg">
-                                                             {{getError(addEmpToProjectForm.selectedEmployee.$error)}}
-                                                        </span>
-                                            <span ng-show="showError" class="valid-msg">
-                                                             {{getError(addEmpToProjectForm.selectedEmployee.required)}}
-                                                        </span>
-                                        </div>
-                                        <br>
-                                        <div class="form-group text-center col-sm-12" id="setEmpModalFooter">
-                                            <button type="submit" class="btn btn-primary">Add Employee</button>
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close
-                                                menu
-                                            </button>
-                                        </div>
-                                    </form>
+                        <div class="modal fade" role="dialog" id="add-employee">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
                                 </div>
                             </div>
                         </div>
