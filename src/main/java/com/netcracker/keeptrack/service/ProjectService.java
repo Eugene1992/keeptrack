@@ -17,7 +17,7 @@ public interface ProjectService {
 
     void deleteProject(Integer id);
 
-    Project getProjectById(Integer id);
+    Project getProjectByName(String name);
 
     void editProject(Project project);
 
@@ -30,4 +30,6 @@ public interface ProjectService {
     Long getProjectSprintsCount(Integer id);
 
     void deleteEmployeeFormProject(Integer id);
+
+    void addEmployeeToProject(Integer employeeId, String projectName);
 }

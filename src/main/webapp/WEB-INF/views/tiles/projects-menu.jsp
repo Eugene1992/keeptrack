@@ -46,7 +46,7 @@
                                         <button type="button" class="btn btn-danger btn-xs">Delete</button>
                                     </td>
                                     <td>
-                                        <a href="/project/${project.id}"><button type="button" class="btn btn-success btn-xs">Details</button></a>
+                                        <a href="/project/${project.name}"><button type="button" class="btn btn-success btn-xs">Details</button></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -91,7 +91,7 @@
                                     <label for="employees">Project manager:</label>
                                     <form:select class="form-control" path="employees" id="employees">
                                         <c:forEach var="employee" items="${freeEmployees}">
-                                            <form:option value="${employee.id}" label="${employee.firstN}"/>
+                                            <form:option value="${employee.id}" label="${employee.firstName} ${employee.lastName}"/>
                                         </c:forEach>
                                     </form:select>
                                 </div>

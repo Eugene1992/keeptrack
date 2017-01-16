@@ -19,4 +19,7 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
     @Query("select count(s) from Sprint s where s.project.id = :id")
     Long getProjectSprintsCount(@Param("id") Integer id);
+
+    @Query("select p from Project p where p.name = :name")
+    Project getProjectByName(@Param("name") String name);
 }

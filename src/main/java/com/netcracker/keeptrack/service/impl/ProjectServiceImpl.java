@@ -56,13 +56,21 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public void addEmployeeToProject(Integer employeeId, String projectName) {
+        User employee = userRepository.findOne(employeeId);
+        Project project = projectRepository.getProjectByName(projectName);
+        employee.setProject(project);
+        userRepository.save(employee);
+    }
+
+    @Override
     public void deleteProject(Integer id) {
         projectRepository.delete(id);
     }
 
     @Override
-    public Project getProjectById(Integer id) {
-        return projectRepository.findOne(id);
+    public Project getProjectByName(String name) {
+        return projectRepository.getProjectByName(name);
     }
 
     @Override

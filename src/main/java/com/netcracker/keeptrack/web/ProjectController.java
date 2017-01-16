@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import javax.validation.Valid;
@@ -70,16 +71,18 @@ public class ProjectController {
      * Project profile controller.
      *
      * @param model selected project info
-     * @param id selected project id
+     * @param name selected project name
      * @return tiles 'project' definition
      */
-    @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
-    public String project(Model model, @PathVariable String id) {
-        final Integer PROJECT_ID = Integer.parseInt(id);
-        final Project CURRENT_PROJECT = projectService.getProjectById(PROJECT_ID);
+    @RequestMapping(value = "/project/{name}", method = RequestMethod.GET)
+    public String project(Model model, @PathVariable String name) {
+        final Project CURRENT_PROJECT = projectService.getProjectByName(name);
+        final Integer PROJECT_ID = CURRENT_PROJECT.getId();
         final User PM = projectService.getProjectManager(PROJECT_ID);
         final Long TOTAL_PROJECT_EMPLOYEES = projectService.getProjectEmployeesCount(PROJECT_ID);
         final Long TOTAL_PROJECT_SPRINTS = projectService.getProjectSprintsCount(PROJECT_ID);
+        final List<User> FREE_EMPLOYEES = userService.getFreeEmployees();
+        model.addAttribute("freeEmployees", FREE_EMPLOYEES);
         model.addAttribute("currentProject", CURRENT_PROJECT);
         model.addAttribute("projectManager", PM);
         model.addAttribute("totalProjectEmployees", TOTAL_PROJECT_EMPLOYEES);
@@ -103,14 +106,32 @@ public class ProjectController {
     }
 
     /**
-     * Drop employee from current project.
+     * Delete employee from current project.
      *
+     * @param id of the employee which will be deleted
+     * @param name of the employee project
      * @return tiles 'project' definition
      */
-    @RequestMapping(value = "project/drop-employee/{id}", method = RequestMethod.GET)
-    public String dropEmployee(@PathVariable String id) {
+    @RequestMapping(value = "project/employees/delete", method = RequestMethod.POST)
+    public String deleteEmployee(@RequestParam("employeeId") String id,
+                                 @RequestParam("projectName") String name) {
         final Integer EMPLOYEE_ID = Integer.parseInt(id);
         projectService.deleteEmployeeFormProject(EMPLOYEE_ID);
-        return "redirect:/project/" + id;
+        return "redirect:/project/" + name;
+    }
+
+    /**
+     * Delete employee from current project.
+     *
+     * @param employeeId of the employee which will be deleted
+     * @param projectName of the employee project
+     * @return tiles 'project' definition
+     */
+    @RequestMapping(value = "project/employees/add", method = RequestMethod.POST)
+    public String addEmployee(@RequestParam("employeeId") String employeeId,
+                              @RequestParam("projectName") String projectName) {
+        final Integer EMPLOYEE_ID = Integer.parseInt(employeeId);
+        projectService.addEmployeeToProject(EMPLOYEE_ID, projectName);
+        return "redirect:/project/" + projectName;
     }
 }
