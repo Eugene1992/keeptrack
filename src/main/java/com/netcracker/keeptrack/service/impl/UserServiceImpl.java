@@ -1,10 +1,14 @@
 package com.netcracker.keeptrack.service.impl;
 
+import com.netcracker.keeptrack.model.Project;
 import com.netcracker.keeptrack.model.User;
+import com.netcracker.keeptrack.repository.ProjectRepository;
 import com.netcracker.keeptrack.repository.UserRepository;
 import com.netcracker.keeptrack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Implementation of {@link UserService} interface that provides methods for Task
@@ -16,25 +20,53 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Override
     public void addUser(User user) {
-        repository.saveAndFlush(user);
+        userRepository.saveAndFlush(user);
     }
 
     @Override
     public void deleteUser(Integer id) {
-        repository.delete(id);
+        userRepository.delete(id);
     }
 
     @Override
     public User getUserById(Integer id) {
-        return repository.findOne(id);
+        return userRepository.findOne(id);
     }
 
     @Override
     public void editUser(User user) {
-        repository.saveAndFlush(user);
+        userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public List<User> getFreeEmployees() {
+        return userRepository.getFreeEmployees();
+    }
+
+    @Override
+    public List<User> getFreeManagers() {
+        return userRepository.getFreeManagers();
+    }
+
+    @Override
+    public void deleteEmployeeFormProject(Integer id) {
+        User employee = userRepository.findOne(id);
+        employee.setProject(null);
+        userRepository.save(employee);
+    }
+
+    @Override
+    public void addEmployeeToProject(Integer employeeId, String projectName) {
+        User employee = userRepository.findOne(employeeId);
+        Project project = projectRepository.getProjectByName(projectName);
+        employee.setProject(project);
+        userRepository.save(employee);
     }
 }

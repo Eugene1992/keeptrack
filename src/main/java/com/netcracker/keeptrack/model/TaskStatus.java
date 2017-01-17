@@ -10,38 +10,25 @@ public enum TaskStatus {
     /**
      * The task is created but not open. Perhaps because there is not a closed dependent task.
      */
-    CREATED("Created"),
+    CREATED,
 
     /**
      * The task is opened by the Project Manager, but the assigner had not yet accepted her.
      */
-    OPEN("Open"),
+    OPEN,
 
     /**
      * The assignee has accepted the task and it is in execution progress.
      */
-    IN_PROGRESS("In progress"),
+    IN_PROGRESS,
 
     /**
      * The task is solved, but requires review or clarification.
      */
-    RESOLVED("Resolved"),
+    RESOLVED,
 
     /**
      * The task is solved and closed.
      */
-    CLOSED("Closed");
-
-    /**
-     * Task status title.
-     */
-    private String name;
-
-    TaskStatus(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
+    CLOSED
 }

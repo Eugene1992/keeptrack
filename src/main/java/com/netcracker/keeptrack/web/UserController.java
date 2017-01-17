@@ -1,7 +1,5 @@
 package com.netcracker.keeptrack.web;
 
-import com.netcracker.keeptrack.model.Gender;
-import com.netcracker.keeptrack.model.Role;
 import com.netcracker.keeptrack.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +21,12 @@ public class UserController {
 
     {
         users = new ArrayList<>();
-        users.add(new User("legendary", "qwerty", Role.ADMIN, "Evgeniy", "Deyneka", 1,
+        /*users.add(new User("legendary", "qwerty", Role.ADMIN, "Evgeniy", "Deyneka", 1,
                 "deyneko55@gmail.com", Gender.MALE, LocalDate.now(), LocalDate.now()));
         users.add(new User("kinder", "qwerty", Role.EMPLOYEE, "Dmitriy", "Titov", 1,
                 "titov5@gmail.com", Gender.MALE, LocalDate.now(), LocalDate.now()));
         users.add(new User("zayka", "qwerty", Role.ADMIN, "Anna", "Zaika", 1,
-                "zayka@gmail.com", Gender.FEMALE, LocalDate.now(), LocalDate.now()));
+                "zayka@gmail.com", Gender.FEMALE, LocalDate.now(), LocalDate.now()));*/
     }
 
     @ModelAttribute("user")
@@ -39,6 +36,7 @@ public class UserController {
 
     /**
      * Employees tab controller.
+     *
      * @return tiles 'users' definition
      */
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
@@ -49,6 +47,7 @@ public class UserController {
 
     /**
      * Employees tab controller.
+     *
      * @param model users info
      * @return tiles 'users' definition
      */

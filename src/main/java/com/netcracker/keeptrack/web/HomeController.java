@@ -18,9 +18,4 @@ public class HomeController {
     public String home() {
         return "home";
     }
-
-    @RequestMapping(value = "/dashboards", method = RequestMethod.GET)
-    public String dashboards() {
-        return "dashboards";
-    }
 }

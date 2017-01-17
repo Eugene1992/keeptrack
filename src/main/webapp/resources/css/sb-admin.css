@@ -25,6 +25,7 @@ body {
     width: 100%;
     padding: 0;
     background-color: #fff;
+    min-height: 800px;
 }
 
 .huge {
@@ -270,4 +271,8 @@ ul.alert-dropdown {
 
 #employees-table {
     margin: 10px 0;
+}
+
+#confirm-modal {
+    margin: 0 auto;
 }

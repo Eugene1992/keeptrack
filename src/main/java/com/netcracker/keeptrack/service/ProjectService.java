@@ -1,6 +1,10 @@
 package com.netcracker.keeptrack.service;
 
 import com.netcracker.keeptrack.model.Project;
+import com.netcracker.keeptrack.model.User;
+import com.netcracker.keeptrack.web.dto.ProjectDTO;
+
+import java.util.List;
 
 /**
  * Project interface that describes methods for Project entity business logic.
@@ -9,11 +13,19 @@ import com.netcracker.keeptrack.model.Project;
  */
 public interface ProjectService {
 
-    void addProject(Project project);
+    void addProject(ProjectDTO project);
 
     void deleteProject(Integer id);
 
-    Project getProjectById(Integer id);
+    Project getProjectByName(String name);
 
     void editProject(Project project);
+
+    List<Project> getAllProjects();
+
+    User getProjectManager(Integer id);
+
+    Long getProjectEmployeesCount(Integer id);
+
+    Long getProjectSprintsCount(Integer id);
 }

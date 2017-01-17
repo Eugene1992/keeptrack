@@ -4,12 +4,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * A person who is hired to work for a project.
@@ -17,7 +23,7 @@ import javax.persistence.Table;
  * @see Gender
  */
 @Entity
-@Table(name = "app_User")
+@Table(name = "app_User", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class User extends BaseEntity {
 
     /**
@@ -40,35 +46,38 @@ public class User extends BaseEntity {
     /**
      * The project is managed by the user if he is a project manager.
      */
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "managed_project_id", unique = true)
     private Project managedProject;
 
     /**
      * The tasks are created by the user if he is a project manager.
      */
-    @OneToMany(mappedBy = "creator")
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
     private Set<Task> createdTasks;
 
     /**
      * The tasks are assigned by the user if he is an employee.
      */
-    @OneToMany(mappedBy = "assigner")
+    @OneToMany(mappedBy = "assigner", fetch = FetchType.EAGER)
     private Set<Task> assignedTasks;
 
     /**
      * User role for system functions separation.
      */
+    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     /**
      * User first name.
      */
+    @Column(name = "first_name")
     private String firstName;
 
     /**
      * User last name.
      */
+    @Column(name = "last_name")
     private String lastName;
 
     /**
@@ -84,6 +93,7 @@ public class User extends BaseEntity {
     /**
      * User gender.
      */
+    @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
     /**
@@ -101,10 +111,14 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    public User(String username, String password, Role role, String firstName, String lastName,
-                int salary, String email, Gender gender, LocalDate birthday, LocalDate hireDay) {
+    public User(String username, String password, Project project, Project managedProject, Set<Task> createdTasks, Set<Task> assignedTasks, Role role,
+                String firstName, String lastName, int salary, String email, Gender gender, LocalDate birthday, LocalDate hireDay) {
         this.username = username;
         this.password = password;
+        this.project = project;
+        this.managedProject = managedProject;
+        this.createdTasks = createdTasks;
+        this.assignedTasks = assignedTasks;
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -195,6 +209,38 @@ public class User extends BaseEntity {
         this.hireDay = hireDay;
     }
 
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public Project getManagedProject() {
+        return managedProject;
+    }
+
+    public void setManagedProject(Project managedProject) {
+        this.managedProject = managedProject;
+    }
+
+    public Set<Task> getCreatedTasks() {
+        return createdTasks;
+    }
+
+    public void setCreatedTasks(Set<Task> createdTasks) {
+        this.createdTasks = createdTasks;
+    }
+
+    public Set<Task> getAssignedTasks() {
+        return assignedTasks;
+    }
+
+    public void setAssignedTasks(Set<Task> assignedTasks) {
+        this.assignedTasks = assignedTasks;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -205,12 +251,6 @@ public class User extends BaseEntity {
         if (salary != user.salary) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (project != null ? !project.equals(user.project) : user.project != null) return false;
-        if (managedProject != null ? !managedProject.equals(user.managedProject) : user.managedProject != null)
-            return false;
-        if (createdTasks != null ? !createdTasks.equals(user.createdTasks) : user.createdTasks != null) return false;
-        if (assignedTasks != null ? !assignedTasks.equals(user.assignedTasks) : user.assignedTasks != null)
-            return false;
         if (role != user.role) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
@@ -225,10 +265,6 @@ public class User extends BaseEntity {
     public int hashCode() {
         int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (project != null ? project.hashCode() : 0);
-        result = 31 * result + (managedProject != null ? managedProject.hashCode() : 0);
-        result = 31 * result + (createdTasks != null ? createdTasks.hashCode() : 0);
-        result = 31 * result + (assignedTasks != null ? assignedTasks.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
@@ -238,5 +274,25 @@ public class User extends BaseEntity {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (hireDay != null ? hireDay.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{"
+                + "username='" + username + '\''
+                + ", password='" + password + '\''
+                + ", project=" + project
+                + ", managedProject=" + managedProject
+                + ", createdTasks=" + createdTasks
+                + ", assignedTasks=" + assignedTasks
+                + ", role=" + role
+                + ", firstName='" + firstName + '\''
+                + ", lastName='" + lastName + '\''
+                + ", salary=" + salary
+                + ", email='" + email + '\''
+                + ", gender=" + gender
+                + ", birthday=" + birthday
+                + ", hireDay=" + hireDay
+                + '}';
     }
 }

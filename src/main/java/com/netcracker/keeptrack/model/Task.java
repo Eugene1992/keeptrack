@@ -1,6 +1,11 @@
 package com.netcracker.keeptrack.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -45,8 +50,21 @@ public class Task extends BaseEntity {
     private int estimate;
 
     /**
+     * Date of start of the task.
+     */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate startDate;
+
+    /**
+     * Date of end of the task.
+     */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate endDate;
+
+    /**
      * Current status of task execution.
      */
+    @Enumerated(value = EnumType.STRING)
     private TaskStatus status;
 
     /**
@@ -57,13 +75,15 @@ public class Task extends BaseEntity {
     public Task() {
     }
 
-    public Task(String name, User creator, User assigner, Sprint sprint,
-                int estimate, TaskStatus status, String description) {
+    public Task(String name, User creator, User assigner, Sprint sprint, int estimate,
+                LocalDate startDate, LocalDate endDate, TaskStatus status, String description) {
         this.name = name;
         this.creator = creator;
         this.assigner = assigner;
         this.sprint = sprint;
         this.estimate = estimate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.status = status;
         this.description = description;
     }
@@ -124,6 +144,22 @@ public class Task extends BaseEntity {
         this.description = description;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -133,9 +169,6 @@ public class Task extends BaseEntity {
 
         if (estimate != task.estimate) return false;
         if (name != null ? !name.equals(task.name) : task.name != null) return false;
-        if (creator != null ? !creator.equals(task.creator) : task.creator != null) return false;
-        if (assigner != null ? !assigner.equals(task.assigner) : task.assigner != null) return false;
-        if (sprint != null ? !sprint.equals(task.sprint) : task.sprint != null) return false;
         if (status != task.status) return false;
         return description != null ? description.equals(task.description) : task.description == null;
 
@@ -144,9 +177,6 @@ public class Task extends BaseEntity {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (creator != null ? creator.hashCode() : 0);
-        result = 31 * result + (assigner != null ? assigner.hashCode() : 0);
-        result = 31 * result + (sprint != null ? sprint.hashCode() : 0);
         result = 31 * result + estimate;
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);

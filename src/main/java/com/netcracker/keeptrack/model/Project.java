@@ -1,8 +1,13 @@
 package com.netcracker.keeptrack.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -31,36 +36,51 @@ public class Project extends BaseEntity {
     /**
      * Employees who works on a current project.
      */
-    @OneToMany(mappedBy = "project")
-    private List<User> users;
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private Set<User> users;
 
     /**
      * The sprints of the project.
      */
     @OneToMany(mappedBy = "project")
-    private List<Sprint> sprints;
+    private Set<Sprint> sprints;
 
     /**
      * Current status of sprint execution.
      */
+    @Enumerated(value = EnumType.STRING)
     private ProjectStatus status;
 
     /**
      * Date of start of the project.
      */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
+
+    /**
+     * Date of end of the project.
+     */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate endDate;
+
+    /**
+     * Date of end of the project.
+     */
+    private String description;
 
     public Project() {
     }
 
-    public Project(String name, User manager, List<User> users, List<Sprint> sprints,
-                   ProjectStatus status, LocalDate startDate) {
+    public Project(String name, User manager, Set<User> users, Set<Sprint> sprints,
+                   ProjectStatus status, LocalDate startDate, LocalDate endDate, String description) {
         this.name = name;
         this.manager = manager;
         this.users = users;
         this.sprints = sprints;
         this.status = status;
         this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
     }
 
     public String getName() {
@@ -79,19 +99,19 @@ public class Project extends BaseEntity {
         this.manager = manager;
     }
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    public List<Sprint> getSprints() {
+    public Set<Sprint> getSprints() {
         return sprints;
     }
 
-    public void setSprints(List<Sprint> sprints) {
+    public void setSprints(Set<Sprint> sprints) {
         this.sprints = sprints;
     }
 
@@ -111,6 +131,22 @@ public class Project extends BaseEntity {
         this.startDate = startDate;
     }
 
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -119,9 +155,7 @@ public class Project extends BaseEntity {
         Project project = (Project) o;
 
         if (name != null ? !name.equals(project.name) : project.name != null) return false;
-        if (manager != null ? !manager.equals(project.manager) : project.manager != null) return false;
-        if (users != null ? !users.equals(project.users) : project.users != null) return false;
-        if (sprints != null ? !sprints.equals(project.sprints) : project.sprints != null) return false;
+        if (description != null ? !description.equals(project.description) : project.description != null) return false;
         if (status != project.status) return false;
         return startDate != null ? startDate.equals(project.startDate) : project.startDate == null;
 
@@ -130,9 +164,7 @@ public class Project extends BaseEntity {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (manager != null ? manager.hashCode() : 0);
-        result = 31 * result + (users != null ? users.hashCode() : 0);
-        result = 31 * result + (sprints != null ? sprints.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
         return result;

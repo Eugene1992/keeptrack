@@ -2,6 +2,8 @@ package com.netcracker.keeptrack.service;
 
 import com.netcracker.keeptrack.model.User;
 
+import java.util.List;
+
 /**
  * User interface that describes methods for User entity business logic.
  *
@@ -16,4 +18,12 @@ public interface UserService {
     User getUserById(Integer id);
 
     void editUser(User user);
+
+    List<User> getFreeEmployees();
+
+    List<User> getFreeManagers();
+
+    void deleteEmployeeFormProject(Integer id);
+
+    void addEmployeeToProject(Integer employeeId, String projectName);
 }
