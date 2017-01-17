@@ -50,13 +50,13 @@ public class Task extends BaseEntity {
     private int estimate;
 
     /**
-     * Date of start of the sprint.
+     * Date of start of the task.
      */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
 
     /**
-     * Date of end of the sprint.
+     * Date of end of the task.
      */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
