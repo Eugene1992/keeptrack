@@ -172,15 +172,65 @@
                                         <button class="btn btn-info btn-xs">Details</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+                                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-sprint-${sprint.id}"><i class="glyphicon glyphicon-remove"></i></button>
                                     </td>
                                 </tr>
+                                <div class="modal fade" role="dialog" id="confirm-drop-sprint-${sprint.id}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <h4>Do you really want delete ${sprint.name} form ${currentProject.name} project?</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="/project/sprints/delete" method="POST" >
+                                                    <input type="hidden" class="form-control" name="sprintId" value="${sprint.id}" />
+                                                    <input type="hidden" class="form-control" name="projectName" value="${currentProject.name}" />
+                                                    <div class="text-center">
+                                                        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Yes, delete</button>
+                                                        <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </c:forEach>
                             </tbody>
                         </table>
                         <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addSprintModal">Add
                             Sprint
                         </button>
+                        <div class="modal fade" role="dialog" id="addSprintModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <form action="/project/sprints/add" method="POST" >
+                                            <input type="hidden" name="projectName" value="${currentProject.name}" class="form-control" required>
+                                            <div class="form-group col-lg-6">
+                                                <label for="title">Title:</label>
+                                                <input type="text" name="sprintName" class="form-control" id="title" required>
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label for="title">End date:</label>
+                                                <input type="date" name="sprintEndDate" class="form-control" id="endDate" required>
+                                            </div>
+                                            <div class="form-group col-lg-12" required>
+                                                <label for="description">Description:</label>
+                                                <textarea name="sprintDescription" class="form-control" id="description" rows="5" required></textarea>
+                                            </div>
+                                            <div class="form-group col-lg-12">
+                                                <p><b>Note:</b> New Sprint can start only after the previous one.
+                                                    The current sprint can be queued and will start after the completion of the previous sprint.</p>
+                                            </div>
+                                            <div class="form-group col-lg-12 text-center">
+                                                <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Add sprint</button>
+                                                <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Project Tasks Panel -->
@@ -218,11 +268,30 @@
                                         <button class="btn btn-info btn-xs">Details</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger btn-xs">
+                                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-task-${task.id}">
                                             <i class="glyphicon glyphicon-remove"></i>
                                         </button>
                                     </td>
                                 </tr>
+                                    <div class="modal fade" role="dialog" id="confirm-drop-task-${task.id}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body text-center">
+                                                    <h4>Do you really want delete ${task.name} form ${currentProject.name} project?</h4>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <form action="/project/tasks/delete" method="POST" >
+                                                        <input type="hidden" class="form-control" name="projectName" value="${currentProject.name}" />
+                                                        <input type="hidden" class="form-control" name="taskId" value="${task.id}" />
+                                                        <div class="text-center">
+                                                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Yes, delete</button>
+                                                            <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </c:forEach>
                             </c:forEach>
                             </tbody>
@@ -231,6 +300,53 @@
                         <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addTaskModal">Add
                             Task
                         </button>
+                    </div>
+                    <div class="modal fade" role="dialog" id="addTaskModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <form action="/project/task/add" method="POST" >
+                                        <input class="form-control" type="hidden" name="projectName" value="${currentProject.name}" required>
+                                        <div class="form-group col-lg-6">
+                                            <label for="task-title">Title:</label>
+                                            <input class="form-control" type="text" name="taskName" id="task-title" required>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="assigner">Assign for:</label>
+                                            <select class="form-control" id="assigner" name="assignerId">
+                                                <c:forEach var="employee" items="${currentProject.users}">
+                                                    <option value="${employee.id}">${employee.firstName} ${employee.lastName}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="assigner">Sprint:</label>
+                                            <select class="form-control" name="sprintId" required>
+                                                <c:forEach var="sprint" items="${currentProject.sprints}">
+                                                    <option value="${sprint.id}">${sprint.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label for="taskEstimate">Estimate:</label>
+                                            <input class="form-control" type="number" name="taskEstimate" id="taskEstimate" required>
+                                        </div>
+                                        <div class="form-group col-lg-offset-3 col-lg-6">
+                                            <label for="taskEndDate">End date:</label>
+                                            <input type="date" name="taskEndDate" class="form-control" id="taskEndDate" required>
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <label for="taskDescription">Description:</label>
+                                            <textarea class="form-control" name="taskDescription" id="taskDescription" rows="5" required></textarea>
+                                        </div>
+                                        <div class="form-group col-lg-12 text-center">
+                                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Add task</button>
+                                            <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

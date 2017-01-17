@@ -49,21 +49,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void deleteEmployeeFormProject(Integer id) {
-        User employee = userRepository.findOne(id);
-        employee.setProject(null);
-        userRepository.save(employee);
-    }
-
-    @Override
-    public void addEmployeeToProject(Integer employeeId, String projectName) {
-        User employee = userRepository.findOne(employeeId);
-        Project project = projectRepository.getProjectByName(projectName);
-        employee.setProject(project);
-        userRepository.save(employee);
-    }
-
-    @Override
     public void deleteProject(Integer id) {
         projectRepository.delete(id);
     }

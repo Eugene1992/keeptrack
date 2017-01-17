@@ -1,5 +1,8 @@
 package com.netcracker.keeptrack.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -47,6 +50,18 @@ public class Task extends BaseEntity {
     private int estimate;
 
     /**
+     * Date of start of the sprint.
+     */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate startDate;
+
+    /**
+     * Date of end of the sprint.
+     */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate endDate;
+
+    /**
      * Current status of task execution.
      */
     @Enumerated(value = EnumType.STRING)
@@ -60,13 +75,15 @@ public class Task extends BaseEntity {
     public Task() {
     }
 
-    public Task(String name, User creator, User assigner, Sprint sprint,
-                int estimate, TaskStatus status, String description) {
+    public Task(String name, User creator, User assigner, Sprint sprint, int estimate,
+                LocalDate startDate, LocalDate endDate, TaskStatus status, String description) {
         this.name = name;
         this.creator = creator;
         this.assigner = assigner;
         this.sprint = sprint;
         this.estimate = estimate;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.status = status;
         this.description = description;
     }
@@ -125,6 +142,22 @@ public class Task extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     @Override

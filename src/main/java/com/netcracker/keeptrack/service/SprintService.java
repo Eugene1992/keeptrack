@@ -16,4 +16,8 @@ public interface SprintService {
     Sprint getSprintById(Integer id);
 
     void editSprint(Sprint sprint);
+
+    void deleteSprintFormProject(Integer id);
+
+    void addSprintToProject(String projectName, String sprintName, String sprintEndDate, String sprintDescription);
 }

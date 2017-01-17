@@ -28,8 +28,4 @@ public interface ProjectService {
     Long getProjectEmployeesCount(Integer id);
 
     Long getProjectSprintsCount(Integer id);
-
-    void deleteEmployeeFormProject(Integer id);
-
-    void addEmployeeToProject(Integer employeeId, String projectName);
 }

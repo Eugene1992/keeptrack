@@ -36,34 +36,35 @@ public class ProjectController {
     }
 
     /**
-     * Employees tab controller.
+     * Add new project controller.
      *
      * @return tiles 'users' definition
      */
-    @RequestMapping(value = "/addProject", method = RequestMethod.POST)
-    public String addProject(@Valid @ModelAttribute("project") ProjectDTO project, BindingResult result, Model model) {
-        final List<User> FREE_EMPLOYEES = userService.getFreeEmployees();
-        final List<User> FREE_MANAGERS = userService.getFreeManagers();
+    @RequestMapping(value = "/projects/add", method = RequestMethod.POST)
+    public String addNewProject(@Valid @ModelAttribute("project") ProjectDTO project, BindingResult result, Model model) {
+        List<User> freeEmployees = userService.getFreeEmployees();
+        List<User> freeManagers = userService.getFreeManagers();
+        String projectName = project.getName();
         if (result.hasErrors()) {
-            model.addAttribute("freeEmployees", FREE_EMPLOYEES);
-            model.addAttribute("freeManagers", FREE_MANAGERS);
+            model.addAttribute("freeEmployees", freeEmployees);
+            model.addAttribute("freeManagers", freeManagers);
             return "new-project";
         }
         projectService.addProject(project);
-        return "redirect:projects";
+        return "redirect:/project/" + projectName;
     }
 
     /**
-     * Projects menu controller.
+     * Projects menu controller. Display list of all projects.
      *
      * @param model projects info
      * @return tiles 'projects' definition
      */
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
-    public String projects(Model model) {
-        final List<Project> PROJECTS = projectService.getAllProjects();
+    public String getAllprojects(Model model) {
+        List<Project> projects = projectService.getAllProjects();
 
-        model.addAttribute("projects", PROJECTS);
+        model.addAttribute("projects", projects);
         return "projects";
     }
 
@@ -76,17 +77,17 @@ public class ProjectController {
      */
     @RequestMapping(value = "/project/{name}", method = RequestMethod.GET)
     public String project(Model model, @PathVariable String name) {
-        final Project CURRENT_PROJECT = projectService.getProjectByName(name);
-        final Integer PROJECT_ID = CURRENT_PROJECT.getId();
-        final User PM = projectService.getProjectManager(PROJECT_ID);
-        final Long TOTAL_PROJECT_EMPLOYEES = projectService.getProjectEmployeesCount(PROJECT_ID);
-        final Long TOTAL_PROJECT_SPRINTS = projectService.getProjectSprintsCount(PROJECT_ID);
-        final List<User> FREE_EMPLOYEES = userService.getFreeEmployees();
-        model.addAttribute("freeEmployees", FREE_EMPLOYEES);
-        model.addAttribute("currentProject", CURRENT_PROJECT);
-        model.addAttribute("projectManager", PM);
-        model.addAttribute("totalProjectEmployees", TOTAL_PROJECT_EMPLOYEES);
-        model.addAttribute("totalProjectSprints", TOTAL_PROJECT_SPRINTS);
+        Project currentProject = projectService.getProjectByName(name);
+        Integer projectId = currentProject.getId();
+        User projectManager = projectService.getProjectManager(projectId);
+        Long totalProjectEmployee = projectService.getProjectEmployeesCount(projectId);
+        Long totalProjectSprints = projectService.getProjectSprintsCount(projectId);
+        List<User> freeEmployees = userService.getFreeEmployees();
+        model.addAttribute("freeEmployees", freeEmployees);
+        model.addAttribute("currentProject", currentProject);
+        model.addAttribute("projectManager", projectManager);
+        model.addAttribute("totalProjectEmployees", totalProjectEmployee);
+        model.addAttribute("totalProjectSprints", totalProjectSprints);
         return "project";
     }
 
@@ -98,10 +99,10 @@ public class ProjectController {
      */
     @RequestMapping(value = "/projects/new", method = RequestMethod.GET)
     public String newProject(Model model) {
-        final List<User> FREE_EMPLOYEES = userService.getFreeEmployees();
-        final List<User> FREE_MANAGERS = userService.getFreeManagers();
-        model.addAttribute("freeEmployees", FREE_EMPLOYEES);
-        model.addAttribute("freeManagers", FREE_MANAGERS);
+        List<User> freeEmployees = userService.getFreeEmployees();
+        List<User> freeManagers = userService.getFreeManagers();
+        model.addAttribute("freeEmployees", freeEmployees);
+        model.addAttribute("freeManagers", freeManagers);
         return "new-project";
     }
 
@@ -113,25 +114,25 @@ public class ProjectController {
      * @return tiles 'project' definition
      */
     @RequestMapping(value = "project/employees/delete", method = RequestMethod.POST)
-    public String deleteEmployee(@RequestParam("employeeId") String id,
+    public String deleteEmployeeFormProject(@RequestParam("employeeId") String id,
                                  @RequestParam("projectName") String name) {
-        final Integer EMPLOYEE_ID = Integer.parseInt(id);
-        projectService.deleteEmployeeFormProject(EMPLOYEE_ID);
+        Integer employeeId = Integer.parseInt(id);
+        userService.deleteEmployeeFormProject(employeeId);
         return "redirect:/project/" + name;
     }
 
     /**
      * Delete employee from current project.
      *
-     * @param employeeId of the employee which will be deleted
+     * @param id of the employee which will be deleted
      * @param projectName of the employee project
      * @return tiles 'project' definition
      */
     @RequestMapping(value = "project/employees/add", method = RequestMethod.POST)
-    public String addEmployee(@RequestParam("employeeId") String employeeId,
+    public String addEmployeeToProject(@RequestParam("employeeId") String id,
                               @RequestParam("projectName") String projectName) {
-        final Integer EMPLOYEE_ID = Integer.parseInt(employeeId);
-        projectService.addEmployeeToProject(EMPLOYEE_ID, projectName);
+        Integer employeeId = Integer.parseInt(id);
+        userService.addEmployeeToProject(employeeId, projectName);
         return "redirect:/project/" + projectName;
     }
 }

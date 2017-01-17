@@ -1,5 +1,8 @@
 package com.netcracker.keeptrack.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -43,6 +46,18 @@ public class Sprint extends BaseEntity {
     private SprintStatus status;
 
     /**
+     * Date of start of the sprint.
+     */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate startDate;
+
+    /**
+     * Date of end of the sprint.
+     */
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate endDate;
+
+    /**
      * Brief description of the sprint.
      */
     private String description;
@@ -50,11 +65,14 @@ public class Sprint extends BaseEntity {
     public Sprint() {
     }
 
-    public Sprint(String name, Project project, Set<Task> tasks, SprintStatus status, String description) {
+    public Sprint(String name, Project project, Set<Task> tasks, SprintStatus status,
+                  LocalDate startDate, LocalDate endDate, String description) {
         this.name = name;
         this.project = project;
         this.tasks = tasks;
         this.status = status;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.description = description;
     }
 
@@ -96,6 +114,22 @@ public class Sprint extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     @Override

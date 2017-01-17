@@ -12,7 +12,7 @@
                         </span>
                     </div>
                     <div class="panel-body">
-                        <form:form action="/addProject" method="POST" modelAttribute="project">
+                        <form:form action="/projects/add" method="POST" modelAttribute="project">
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-6">
                                     <label for="name">Title:</label>

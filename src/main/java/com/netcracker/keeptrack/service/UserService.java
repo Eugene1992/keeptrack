@@ -23,4 +23,7 @@ public interface UserService {
 
     List<User> getFreeManagers();
 
+    void deleteEmployeeFormProject(Integer id);
+
+    void addEmployeeToProject(Integer employeeId, String projectName);
 }

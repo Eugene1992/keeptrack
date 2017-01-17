@@ -18,4 +18,9 @@ public interface TaskService {
     Task getTaskById(Integer id);
 
     void editTask(Task task);
+
+    void deleteTaskFromSprint(String taskId);
+
+    void addTaskToSprint(String name, String endDate, String estimate,
+                         String assignerId, String description, String sprintId);
 }
