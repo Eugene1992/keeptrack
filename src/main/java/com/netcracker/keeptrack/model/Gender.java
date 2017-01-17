@@ -6,6 +6,5 @@ package com.netcracker.keeptrack.model;
  *  @see User
  */
 public enum Gender {
-
     MALE, FEMALE
 }
