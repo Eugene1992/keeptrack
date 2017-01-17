@@ -13,7 +13,7 @@
                         <a href="/projects/new"><button type="button" class="btn btn-success btn-sm pull-right">New Project</button></a>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-bordered table-hover" id="users-table">
+                        <table class="table table-bordered table-hover" id="projects-table">
                             <thead>
                             <tr>
                                 <th>Title</th>
