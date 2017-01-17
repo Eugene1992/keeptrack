@@ -59,24 +59,7 @@ public class UserServiceImplTest {
 
     @Test
     public void getUserByIdTest() throws Exception {
-        User userById = userService.getUserById(1);
-        System.out.println(userById);
     }
-
-    @Test
-    public void getFreeEmployees() throws Exception {
-        List<User> freeEmployees = userService.getFreeManagers();
-        for (User freeEmployee : freeEmployees) {
-            System.out.printf("%s %s %s %s \n", freeEmployee.getFirstName(), freeEmployee.getLastName(), freeEmployee.getProject(), freeEmployee.getRole());
-        }
-    }
-
-    @Test
-    public void setManager() throws Exception {
-
-    }
-
-
 
     @After
     public void tearDown() {
