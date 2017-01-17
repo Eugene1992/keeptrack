@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
  * Base class for the entities stored in the database, which should contain the id.
  */
 @MappedSuperclass
-public class BaseEntity {
+class BaseEntity {
 
     /**
      * Unique identifier for storage in data base.
@@ -18,7 +18,7 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
-    public BaseEntity() {
+    BaseEntity() {
     }
 
     public Integer getId() {
@@ -33,11 +33,8 @@ public class BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         BaseEntity that = (BaseEntity) o;
-
         return id != null ? id.equals(that.id) : that.id == null;
-
     }
 
     @Override
