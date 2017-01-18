@@ -22,6 +22,11 @@
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
         <put-attribute name="projects-menu" value="/WEB-INF/views/tiles/projects-menu.jsp" />
     </definition>
+    <definition name="sprints" template="/WEB-INF/views/template/sprints.jsp">
+        <put-attribute name="title" value="Sprints" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="sprints-menu" value="/WEB-INF/views/tiles/sprints-menu.jsp" />
+    </definition>
     <definition name="project" template="/WEB-INF/views/template/project-profile.jsp">
         <put-attribute name="title" value="Project" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
@@ -30,6 +35,21 @@
     <definition name="new-project" template="/WEB-INF/views/template/project-add-page.jsp">
         <put-attribute name="title" value="Project" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
-        <put-attribute name="project-ad-form" value="/WEB-INF/views/tiles/project-add-form.jsp" />
+        <put-attribute name="project-add-form" value="/WEB-INF/views/tiles/project-add-form.jsp" />
+    </definition>
+    <definition name="new-sprint" template="/WEB-INF/views/template/sprint-add-page.jsp">
+        <put-attribute name="title" value="Sprint" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="sprint-add-form" value="/WEB-INF/views/tiles/sprint-add-form.jsp" />
+    </definition>
+    <definition name="upd-sprint" template="/WEB-INF/views/template/sprint-upd-page.jsp">
+        <put-attribute name="title" value="Sprint" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="sprint-upd-form" value="/WEB-INF/views/tiles/sprint-upd-form.jsp" />
+    </definition>
+    <definition name="sprint-profile" template="/WEB-INF/views/template/sprint-profile.jsp">
+        <put-attribute name="title" value="Sprint Profile" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="sprint-profile-menu" value="/WEB-INF/views/tiles/sprint-profile-menu.jsp" />
     </definition>
 </tiles-definitions>

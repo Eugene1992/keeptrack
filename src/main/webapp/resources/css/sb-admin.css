@@ -276,3 +276,9 @@ ul.alert-dropdown {
 #confirm-modal {
     margin: 0 auto;
 }
+
+.text-area-margin {
+    margin-bottom: -5px;
+    margin-top: -5px;
+    width: 100%;
+}

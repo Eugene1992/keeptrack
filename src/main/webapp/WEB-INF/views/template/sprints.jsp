@@ -1,4 +1,5 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,11 +21,13 @@
 
     <!-- Morris Charts CSS -->
     <link href="../../../resources/css/plugins/morris.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="${param.contextPath}/resources/css/dataTables.bootstrap.min.css">
 </head>
 <body>
 <div id="wrapper">
-    <tiles:insertAttribute name="navigation" />
-    <tiles:insertAttribute name="project-add-form"/>
+    <tiles:insertAttribute name="navigation"/>
+    <tiles:insertAttribute name="sprints-menu"/>
 </div>
 
 <!-- isteven multi select -->
@@ -33,8 +36,19 @@
 <!-- jQuery -->
 <script src="../../../resources/js/jquery.js"></script>
 
+<script type="text/javascript" src="${param.contextPath}/resources/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${param.contextPath}/resources/js/dataTables.bootstrap.min.js"></script>
+
 <!-- Bootstrap Core JavaScript -->
 <script src="../../../resources/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#sprints-table').DataTable( {
+            "pagingType": "full_numbers"
+        } );
+    } );
+</script>
 
 <!-- Morris Charts JavaScript -->
 <%--<script src="../../../resources/js/plugins/morris/raphael.min.js"></script>

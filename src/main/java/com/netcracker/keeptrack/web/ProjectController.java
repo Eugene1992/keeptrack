@@ -61,7 +61,7 @@ public class ProjectController {
      * @return tiles 'projects' definition
      */
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
-    public String getAllprojects(Model model) {
+    public String getAllProjects(Model model) {
         List<Project> projects = projectService.getAllProjects();
 
         model.addAttribute("projects", projects);

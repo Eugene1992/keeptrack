@@ -81,6 +81,9 @@
                 <a href="/users"><i class="fa fa-fw fa-user"></i> Employees</a>
             </li>
             <li>
+                <a href="/sprints"><i class="fa fa-fw fa-tasks"></i> Sprints</a>
+            </li>
+            <li>
                 <a href="#"><i class="fa fa-fw fa-wrench"></i> Tasks</a>
             </li>
             <li>

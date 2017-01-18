@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -36,7 +37,7 @@ public class Sprint extends BaseEntity {
     /**
      * Sprint tasks.
      */
-    @OneToMany(mappedBy = "sprint")
+    @OneToMany(mappedBy = "sprint", cascade = CascadeType.ALL)
     private Set<Task> tasks;
 
     /**

@@ -214,7 +214,7 @@
                                                 <label for="title">End date:</label>
                                                 <input type="date" name="sprintEndDate" class="form-control" id="endDate" required>
                                             </div>
-                                            <div class="form-group col-lg-12" required>
+                                            <div class="form-group col-lg-12">
                                                 <label for="description">Description:</label>
                                                 <textarea name="sprintDescription" class="form-control" id="description" rows="5" required></textarea>
                                             </div>
