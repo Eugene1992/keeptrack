@@ -30,4 +30,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("update User u set u.project = :project where u.id = :id")
     void setManagerToProject(@Param("project") Project project,
                              @Param("id") Integer id);
+
+    @Query("select u from User u where u.role = 'EMPLOYEE'")
+    List<User> getAllEmployees();
+
+    @Query("select u from User u where u.role = 'PM'")
+    List<User> getAllManagers();
 }

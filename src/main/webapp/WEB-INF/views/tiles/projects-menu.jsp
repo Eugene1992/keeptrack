@@ -10,7 +10,8 @@
                         <span class="panel-title">
                             Projects list
                         </span>
-                        <a href="/projects/new"><button type="button" class="btn btn-success btn-sm pull-right">New Project</button></a>
+                        <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal"
+                                data-target="#newProjectModal">New Project</button>
                     </div>
                     <div class="panel-body">
                         <table class="table table-bordered table-hover" id="projects-table">
@@ -39,8 +40,9 @@
                                     <td>${fn:length(project.users)}
                                     <td>${fn:length(project.sprints)}</td>
                                     <td>
-                                        <button type="button" class="btn btn-warning btn-xs" data-toggle="modal"
-                                                data-target="#updEmpModal">Update</button>
+                                        <form action="/projects/update/${project.id}" method="POST">
+                                            <button type="submit" class="btn btn-warning btn-xs">Update</button>
+                                        </form>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-danger btn-xs">Delete</button>
@@ -65,35 +67,60 @@
                         <h4 class="modal-title">Add new Employee</h4>
                     </div>
                     <div class="modal-body">
-                        <form:form action="/addProject" method="POST" modelAttribute="project">
+                        <form:form action="/projects/add" method="POST" modelAttribute="project">
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-6">
                                     <label for="name">Title:</label>
-                                    <form:input path="name" type="text" class="form-control" id="name" pattern="[a-zA-Z]{2,20}" />
+                                    <form:input path="name" type="text" class="form-control" id="name" />
+                                    <form:errors path="name" cssClass="label label-danger"/>
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="manager">Project manager:</label>
-                                    <form:select path="manager" id="manager">
-                                        <c:forEach var="employee" items="${freeEmployees}">
-                                            <form:option value="${employee.firstName} ${employee.lastName}"/>
+                                    <label for="managerId">Project manager:</label>
+                                    <form:select class="form-control" path="managerId" id="managerId">
+                                        <c:forEach var="manager" items="${freeManagers}">
+                                            <form:option value="${manager.id}" label="${manager.firstName} ${manager.lastName}"/>
                                         </c:forEach>
                                     </form:select>
+                                    <form:errors path="managerId" cssClass="label label-danger"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12 outer">
+                                <div class="form-group col-lg-4">
+                                    <label for="name">Start date:</label>
+                                    <form:input path="startDate" type="date" class="form-control" id="name" />
+                                    <form:errors path="startDate" cssClass="label label-danger"/>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="name">End date:</label>
+                                    <form:input path="endDate" type="date" class="form-control" id="name" />
+                                    <form:errors path="endDate" cssClass="label label-danger"/>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="status">Status:</label>
+                                    <form:select class="form-control" path="status" id="status">
+                                        <form:option value="CREATED" label="CREATED"/>
+                                        <form:option value="IN_PROGRESS" label="IN_PROGRESS"/>
+                                        <form:option value="CLOSED" label="CLOSED"/>
+                                    </form:select>
+                                    <form:errors path="status" cssClass="label label-danger"/>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-12">
                                     <p><b>Description: </b></p>
                                     <form:textarea path="description" id="description" rows="5" cssStyle="width: 100%"/>
+                                    <form:errors path="description" cssClass="label label-danger"/>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-12">
-                                    <label for="employees">Project manager:</label>
-                                    <form:select class="form-control" path="employees" id="employees">
+                                    <label for="employees">Employees:</label>
+                                    <form:select class="form-control" path="employees" id="employees" size="10">
                                         <c:forEach var="employee" items="${freeEmployees}">
                                             <form:option value="${employee.id}" label="${employee.firstName} ${employee.lastName}"/>
                                         </c:forEach>
                                     </form:select>
+                                    <form:errors path="employees" cssClass="label label-danger"/>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
@@ -103,73 +130,8 @@
                             </div>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-primary">Create project</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close menu</button>
                             </div>
                         </form:form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Update User Modal -->
-        <div class="modal fade" id="updEmpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #337AB7">
-                        <h4 class="modal-title">Update Employee</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form name="updEmpForm" novalidate>
-                            <div class="col-lg-12 outer">
-                                <div class="form-group col-lg-6">
-                                    <label for="ufirstName">First name:</label>
-                                    <input type="text" class="form-control" id="ufirstName" pattern="/^[a-zA-Z]{2,10}$/" required/>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label for="ulastName">Last name:</label>
-                                    <input type="text" class="form-control" pattern="/^[a-zA-Z]{2,10}$/" id="ulastName" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 outer">
-                                <div class="form-group col-lg-3">
-                                    <label for="usalary">Salary:</label>
-                                    <input type="text" class="form-control" id="usalary" pattern="/^[0-9]+$/" required>
-                                </div>
-                                <div class="form-group form-group-sm col-md-3">
-                                    <label for="ugender">Gender:</label>
-                                    <select class="form-control custom-select-height" id="ugender" required>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label for="uemail">Email:</label>
-                                    <input type="email" class="form-control" id="uemail" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 outer">
-                                <div class="form-group col-lg-6">
-                                    <label for="ubirthday">Birthday:</label>
-                                    <input type="date" class="form-control" id="ubirthday" required>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label for="uhiredate">Hiredate:</label>
-                                    <input type="date" class="form-control" id="uhiredate" required>
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-12 outer">
-                                <div class="form-group form-group-sm col-md-6" id="upm">
-                                    <label for="upm">Assign as PM for the project:</label>
-                                    <select class="form-control custom-select-height" required>
-                                        <option>Minerva</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close menu</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>

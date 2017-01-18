@@ -51,20 +51,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAllEmployees() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public List<User> getFreeManagers() {
         return userRepository.getFreeManagers();
     }
 
     @Override
-    public void deleteEmployeeFormProject(Integer id) {
+    public List<User> getAllManagers() {
+        return null;
+    }
+
+    @Override
+    public void deleteEmployeeFormProject(String employeeId) {
+        Integer id = Integer.parseInt(employeeId);
         User employee = userRepository.findOne(id);
         employee.setProject(null);
         userRepository.save(employee);
     }
 
     @Override
-    public void addEmployeeToProject(Integer employeeId, String projectName) {
-        User employee = userRepository.findOne(employeeId);
+    public void addEmployeeToProject(String employeeId, String projectName) {
+        Integer id = Integer.parseInt(employeeId);
+        User employee = userRepository.findOne(id);
         Project project = projectRepository.getProjectByName(projectName);
         employee.setProject(project);
         userRepository.save(employee);

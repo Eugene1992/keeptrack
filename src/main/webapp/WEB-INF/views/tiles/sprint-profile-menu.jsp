@@ -22,7 +22,7 @@
                                 <td>${sprint.project.name}</td>
                             </tr>
                             <tr>
-                                <td><b>Project manager:</b></td>
+                                <td><b>Project managerId:</b></td>
                                 <td>${sprint.project.manager.firstName} ${sprint.project.manager.lastName}</td>
                             </tr>
                             <tr>

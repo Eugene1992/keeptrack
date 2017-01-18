@@ -34,7 +34,7 @@ public class SprintValidator implements Validator {
         String sprintName = sprint.getName();
 
         if (sprintName == null || sprintName.isEmpty()) {
-            errors.rejectValue("name", "valid.required.sprint.name");
+            errors.rejectValue("name", "valid.required.name");
         }
 
         if (sprintName != null && sprintName.matches("[a-zA-Z0-9]{3,10}")) {
@@ -48,13 +48,13 @@ public class SprintValidator implements Validator {
         String status = sprint.getStatus();
 
         if (status == null || status.isEmpty()) {
-            errors.rejectValue("status", "valid.required.sprint.status");
+            errors.rejectValue("status", "valid.required.status");
         }
 
         String description = sprint.getDescription();
 
         if (description == null || description.isEmpty()) {
-            errors.rejectValue("description", "valid.required.sprint.description");
+            errors.rejectValue("description", "valid.required.description");
         }
 
         if (description != null && description.matches("[a-zA-Z0-9]{10,100}")) {
@@ -74,17 +74,17 @@ public class SprintValidator implements Validator {
             LocalDate parsedStartDate = LocalDate.parse(sprint.getStartDate());
             LocalDate parsedEndDate = LocalDate.parse(sprint.getEndDate());
             if (parsedStartDate.isAfter(parsedEndDate)) {
-                errors.rejectValue("startDate", "valid.invalid.sprint.start-date");
+                errors.rejectValue("startDate", "valid.invalid.start-date");
             }
             if (parsedEndDate.isBefore(parsedStartDate)) {
-                errors.rejectValue("endDate", "valid.invalid.sprint.end-date");
+                errors.rejectValue("endDate", "valid.invalid.end-date");
             }
         } else {
             if (startDate == null || startDate.isEmpty()) {
-                errors.rejectValue("startDate", "valid.required.sprint.start-date");
+                errors.rejectValue("startDate", "valid.required.start-date");
             }
             if (endDate == null || endDate.isEmpty()) {
-                errors.rejectValue("endDate", "valid.required.sprint.end-date");
+                errors.rejectValue("endDate", "valid.required.end-date");
             }
         }
     }

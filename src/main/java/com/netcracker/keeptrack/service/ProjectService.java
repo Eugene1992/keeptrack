@@ -17,9 +17,11 @@ public interface ProjectService {
 
     void deleteProject(Integer id);
 
+    Project getProjectById(Integer id);
+
     Project getProjectByName(String name);
 
-    void editProject(Project project);
+    void updateProject(ProjectDTO projectDTO);
 
     List<Project> getAllProjects();
 
@@ -28,4 +30,6 @@ public interface ProjectService {
     Long getProjectEmployeesCount(Integer id);
 
     Long getProjectSprintsCount(Integer id);
+
+    boolean checkProjectName(String name);
 }

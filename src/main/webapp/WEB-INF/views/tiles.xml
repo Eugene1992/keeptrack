@@ -37,6 +37,11 @@
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
         <put-attribute name="project-add-form" value="/WEB-INF/views/tiles/project-add-form.jsp" />
     </definition>
+    <definition name="upd-project" template="/WEB-INF/views/template/project-upd-page.jsp">
+        <put-attribute name="title" value="Sprint" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="project-upd-form" value="/WEB-INF/views/tiles/project-upd-form.jsp" />
+    </definition>
     <definition name="new-sprint" template="/WEB-INF/views/template/sprint-add-page.jsp">
         <put-attribute name="title" value="Sprint" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />

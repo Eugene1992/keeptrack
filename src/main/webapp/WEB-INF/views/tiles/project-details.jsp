@@ -19,7 +19,7 @@
                                 <td>${currentProject.name}</td>
                             </tr>
                             <tr>
-                                <td><b>Project manager:</b></td>
+                                <td><b>Project managerId:</b></td>
                                 <td>${projectManager.firstName} ${projectManager.lastName}</td>
                             </tr>
                             <tr>
