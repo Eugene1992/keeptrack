@@ -20,7 +20,7 @@ CREATE TABLE app_user
 CREATE UNIQUE INDEX ukt586mi4il2cuntklsyceovras ON app_user (email);
 CREATE UNIQUE INDEX uk_5ssgetqhwklwfl3p6691pqfd7 ON app_user (managed_project_id);
 
-INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender) VALUES (1, 'employee', 'qwerty', 'EMPLOYEE', 'Evgeniy', 'Deyneka', 'deyneko55@gmail.com', 15000, '1992-12-26', '2016-02-02', 'MALE');
+INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender) VALUES (1, 'legendary', 'qwerty', 'EMPLOYEE', 'Evgeniy', 'Deyneka', 'deyneko55@gmail.com', 15000, '1992-12-26', '2016-02-02', 'MALE');
 INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender) VALUES (2, 'admin', 'qwerty', 'ADMIN', 'Roman', 'Andriyanov', 'randriyanov@gmail.com', 100000, '1985-10-14', '2012-05-12', 'MALE');
 INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender) VALUES (3, 'pmanager', 'qwerty', 'PM', 'Denis', 'Ruzhuh', 'ruzhuh@gmail.com', 70000, '1982-04-02', '2008-07-21', 'MALE');
 INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender) VALUES (4, 'customer', 'qwerty', 'CUSTOMER', 'Elon', 'Mask', 'elon@tesla.com', 1000000, '1971-08-28', '1996-03-11', 'MALE');
