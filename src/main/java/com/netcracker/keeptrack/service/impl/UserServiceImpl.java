@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllManagers() {
-        return null;
+        return userRepository.getAllManagers();
     }
 
     @Override

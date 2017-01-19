@@ -68,29 +68,31 @@ public class ProjectController {
      * If the data is correct, it is passed to the service layer via Data Transfer Object
      * for further processing, if not - redirects to a separate form with validation errors.
      *
-     * @param project contains data obtained from spring form
+     * @param projectDTO contains data obtained from spring form
      * @param model contains data about the available employees and project managers for HTML select menu
      * @return redirect to created project profile
      */
     @RequestMapping(value = "/projects/add", method = RequestMethod.POST)
-    public String addNewProject(@Valid @ModelAttribute("project") ProjectDTO project, BindingResult result, Model model) {
+    public String addNewProject(@Valid @ModelAttribute("project") ProjectDTO projectDTO, BindingResult result, Model model) {
         List<User> freeEmployees = userService.getFreeEmployees();
         List<User> freeManagers = userService.getFreeManagers();
-        validator.validate(project, result);
+        validator.validate(projectDTO, result);
         if (result.hasErrors()) {
             model.addAttribute("freeEmployees", freeEmployees);
             model.addAttribute("freeManagers", freeManagers);
             return "new-project";
         }
-        projectService.addProject(project);
-        String projectName = project.getName();
+        projectService.addProject(projectDTO);
+        String projectName = projectDTO.getName();
         return "redirect:/project/" + projectName;
     }
 
     /**
-     * The controller to redirect to the update menu of the selected project.
+     * Controller that redirects to the update menu of the selected project.
      *
-     * @return tiles 'users' definition
+     * @param model contains data about the all employees, project managers for HTML select menu
+     *              and updated project data for user changes
+     * @return update menu of the selected project
      */
     @RequestMapping(value = "/projects/update/{id}", method = RequestMethod.POST)
     public String updateProject(@PathVariable("id") String id, Model model) {
@@ -104,9 +106,12 @@ public class ProjectController {
     }
 
     /**
-     * Add new project controller.
+     * Controller that processes data received from update form, validates and if data
+     * is correct - transmits it to the service layer for further processing and saving.
      *
-     * @return tiles 'users' definition
+     * @param model contains data about the all employees, project managersfor HTML select menu
+     *              and updated project data for user changes
+     * @return redirects to the projects menu
      */
     @RequestMapping(value = "/projects/update", method = RequestMethod.POST)
     public String updateProject(@Valid @ModelAttribute("project") ProjectDTO projectDTO, BindingResult result, Model model) {

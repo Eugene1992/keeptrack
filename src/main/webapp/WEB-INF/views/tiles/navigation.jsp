@@ -84,7 +84,7 @@
                 <a href="/sprints"><i class="fa fa-fw fa-tasks"></i> Sprints</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-wrench"></i> Tasks</a>
+                <a href="/tasks"><i class="fa fa-fw fa-wrench"></i> Tasks</a>
             </li>
             <li>
                 <a data-toggle="collapse" data-target="#demo">
