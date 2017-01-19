@@ -27,13 +27,38 @@ public class BaseValidator {
      * Class provide base validation behavior for all entity classes.
      */
     public void validateName(Errors errors, String name, String lengthMsg, String regex) {
-        if (name.isEmpty()) {
-            errors.rejectValue("name", "valid.required.name");
+        validateParamName(errors, "name", name, "valid.required.name", lengthMsg, regex);
+    }
+
+    /**
+     * Class provide base validation behavior for all entity classes.
+     */
+    public void validateParamName(Errors errors, String nameField, String nameValue,
+                                  String requiredMsg, String lengthMsg, String regex) {
+        if (nameValue.isEmpty()) {
+            errors.rejectValue(nameField, requiredMsg);
         } else {
             Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(name);
+            Matcher matcher = pattern.matcher(nameValue);
             if (!matcher.matches()) {
-                errors.rejectValue("name", lengthMsg);
+                errors.rejectValue(nameField, lengthMsg);
+            }
+        }
+    }
+
+
+
+    /**
+     * Class provide base validation behavior for all entity classes.
+     */
+    public void validatePassword(Errors errors, String password, String passwordMsg, String regex) {
+        if (password.isEmpty()) {
+            errors.rejectValue("password", "valid.required.password");
+        } else {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(password);
+            if (!matcher.matches()) {
+                errors.rejectValue("password", passwordMsg);
             }
         }
     }

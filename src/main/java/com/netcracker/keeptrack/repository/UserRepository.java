@@ -3,10 +3,8 @@ package com.netcracker.keeptrack.repository;
 import com.netcracker.keeptrack.model.Project;
 import com.netcracker.keeptrack.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,11 +20,15 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<User> getFreeManagers();
 
     @Query("select u from User u where u.firstName = :firstName and u.lastName = :lastName")
-    User getManagerByFirstAndLastName(@Param("firstName") String firstName,
-                                      @Param("lastName") String lastName);
+    User getUserByFirstAndLastName(@Param("firstName") String firstName,
+                                   @Param("lastName") String lastName);
 
-    @Transactional
-    @Modifying
+    @Query("select u from User u where u.username = :username")
+    User getUserByUsername(@Param("username") String username);
+
+    @Query("select u from User u where u.email = :email")
+    User getUserByEmail(@Param("email") String email);
+
     @Query("update User u set u.project = :project where u.id = :id")
     void setManagerToProject(@Param("project") Project project,
                              @Param("id") Integer id);

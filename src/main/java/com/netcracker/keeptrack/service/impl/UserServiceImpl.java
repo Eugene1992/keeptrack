@@ -1,13 +1,17 @@
 package com.netcracker.keeptrack.service.impl;
 
+import com.netcracker.keeptrack.model.Gender;
 import com.netcracker.keeptrack.model.Project;
+import com.netcracker.keeptrack.model.Role;
 import com.netcracker.keeptrack.model.User;
 import com.netcracker.keeptrack.repository.ProjectRepository;
 import com.netcracker.keeptrack.repository.UserRepository;
 import com.netcracker.keeptrack.service.UserService;
+import com.netcracker.keeptrack.web.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -26,8 +30,22 @@ public class UserServiceImpl implements UserService {
     private ProjectRepository projectRepository;
 
     @Override
-    public void addUser(User user) {
-        userRepository.saveAndFlush(user);
+    public void addUser(UserDTO userDTO) {
+        User user = new User();
+        Integer projectId = Integer.valueOf(userDTO.getProjectId());
+        Project project = projectRepository.findOne(projectId);
+        user.setProject(project);
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setRole(Role.valueOf(userDTO.getRole()));
+        user.setSalary(Integer.parseInt(userDTO.getSalary()));
+        user.setEmail(userDTO.getEmail());
+        user.setGender(Gender.valueOf(userDTO.getGender()));
+        user.setBirthday(LocalDate.parse(userDTO.getBirthday()));
+        user.setHireDay(LocalDate.parse(userDTO.getHireDay()));
+        userRepository.save(user);
     }
 
     @Override
@@ -41,8 +59,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editUser(User user) {
-        userRepository.saveAndFlush(user);
+    public User getUserByUsername(String username) {
+        return userRepository.getUserByUsername(username);
+    }
+
+    @Override
+    public void updateUser(UserDTO userDTO) {
+        Integer userId = Integer.valueOf(userDTO.getId());
+        User user = userRepository.findOne(userId);
+        Integer projectId = Integer.valueOf(userDTO.getProjectId());
+        Project project = projectRepository.findOne(projectId);
+        user.setProject(project);
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setRole(Role.valueOf(userDTO.getRole()));
+        user.setSalary(Integer.parseInt(userDTO.getSalary()));
+        user.setEmail(userDTO.getEmail());
+        user.setGender(Gender.valueOf(userDTO.getGender()));
+        user.setBirthday(LocalDate.parse(userDTO.getBirthday()));
+        user.setHireDay(LocalDate.parse(userDTO.getHireDay()));
+        userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override

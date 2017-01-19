@@ -3,6 +3,7 @@ package com.netcracker.keeptrack.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,14 +27,14 @@ public class Task extends BaseEntity {
     /**
      * Project manager which creates current task.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "creator_id")
     private User creator;
 
     /**
      * The employee to whom the task is assigned.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "assigner_id")
     private User assigner;
 
