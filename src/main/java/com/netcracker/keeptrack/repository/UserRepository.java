@@ -1,6 +1,5 @@
 package com.netcracker.keeptrack.repository;
 
-import com.netcracker.keeptrack.model.Project;
 import com.netcracker.keeptrack.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -28,10 +27,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.email = :email")
     User getUserByEmail(@Param("email") String email);
-
-    @Query("update User u set u.project = :project where u.id = :id")
-    void setManagerToProject(@Param("project") Project project,
-                             @Param("id") Integer id);
 
     @Query("select u from User u where u.role = 'EMPLOYEE'")
     List<User> getAllEmployees();
