@@ -4,12 +4,14 @@ import com.netcracker.keeptrack.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Spring Data JPA repository interface for User entity.
  */
+@Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.project is null and u.role = 'EMPLOYEE'")
@@ -33,4 +35,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.role = 'PM'")
     List<User> getAllManagers();
+
+    @Query("select count(u) from User u where u.role = 'CUSTOMER'")
+    Long getTotalCustomersCount();
+
+    @Query("select count(u) from User u where u.role = 'EMPLOYEE'")
+    Long getTotalEmployeesCount();
 }

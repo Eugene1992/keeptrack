@@ -1,5 +1,6 @@
 package com.netcracker.keeptrack.repository;
 
+import com.netcracker.keeptrack.BaseTestConfig;
 import com.netcracker.keeptrack.model.Project;
 import com.netcracker.keeptrack.model.User;
 import org.junit.Assert;
@@ -23,7 +24,7 @@ public class ProjectRepositoryTest extends BaseTestConfig {
     }
 
     @Test
-    public void getProjectManager() throws Exception {
+    public void getProjectManagerTest() throws Exception {
         final User PROJECT_MANAGER = projectRepository.getProjectManager(projectId);
         Assert.assertNotNull(PROJECT_MANAGER);
         Assert.assertEquals("Gloria", PROJECT_MANAGER.getFirstName());
@@ -32,7 +33,7 @@ public class ProjectRepositoryTest extends BaseTestConfig {
     }
 
     @Test
-    public void getProjectEmployeesCount() throws Exception {
+    public void getProjectEmployeesCountTest() throws Exception {
         final Long EMPLOYEES_COUNT = projectRepository.getProjectEmployeesCount(projectId);
         final Long EXPECTED_COUNT = 2L;
         Assert.assertNotNull(EMPLOYEES_COUNT);
@@ -40,7 +41,7 @@ public class ProjectRepositoryTest extends BaseTestConfig {
     }
 
     @Test
-    public void getProjectSprintsCount() throws Exception {
+    public void getProjectSprintsCountTest() throws Exception {
         final Long SPRINTS_COUNT = projectRepository.getProjectSprintsCount(projectId);
         final Long EXPECTED_COUNT = 2L;
         Assert.assertNotNull(SPRINTS_COUNT);
@@ -52,5 +53,13 @@ public class ProjectRepositoryTest extends BaseTestConfig {
         final Project RESULT_PROJECT = projectRepository.getProjectByName(projectName);
         Assert.assertNotNull(RESULT_PROJECT);
         Assert.assertEquals(projectName, RESULT_PROJECT.getName());
+    }
+
+    @Test
+    public void getTotalProjectsCountTest() throws Exception {
+        final Long EXPECTED_COUNT = 4L;
+        final Long RESULT_COUNT = projectRepository.getTotalProjectsCount();
+        Assert.assertNotNull(RESULT_COUNT);
+        Assert.assertEquals(RESULT_COUNT, EXPECTED_COUNT);
     }
 }

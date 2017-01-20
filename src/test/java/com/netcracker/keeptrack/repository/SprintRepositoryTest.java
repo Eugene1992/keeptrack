@@ -1,5 +1,6 @@
 package com.netcracker.keeptrack.repository;
 
+import com.netcracker.keeptrack.BaseTestConfig;
 import com.netcracker.keeptrack.model.Sprint;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,7 +20,7 @@ public class SprintRepositoryTest extends BaseTestConfig {
     }
 
     @Test
-    public void getSprintByName() throws Exception {
+    public void getSprintByNameTest() throws Exception {
         final Sprint RESULT_SPRINT = sprintRepository.getSprintByName(sprintName);
         Assert.assertNotNull(RESULT_SPRINT);
         Assert.assertEquals(sprintName, RESULT_SPRINT.getName());

@@ -5,10 +5,12 @@ import com.netcracker.keeptrack.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * Spring Data JPA repository interface for Project entity.
  */
+@Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
     @Query("select u from User u where u.managedProject.id = :id")
@@ -22,4 +24,7 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
     @Query("select p from Project p where p.name = :name")
     Project getProjectByName(@Param("name") String name);
+
+    @Query("select count(p) from Project p")
+    Long getTotalProjectsCount();
 }
