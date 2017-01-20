@@ -1,4 +1,4 @@
-package com.netcracker.keeptrack.repository;
+package com.netcracker.keeptrack;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;

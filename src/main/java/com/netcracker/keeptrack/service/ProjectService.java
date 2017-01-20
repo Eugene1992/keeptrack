@@ -25,7 +25,7 @@ public interface ProjectService {
 
     List<Project> getAllProjects();
 
-    User getProjectManager(Integer id);
+    User getProjectManager(Integer projectId);
 
     Long getProjectEmployeesCount(Integer id);
 

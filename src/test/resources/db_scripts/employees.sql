@@ -20,13 +20,13 @@ CREATE TABLE app_user
 CREATE UNIQUE INDEX ukt586mi4il2cuntklsyceovras ON app_user (email);
 CREATE UNIQUE INDEX uk_5ssgetqhwklwfl3p6691pqfd7 ON app_user (managed_project_id);
 
-INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender) VALUES (1, 'legendary', 'qwerty', 'EMPLOYEE', 'Evgeniy', 'Deyneka', 'deyneko55@gmail.com', 15000, '1992-12-26', '2016-02-02', 'MALE');
+INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender, project_id) VALUES (1, 'legendary', 'qwerty', 'EMPLOYEE', 'Evgeniy', 'Deyneka', 'deyneko55@gmail.com', 15000, '1992-12-26', '2016-02-02', 'MALE', 2);
 INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender) VALUES (2, 'admin', 'qwerty', 'ADMIN', 'Roman', 'Andriyanov', 'randriyanov@gmail.com', 100000, '1985-10-14', '2012-05-12', 'MALE');
 INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender) VALUES (3, 'pmanager', 'qwerty', 'PM', 'Denis', 'Ruzhuh', 'ruzhuh@gmail.com', 70000, '1982-04-02', '2008-07-21', 'MALE');
 INSERT INTO app_user(id, username, password, role, first_name, last_name, email, salary, birthday, hireday, gender) VALUES (4, 'customer', 'qwerty', 'CUSTOMER', 'Elon', 'Mask', 'elon@tesla.com', 1000000, '1971-08-28', '1996-03-11', 'MALE');
 
 insert into app_user (id, username, password, first_name, last_name, birthday, hireday, salary, role, email, gender, project_id) values (5, 'mholmes4', 'xIPsICnk', 'Matthew', 'Holmes', '1983-12-22', '2012-02-18', 54643, 'EMPLOYEE', 'mholmes4@merriam-webster.com', 'MALE', 1);
-insert into app_user (id, username, password, first_name, last_name, birthday, hireday, salary, role, email, gender, project_id) values (6, 'fbowman5', '96ZnqN', 'Fred', 'Bowman', '1986-08-01', '2013-02-04', 86500, 'EMPLOYEE', 'fbowman5@baidu.com', 'FEMALE', 1);
+insert into app_user (id, username, password, first_name, last_name, birthday, hireday, salary, role, email, gender, project_id) values (6, 'freddy', '96ZnqN', 'Fred', 'Bowman', '1986-08-01', '2013-02-04', 86500, 'EMPLOYEE', 'fbowman5@baidu.com', 'FEMALE', 1);
 
 insert into app_user (id, username, password, first_name, last_name, birthday, hireday, salary, role, email, gender, project_id) values (7, 'kbanks6', 'MlHktd', 'Katherine', 'Banks', '1975-05-15', '2009-01-30', 80332, 'EMPLOYEE', 'kbanks6@netlog.com', 'FEMALE', 2);
 insert into app_user (id, username, password, first_name, last_name, birthday, hireday, salary, role, email, gender, project_id) values (8, 'rporter7', 'Ixa0wcb64', 'Richard', 'Porter', '1978-01-18', '2010-06-09', 20589, 'EMPLOYEE', 'rporter7@cornell.edu', 'FEMALE', 2);
