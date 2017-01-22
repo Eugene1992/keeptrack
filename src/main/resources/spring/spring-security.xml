@@ -13,6 +13,7 @@
         <access-denied-handler error-page="/access-denied" />
 
         <intercept-url pattern="/home" access="hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />
+        <intercept-url pattern="/login*" access="permitAll" />
         <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
         <intercept-url pattern="/user/**" access="hasRole('ADMIN')" />
 
@@ -30,20 +31,7 @@
 
     <bean:bean id="authenticationSuccessHandler" class="com.netcracker.keeptrack.service.security.CustomSuccessAuthHandler"/>
 
-
     <authentication-manager>
         <authentication-provider user-service-ref="user-details" />
     </authentication-manager>
-
-    <!--<authentication-manager>
-        <authentication-provider>
-            &lt;!&ndash; In memory &ndash;&gt;
-             <user-service>
-                <user name="user@gmail.com" password="26121992z" authorities="ROLE_USER" />
-                <user name="admin@gmail.com" password="26121992z" authorities="ROLE_USER, ROLE_ADMIN" />
-            </user-service>
-            &lt;!&ndash; Data base &ndash;&gt;
-            &lt;!&ndash;<jdbc-user-service data-source-ref="dataSource"/>&ndash;&gt;
-        </authentication-provider>
-    </authentication-manager>-->
 </bean:beans>
