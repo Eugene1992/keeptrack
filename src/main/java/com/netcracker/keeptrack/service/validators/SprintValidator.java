@@ -7,25 +7,47 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.time.LocalDate;
-
 /**
  * Class provide validation behavior for the Sprint by implementing the
- * {@link org.springframework.validation.Validator} interface.
+ * {@link Validator} interface.
+ * Also inherited from the base validator that allows common validation methods.
  *
- * @see org.springframework.validation.Validator
+ * @see Validator
+ * @see BaseValidator
  */
 @Component
-public class SprintValidator implements Validator {
+public class SprintValidator extends BaseValidator implements Validator {
 
     @Autowired
     private SprintService sprintService;
 
+    /**
+     * Validation error messages.
+     */
+    private static final String NAME_REGEX = "[\\w ]{3,10}";
+    private static final String NAME_LENGTH_MSG = "valid.length.sprint.name";
+    private static final String STATUS_MSG = "valid.required.status";
+    private static final String DESCRIPTION_MSG = "valid.required.description";
+    private static final String PROJECT_MSG = "valid.required.sprint.project";
+
+    /**
+     * Register which {@code Class} must support the validation.
+     *
+     * @param aClass validated {@link Class} instance
+     */
     @Override
     public boolean supports(Class<?> aClass) {
         return SprintDTO.class.isAssignableFrom(aClass);
     }
 
+    /**
+     * Validates Sprint DTO fields.
+     * If we add new sprint(request comes from adding form) also check whether
+     * the sprint exists with the specified name.
+     *
+     * @param obj validated object
+     * @param errors validation errors
+     */
     @Override
     public void validate(Object obj, Errors errors) {
         SprintDTO sprint = (SprintDTO) obj;
@@ -33,59 +55,23 @@ public class SprintValidator implements Validator {
         boolean isNew = sprint.getId() == null;
         String sprintName = sprint.getName();
 
-        if (sprintName == null || sprintName.isEmpty()) {
-            errors.rejectValue("name", "valid.required.name");
-        }
-
-        if (sprintName != null && sprintName.matches("[a-zA-Z0-9]{3,10}")) {
-            errors.rejectValue("name", "valid.length.sprint.name");
-        }
+        validateName(errors, sprintName, NAME_LENGTH_MSG, NAME_REGEX);
 
         if (isNew && sprintService.checkSprintName(sprintName)) {
             errors.rejectValue("name", "valid.existed.sprint.name");
         }
 
         String status = sprint.getStatus();
-
-        if (status == null || status.isEmpty()) {
-            errors.rejectValue("status", "valid.required.status");
-        }
+        validateNotNullAndEmpty(errors, "status", status, STATUS_MSG);
 
         String description = sprint.getDescription();
-
-        if (description == null || description.isEmpty()) {
-            errors.rejectValue("description", "valid.required.description");
-        }
-
-        if (description != null && description.matches("[a-zA-Z0-9]{10,100}")) {
-            errors.rejectValue("description", "valid.length.sprint.description");
-        }
+        validateNotNullAndEmpty(errors, "description", description, DESCRIPTION_MSG);
 
         String projectId = sprint.getProjectId();
-
-        if (projectId == null || projectId.isEmpty()) {
-            errors.rejectValue("name", "valid.required.sprint.project");
-        }
+        validateNotNullAndEmpty(errors, "projectId", projectId, PROJECT_MSG);
 
         String startDate = sprint.getStartDate();
         String endDate = sprint.getEndDate();
-
-        if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) {
-            LocalDate parsedStartDate = LocalDate.parse(sprint.getStartDate());
-            LocalDate parsedEndDate = LocalDate.parse(sprint.getEndDate());
-            if (parsedStartDate.isAfter(parsedEndDate)) {
-                errors.rejectValue("startDate", "valid.invalid.start-date");
-            }
-            if (parsedEndDate.isBefore(parsedStartDate)) {
-                errors.rejectValue("endDate", "valid.invalid.end-date");
-            }
-        } else {
-            if (startDate == null || startDate.isEmpty()) {
-                errors.rejectValue("startDate", "valid.required.start-date");
-            }
-            if (endDate == null || endDate.isEmpty()) {
-                errors.rejectValue("endDate", "valid.required.end-date");
-            }
-        }
+        validateDates(errors, startDate, endDate);
     }
 }

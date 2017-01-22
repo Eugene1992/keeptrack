@@ -172,7 +172,6 @@ public class Task extends BaseEntity {
         if (name != null ? !name.equals(task.name) : task.name != null) return false;
         if (status != task.status) return false;
         return description != null ? description.equals(task.description) : task.description == null;
-
     }
 
     @Override

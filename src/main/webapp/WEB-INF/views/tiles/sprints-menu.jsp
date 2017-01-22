@@ -47,14 +47,30 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="/sprints/delete/${sprint.id}" method="POST">
-                                            <button type="submit" class="btn btn-danger btn-xs">Delete</button>
-                                        </form>
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-sprint-${sprint.id}">Delete</button>                                    </td>
                                     </td>
                                     <td>
                                         <a href="sprint/${sprint.name}"><button type="button" class="btn btn-success btn-xs">Profile</button></a>
                                     </td>
                                 </tr>
+                                <div class="modal fade" role="dialog" id="confirm-drop-sprint-${sprint.id}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <h4>Do you really want delete ${sprint.name}?</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="/sprints/delete" method="POST" >
+                                                    <input type="hidden" class="form-control" name="id" value="${sprint.id}" />
+                                                    <div class="text-center">
+                                                        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Yes, delete</button>
+                                                        <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </c:forEach>
                             </tbody>
                         </table>
