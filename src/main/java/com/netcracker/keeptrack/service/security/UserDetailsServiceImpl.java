@@ -1,4 +1,4 @@
-package com.netcracker.keeptrack.service.impl;
+package com.netcracker.keeptrack.service.security;
 
 import com.netcracker.keeptrack.model.User;
 import com.netcracker.keeptrack.repository.UserRepository;

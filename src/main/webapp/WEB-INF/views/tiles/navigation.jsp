@@ -44,7 +44,7 @@
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-user"></i> ${loggedUser.firstName} ${loggedUser.lastName} <b class="caret"></b>
+                <i class="fa fa-user"></i> ${user.firstName} ${user.lastName} <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
                 <li>

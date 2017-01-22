@@ -27,7 +27,8 @@ import javax.validation.Valid;
  * @see com.netcracker.keeptrack.service.ProjectService
  */
 @Controller
-public class ProjectController {
+@RequestMapping("/admin")
+public class AdminController {
 
     @Autowired
     private ProjectService projectService;

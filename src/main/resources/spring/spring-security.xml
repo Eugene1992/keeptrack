@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bean:beans xmlns="http://www.springframework.org/schema/security"
             xmlns:bean="http://www.springframework.org/schema/beans"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/c"
             xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -12,23 +12,24 @@
         <remember-me/>
         <access-denied-handler error-page="/access-denied" />
 
-        <intercept-url pattern="/login" access="!hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />
-        <intercept-url pattern="/projects" access="hasRole('ADMIN')" />
-        <intercept-url pattern="/sprints" access="hasRole('ADMIN')" />
-        <intercept-url pattern="/tasks" access="hasRole('ADMIN')" />
-        <intercept-url pattern="/users" access="hasRole('ADMIN')" />
-        <intercept-url pattern="/project" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/home" access="hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />
+        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/user/**" access="hasRole('ADMIN')" />
 
         <form-login
                 login-page="/login"
                 default-target-url="/home"
                 username-parameter="user_name"
                 password-parameter="user_password"
+                authentication-success-handler-ref="authenticationSuccessHandler"
                 authentication-failure-url="/login"
         />
         <logout logout-success-url="/login" />
         <remember-me/>
     </http>
+
+    <bean:bean id="authenticationSuccessHandler" class="com.netcracker.keeptrack.service.security.CustomSuccessAuthHandler"/>
+
 
     <authentication-manager>
         <authentication-provider user-service-ref="user-details" />

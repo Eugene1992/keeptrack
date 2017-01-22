@@ -23,7 +23,7 @@ public class HomeController {
      * Login page controller.
      * @return tiles 'home' definition
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String login() {
         return "login";
     }
