@@ -1,7 +1,9 @@
 package com.netcracker.keeptrack.service.impl;
 
 import com.netcracker.keeptrack.model.Task;
-import com.netcracker.keeptrack.repository.StatisticRepository;
+import com.netcracker.keeptrack.repository.ProjectRepository;
+import com.netcracker.keeptrack.repository.TaskRepository;
+import com.netcracker.keeptrack.repository.UserRepository;
 import com.netcracker.keeptrack.service.StatisticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -17,30 +19,36 @@ import java.util.List;
 public class StatisticServiceImpl implements StatisticService {
 
     @Autowired
-    private StatisticRepository statisticRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Override
     public Long getTotalCustomersCount() {
-        return statisticRepository.getTotalCustomersCount();
+        return userRepository.getTotalCustomersCount();
     }
 
     @Override
     public Long getTotalProjectsCount() {
-        return statisticRepository.getTotalProjectsCount();
+        return projectRepository.getTotalProjectsCount();
     }
 
     @Override
     public Long getTotalTasksCount() {
-        return statisticRepository.getTotalTasksCount();
+        return taskRepository.getTotalTasksCount();
     }
 
     @Override
     public Long getTotalEmployeesCount() {
-        return statisticRepository.getTotalEmployeesCount();
+        return userRepository.getTotalEmployeesCount();
     }
 
     @Override
     public List<Task> getLatestTasks(Integer limit) {
-        return statisticRepository.getLatestTasks(new PageRequest(0, limit));
+        return taskRepository.getLatestTasks(new PageRequest(0, limit));
     }
 }

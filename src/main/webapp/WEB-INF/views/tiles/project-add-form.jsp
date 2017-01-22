@@ -8,7 +8,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">
-                            Add new project
+                            Create new project
                         </span>
                     </div>
                     <div class="panel-body">
@@ -16,23 +16,44 @@
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-6">
                                     <label for="name">Title:</label>
-                                    <form:input path="name" type="text" class="form-control" id="name" pattern="[a-zA-Z]{2,20}" />
+                                    <form:input path="name" type="text" class="form-control" id="name" />
                                     <form:errors path="name" cssClass="label label-danger"/>
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="manager">Project manager:</label>
-                                    <form:select class="form-control" path="manager" id="manager">
+                                    <label for="managerId">Project manager:</label>
+                                    <form:select class="form-control" path="managerId" id="managerId">
                                         <c:forEach var="manager" items="${freeManagers}">
                                             <form:option value="${manager.id}" label="${manager.firstName} ${manager.lastName}"/>
                                         </c:forEach>
                                     </form:select>
-                                    <form:errors path="manager" cssClass="label label-danger"/>
+                                    <form:errors path="managerId" cssClass="label label-danger"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12 outer">
+                                <div class="form-group col-lg-4">
+                                    <label for="name">Start date:</label>
+                                    <form:input path="startDate" type="date" class="form-control" id="name" />
+                                    <form:errors path="startDate" cssClass="label label-danger"/>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="name">End date:</label>
+                                    <form:input path="endDate" type="date" class="form-control" id="name" />
+                                    <form:errors path="endDate" cssClass="label label-danger"/>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="status">Status:</label>
+                                    <form:select class="form-control" path="status" id="status">
+                                        <form:option value="CREATED" label="CREATED"/>
+                                        <form:option value="IN_PROGRESS" label="IN_PROGRESS"/>
+                                        <form:option value="CLOSED" label="CLOSED"/>
+                                    </form:select>
+                                    <form:errors path="status" cssClass="label label-danger"/>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-12">
                                     <p><b>Description: </b></p>
-                                    <form:textarea path="description" id="description" rows="5" cssStyle="width: 100%"/>
+                                    <form:textarea path="description" id="description" rows="5" cssClass="text-area-margin"/>
                                     <form:errors path="description" cssClass="label label-danger"/>
                                 </div>
                             </div>

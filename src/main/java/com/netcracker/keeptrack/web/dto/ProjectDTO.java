@@ -1,8 +1,8 @@
 package com.netcracker.keeptrack.web.dto;
 
+import com.netcracker.keeptrack.model.Project;
+
 import java.util.Set;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * Project entity Data Transfer Object.
@@ -10,38 +10,64 @@ import javax.validation.constraints.Size;
 public class ProjectDTO {
 
     /**
+     * Project id.
+     */
+    private String id;
+
+    /**
      * Project title.
      */
-    @NotNull(message = "Please select project name")
-    @Size(min = 3, max = 10, message = "Name length must be in 3 to 10 chars")
     private String name;
 
     /**
-     * Project manager credentials.
+     * Project managerId credentials.
      */
-    @NotNull(message = "Please select project manager")
-    private String manager;
+    private String managerId;
+
+    /**
+     * Project status.
+     */
+    private String status;
 
     /**
      * Project title.
      */
-    @Size(min = 10, max = 100, message = "Description length must be in 10 to 100 chars")
+    private String startDate;
+
+    /**
+     * Project title.
+     */
+    private String endDate;
+
+    /**
+     * Project title.
+     */
     private String description;
 
     /**
      * Project employees credentials.
      */
-    @NotNull
     private Set<String> employees;
 
     public ProjectDTO() {
     }
 
-    public ProjectDTO(String name, String manager, String description, Set<String> employees) {
-        this.name = name;
-        this.manager = manager;
-        this.description = description;
-        this.employees = employees;
+    public ProjectDTO(Project project) {
+        this.id = String.valueOf(project.getId());
+        this.name = project.getName();
+        this.managerId = String.valueOf(project.getManager().getId());
+        this.status = project.getStatus().name();
+        this.startDate = project.getStartDate().toString();
+        this.endDate = project.getEndDate().toString();
+        this.description = project.getDescription();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -52,12 +78,12 @@ public class ProjectDTO {
         this.name = name;
     }
 
-    public String getManager() {
-        return manager;
+    public String getManagerId() {
+        return managerId;
     }
 
-    public void setManager(String manager) {
-        this.manager = manager;
+    public void setManagerId(String managerId) {
+        this.managerId = managerId;
     }
 
     public String getDescription() {
@@ -74,5 +100,29 @@ public class ProjectDTO {
 
     public void setEmployees(Set<String> employees) {
         this.employees = employees;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

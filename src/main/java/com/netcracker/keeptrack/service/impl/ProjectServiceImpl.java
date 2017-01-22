@@ -36,7 +36,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setDescription(dto.getDescription());
         project.setStatus(ProjectStatus.CREATED);
         projectRepository.saveAndFlush(project);
-        Integer managerId = Integer.parseInt(dto.getManager());
+        Integer managerId = Integer.parseInt(dto.getManagerId());
         User manager = userRepository.findOne(managerId);
         manager.setManagedProject(project);
         userRepository.save(manager);
@@ -54,17 +54,37 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public Project getProjectById(Integer id) {
+        return projectRepository.findOne(id);
+    }
+
+    @Override
     public Project getProjectByName(String name) {
         return projectRepository.getProjectByName(name);
     }
 
     @Override
-    public void editProject(Project project) {
+    public void updateProject(ProjectDTO projectDTO) {
+        Integer projectId = Integer.parseInt(projectDTO.getId());
+        Project project = projectRepository.findOne(projectId);
+        Integer managerId = Integer.parseInt(projectDTO.getManagerId());
+        User manager = userRepository.findOne(managerId);
+        project.setManager(manager);
+        for (String id : projectDTO.getEmployees()) {
+            Integer employeeId = Integer.parseInt(id);
+            User user = userRepository.findOne(employeeId);
+            user.setProject(project);
+        }
+        project.setName(project.getName());
+        project.setStatus(project.getStatus());
+        project.setStartDate(LocalDate.parse(projectDTO.getStartDate()));
+        project.setEndDate(LocalDate.parse(projectDTO.getEndDate()));
+        project.setDescription(projectDTO.getDescription());
         projectRepository.saveAndFlush(project);
     }
 
-    public User getProjectManager(Integer id) {
-        return projectRepository.getProjectManager(id);
+    public User getProjectManager(Integer projectId) {
+        return projectRepository.getProjectManager(projectId);
     }
 
     @Override
@@ -75,6 +95,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Long getProjectSprintsCount(Integer id) {
         return projectRepository.getProjectSprintsCount(id);
+    }
+
+    @Override
+    public boolean checkProjectName(String name) {
+        return getProjectByName(name) != null;
     }
 
     @Override

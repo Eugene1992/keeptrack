@@ -1,10 +1,6 @@
-package com.netcracker.keeptrack.service.impl;
+package com.netcracker.keeptrack;
 
-import com.netcracker.keeptrack.model.*;
-import com.netcracker.keeptrack.service.UserService;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -16,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -24,23 +19,12 @@ import java.util.List;
         "classpath:spring/spring-db.xml",
 })
 @ActiveProfiles("hsql")
-public class UserServiceImplTest {
+public class BaseTestConfig {
 
     @Autowired
     private EntityManagerFactory emf;
 
-    @Autowired
-    private UserService userService;
-
     private EntityManager em;
-
-    private User testUser;
-
-    private Integer userId;
-
-    private Integer nonExistentUserId;
-
-    private String email;
 
     private EmbeddedDatabase db;
 
@@ -55,14 +39,5 @@ public class UserServiceImplTest {
                 .addScript("db_scripts/sprints.sql")
                 .addScript("db_scripts/tasks.sql")
                 .build();
-    }
-
-    @Test
-    public void getUserByIdTest() throws Exception {
-    }
-
-    @After
-    public void tearDown() {
-        db.shutdown();
     }
 }

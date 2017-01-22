@@ -3,6 +3,10 @@
         "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
+    <definition name="login" template="/WEB-INF/views/template/login.jsp"/>
+    <definition name="access-denied" template="/WEB-INF/views/template/access-denied.jsp">
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+    </definition>
     <definition name="home" template="/WEB-INF/views/template/home.jsp">
         <put-attribute name="title" value="Home" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
@@ -22,6 +26,26 @@
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
         <put-attribute name="projects-menu" value="/WEB-INF/views/tiles/projects-menu.jsp" />
     </definition>
+    <definition name="sprints" template="/WEB-INF/views/template/sprints.jsp">
+        <put-attribute name="title" value="Sprints" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="sprints-menu" value="/WEB-INF/views/tiles/sprints-menu.jsp" />
+    </definition>
+    <definition name="tasks" template="/WEB-INF/views/template/tasks.jsp">
+        <put-attribute name="title" value="Sprints" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="tasks-menu" value="/WEB-INF/views/tiles/tasks-menu.jsp" />
+    </definition>
+    <definition name="add-task" template="/WEB-INF/views/template/task-add-page.jsp">
+        <put-attribute name="title" value="Sprint" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="task-add-form" value="/WEB-INF/views/tiles/task-add-form.jsp" />
+    </definition>
+    <definition name="upd-task" template="/WEB-INF/views/template/task-upd-page.jsp">
+        <put-attribute name="title" value="Sprint" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="task-upd-form" value="/WEB-INF/views/tiles/task-upd-form.jsp" />
+    </definition>
     <definition name="project" template="/WEB-INF/views/template/project-profile.jsp">
         <put-attribute name="title" value="Project" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
@@ -30,6 +54,46 @@
     <definition name="new-project" template="/WEB-INF/views/template/project-add-page.jsp">
         <put-attribute name="title" value="Project" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
-        <put-attribute name="project-ad-form" value="/WEB-INF/views/tiles/project-add-form.jsp" />
+        <put-attribute name="project-add-form" value="/WEB-INF/views/tiles/project-add-form.jsp" />
+    </definition>
+    <definition name="upd-project" template="/WEB-INF/views/template/project-upd-page.jsp">
+        <put-attribute name="title" value="Project" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="project-upd-form" value="/WEB-INF/views/tiles/project-upd-form.jsp" />
+    </definition>
+    <definition name="new-sprint" template="/WEB-INF/views/template/sprint-add-page.jsp">
+        <put-attribute name="title" value="Sprint" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="sprint-add-form" value="/WEB-INF/views/tiles/sprint-add-form.jsp" />
+    </definition>
+    <definition name="new-user" template="/WEB-INF/views/template/user-add-page.jsp">
+        <put-attribute name="title" value="User" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="user-add-form" value="/WEB-INF/views/tiles/user-add-form.jsp" />
+    </definition>
+    <definition name="upd-user" template="/WEB-INF/views/template/user-upd-page.jsp">
+        <put-attribute name="title" value="Project" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="user-upd-form" value="/WEB-INF/views/tiles/user-upd-form.jsp" />
+    </definition>
+    <definition name="upd-sprint" template="/WEB-INF/views/template/sprint-upd-page.jsp">
+        <put-attribute name="title" value="Sprint" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="sprint-upd-form" value="/WEB-INF/views/tiles/sprint-upd-form.jsp" />
+    </definition>
+    <definition name="sprint-profile" template="/WEB-INF/views/template/sprint-profile.jsp">
+        <put-attribute name="title" value="Sprint Profile" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="sprint-profile-menu" value="/WEB-INF/views/tiles/sprint-profile-menu.jsp" />
+    </definition>
+    <definition name="task-profile" template="/WEB-INF/views/template/task-profile.jsp">
+        <put-attribute name="title" value="Sprint Profile" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="task-profile-menu" value="/WEB-INF/views/tiles/task-profile-menu.jsp" />
+    </definition>
+    <definition name="user-profile" template="/WEB-INF/views/template/user-profile.jsp">
+        <put-attribute name="title" value="User Profile" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="user-profile-menu" value="/WEB-INF/views/tiles/user-profile-menu.jsp" />
     </definition>
 </tiles-definitions>

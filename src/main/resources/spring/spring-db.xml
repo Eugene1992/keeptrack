@@ -7,7 +7,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <jpa:repositories base-package="com.netcracker.keeptrack.repository"/>
-    <!--<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager"/>-->
+    <!--<tx:annotation-driven proxy-target-class="true" transaction-managerId="transactionManager"/>-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="persistenceExceptionTranslationPostProcessor"
@@ -17,7 +17,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="true"/>
+                <!--<property name="showSql" value="true"/>-->
                 <property name="generateDdl" value="true"/>
             </bean>
         </property>

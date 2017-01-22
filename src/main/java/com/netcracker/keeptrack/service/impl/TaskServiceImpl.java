@@ -2,15 +2,18 @@ package com.netcracker.keeptrack.service.impl;
 
 import com.netcracker.keeptrack.model.Sprint;
 import com.netcracker.keeptrack.model.Task;
+import com.netcracker.keeptrack.model.TaskStatus;
 import com.netcracker.keeptrack.model.User;
 import com.netcracker.keeptrack.repository.SprintRepository;
 import com.netcracker.keeptrack.repository.TaskRepository;
 import com.netcracker.keeptrack.repository.UserRepository;
 import com.netcracker.keeptrack.service.TaskService;
+import com.netcracker.keeptrack.web.dto.TaskDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Dsdasdsdasa ds ads asd sa.
@@ -28,7 +31,23 @@ public class TaskServiceImpl implements TaskService {
     private SprintRepository sprintRepository;
 
     @Override
-    public void addTask(Task task) {
+    public void addTask(TaskDTO taskDTO) {
+        Task task = new Task();
+        Integer sprintId = Integer.valueOf(taskDTO.getSprintId());
+        Sprint taskSprint = sprintRepository.findOne(sprintId);
+        task.setSprint(taskSprint);
+        Integer assignerId = Integer.valueOf(taskDTO.getAssignerId());
+        User taskAssigner = userRepository.findOne(assignerId);
+        task.setAssigner(taskAssigner);
+        Integer creatorId = Integer.valueOf(taskDTO.getCreatorId());
+        User taskCreator = userRepository.findOne(creatorId);
+        task.setCreator(taskCreator);
+        task.setName(taskDTO.getName());
+        task.setStartDate(LocalDate.parse(taskDTO.getStartDate()));
+        task.setEndDate(LocalDate.parse(taskDTO.getEndDate()));
+        task.setStatus(TaskStatus.valueOf(taskDTO.getStatus()));
+        task.setDescription(taskDTO.getDescription());
+        task.setEstimate(Integer.parseInt(taskDTO.getEstimate()));
         taskRepository.saveAndFlush(task);
     }
 
@@ -43,8 +62,35 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void editTask(Task task) {
-        taskRepository.saveAndFlush(task);
+    public Task getTaskByName(String name) {
+        return taskRepository.getTaskByName(name);
+    }
+
+    @Override
+    public void updateTask(TaskDTO taskDTO) {
+        Integer taskId = Integer.valueOf(taskDTO.getId());
+        Task task = taskRepository.findOne(taskId);
+        Integer taskSprintId = Integer.valueOf(taskDTO.getSprintId());
+        Sprint taskSprint = sprintRepository.findOne(taskSprintId);
+        task.setSprint(taskSprint);
+        Integer assignerId = Integer.valueOf(taskDTO.getAssignerId());
+        User taskAssigner = userRepository.findOne(assignerId);
+        task.setAssigner(taskAssigner);
+        Integer creatorId = Integer.valueOf(taskDTO.getCreatorId());
+        User taskCreator = userRepository.findOne(creatorId);
+        task.setCreator(taskCreator);
+        task.setName(taskDTO.getName());
+        task.setStartDate(LocalDate.parse(taskDTO.getStartDate()));
+        task.setEndDate(LocalDate.parse(taskDTO.getEndDate()));
+        task.setStatus(TaskStatus.valueOf(taskDTO.getStatus()));
+        task.setDescription(taskDTO.getDescription());
+        task.setEstimate(Integer.parseInt(taskDTO.getEstimate()));
+        taskRepository.save(task);
+    }
+
+    @Override
+    public List<Task> getAllTasks() {
+        return taskRepository.findAll();
     }
 
     @Override
