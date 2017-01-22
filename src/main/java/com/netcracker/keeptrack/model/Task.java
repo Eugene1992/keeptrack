@@ -41,7 +41,7 @@ public class Task extends BaseEntity {
     /**
      * Task sprint.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sprint_id")
     private Sprint sprint;
 

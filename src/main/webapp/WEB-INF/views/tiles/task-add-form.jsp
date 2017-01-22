@@ -4,11 +4,11 @@
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
+            <div class="col-lg-offset-2 col-lg-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">
-                            Update task
+                            Create new task
                         </span>
                     </div>
                     <div class="panel-body">
@@ -45,7 +45,7 @@
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-6">
                                     <label for="estimate">Estimate:</label>
-                                    <form:input path="estimate" type="number" class="form-control"/>
+                                    <form:input path="estimate" min="1" type="number" class="form-control"/>
                                     <form:errors path="estimate" cssClass="label label-danger"/>
                                 </div>
                                 <div class="form-group form-group-sm col-md-6">

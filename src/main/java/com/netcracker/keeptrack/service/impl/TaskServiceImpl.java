@@ -48,7 +48,7 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(TaskStatus.valueOf(taskDTO.getStatus()));
         task.setDescription(taskDTO.getDescription());
         task.setEstimate(Integer.parseInt(taskDTO.getEstimate()));
-        taskRepository.saveAndFlush(task);
+        taskRepository.save(task);
     }
 
     @Override
