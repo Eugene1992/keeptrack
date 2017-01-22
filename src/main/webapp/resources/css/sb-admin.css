@@ -301,3 +301,7 @@ ul.alert-dropdown {
     -webkit-border-radius: 50%;
     border-radius: 50%;
 }
+
+#acceess-denied {
+    margin-top: 200px;
+}
