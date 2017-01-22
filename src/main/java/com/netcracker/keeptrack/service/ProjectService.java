@@ -3,6 +3,7 @@ package com.netcracker.keeptrack.service;
 import com.netcracker.keeptrack.model.Project;
 import com.netcracker.keeptrack.model.User;
 import com.netcracker.keeptrack.web.dto.ProjectDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -23,9 +24,10 @@ public interface ProjectService {
 
     void updateProject(ProjectDTO projectDTO);
 
+    @PreAuthorize(value = "hasAuthority('ADMIN')")
     List<Project> getAllProjects();
 
-    User getProjectManager(Integer id);
+    User getProjectManager(Integer projectId);
 
     Long getProjectEmployeesCount(Integer id);
 

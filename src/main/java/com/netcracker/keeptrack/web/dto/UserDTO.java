@@ -1,5 +1,7 @@
 package com.netcracker.keeptrack.web.dto;
 
+import com.netcracker.keeptrack.model.User;
+
 /**
  * User entity Data Transfer Object.
  */
@@ -66,6 +68,21 @@ public class UserDTO {
     private String hireDay;
 
     public UserDTO() {
+    }
+
+    public UserDTO(User user) {
+        this.id = String.valueOf(user.getId());
+        this.projectId = String.valueOf(user.getProject().getId());
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.role = user.getRole().name();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.salary = String.valueOf(user.getSalary());
+        this.email = user.getEmail();
+        this.gender = user.getGender().name();
+        this.birthday = user.getBirthday().toString();
+        this.hireDay = user.getHireDay().toString();
     }
 
     public String getUsername() {

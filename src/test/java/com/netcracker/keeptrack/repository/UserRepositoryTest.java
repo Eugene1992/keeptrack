@@ -1,6 +1,6 @@
 package com.netcracker.keeptrack.repository;
 
-import com.netcracker.keeptrack.model.Project;
+import com.netcracker.keeptrack.BaseTestConfig;
 import com.netcracker.keeptrack.model.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,16 +31,16 @@ public class UserRepositoryTest extends BaseTestConfig {
     }
 
     @Test
-    public void getFreeEmployees() throws Exception {
+    public void getFreeEmployeesTest() throws Exception {
         final List<User> RESULT_LIST = userRepository.getFreeEmployees();
-        final Integer EXPECTED_SIZE = 6;
+        final Integer EXPECTED_SIZE = 5;
         final Integer RESULT_SIZE = RESULT_LIST.size();
         Assert.assertNotNull(RESULT_LIST);
         Assert.assertEquals(EXPECTED_SIZE, RESULT_SIZE);
     }
 
     @Test
-    public void getFreeManagers() throws Exception {
+    public void getFreeManagersTest() throws Exception {
         final List<User> RESULT_LIST = userRepository.getFreeManagers();
         final Integer EXPECTED_SIZE = 5;
         final Integer RESULT_SIZE = RESULT_LIST.size();
@@ -49,7 +49,7 @@ public class UserRepositoryTest extends BaseTestConfig {
     }
 
     @Test
-    public void getUserByFirstAndLastName() throws Exception {
+    public void getUserByFirstAndLastNameTest() throws Exception {
         final User RESULT_USER = userRepository.getUserByFirstAndLastName(userFirstName, userLastName);
         Assert.assertNotNull(RESULT_USER);
         Assert.assertEquals(userFirstName, RESULT_USER.getFirstName());
@@ -57,7 +57,7 @@ public class UserRepositoryTest extends BaseTestConfig {
     }
 
     @Test
-    public void getUserByUsername() throws Exception {
+    public void getUserByUsernameTest() throws Exception {
         final User RESULT_USER = userRepository.getUserByUsername(username);
         Assert.assertNotNull(RESULT_USER);
         Assert.assertEquals(username, RESULT_USER.getUsername());
@@ -71,7 +71,7 @@ public class UserRepositoryTest extends BaseTestConfig {
     }
 
     @Test
-    public void getAllEmployees() throws Exception {
+    public void getAllEmployeesTest() throws Exception {
         final List<User> EMPLOYEES_LIST = userRepository.getAllEmployees();
         final Integer EXPECTED_SIZE = 18;
         final Integer RESULT_SIZE = EMPLOYEES_LIST.size();
@@ -79,10 +79,26 @@ public class UserRepositoryTest extends BaseTestConfig {
     }
 
     @Test
-    public void getAllManagers() throws Exception {
+    public void getAllManagersTest() throws Exception {
         final List<User> MANAGERS_LIST = userRepository.getAllManagers();
         final Integer EXPECTED_SIZE = 8;
         final Integer RESULT_SIZE = MANAGERS_LIST.size();
         Assert.assertEquals(RESULT_SIZE, EXPECTED_SIZE);
+    }
+
+    @Test
+    public void getTotalCustomersCountTest() throws Exception {
+        final Long RESULT_COUNT = userRepository.getTotalCustomersCount();
+        final Long EXPECTED_COUNT = 1L;
+        Assert.assertNotNull(RESULT_COUNT);
+        Assert.assertEquals(RESULT_COUNT, EXPECTED_COUNT);
+    }
+
+    @Test
+    public void getTotalEmployeesCountTest() throws Exception {
+        final Long EXPECTED_COUNT = 18L;
+        final Long RESULT_COUNT = userRepository.getTotalEmployeesCount();
+        Assert.assertNotNull(RESULT_COUNT);
+        Assert.assertEquals(RESULT_COUNT, EXPECTED_COUNT);
     }
 }

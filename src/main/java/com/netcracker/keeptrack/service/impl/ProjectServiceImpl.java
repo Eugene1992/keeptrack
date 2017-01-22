@@ -83,8 +83,8 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.saveAndFlush(project);
     }
 
-    public User getProjectManager(Integer id) {
-        return projectRepository.getProjectManager(id);
+    public User getProjectManager(Integer projectId) {
+        return projectRepository.getProjectManager(projectId);
     }
 
     @Override

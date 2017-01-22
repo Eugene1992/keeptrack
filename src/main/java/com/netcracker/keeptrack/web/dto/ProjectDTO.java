@@ -1,5 +1,7 @@
 package com.netcracker.keeptrack.web.dto;
 
+import com.netcracker.keeptrack.model.Project;
+
 import java.util.Set;
 
 /**
@@ -48,6 +50,16 @@ public class ProjectDTO {
     private Set<String> employees;
 
     public ProjectDTO() {
+    }
+
+    public ProjectDTO(Project project) {
+        this.id = String.valueOf(project.getId());
+        this.name = project.getName();
+        this.managerId = String.valueOf(project.getManager().getId());
+        this.status = project.getStatus().name();
+        this.startDate = project.getStartDate().toString();
+        this.endDate = project.getEndDate().toString();
+        this.description = project.getDescription();
     }
 
     public String getId() {

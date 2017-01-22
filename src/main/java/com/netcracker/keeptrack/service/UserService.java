@@ -32,7 +32,7 @@ public interface UserService {
 
     List<User> getAllManagers();
 
-    void deleteEmployeeFormProject(String id);
+    void deleteEmployeeFormProject(String employeeId);
 
     void addEmployeeToProject(String employeeId, String projectName);
 }
