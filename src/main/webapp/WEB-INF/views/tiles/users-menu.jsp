@@ -7,7 +7,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">
-                            Employee list
+                            Employees list
                         </span>
                         <button type="button" class="btn btn-success btn-sm pull-right" data-toggle="modal"
                                 data-target="#newUserModal">New Employee
@@ -95,7 +95,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #337AB7">
-                        <h4 class="modal-title">Add new Employee</h4>
+                        <h4 class="modal-title">Create new Employee</h4>
                     </div>
                     <div class="modal-body">
                         <form:form action="/users/add" method="POST" modelAttribute="user" id="newUserModal">
@@ -169,7 +169,7 @@
                             </div>
 
                             <div class="form-group text-center">
-                                <button type="submit" class="btn btn-primary">Save employee</button>
+                                <button type="submit" class="btn btn-primary">Create employee</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close menu</button>
                             </div>
                         </form:form>

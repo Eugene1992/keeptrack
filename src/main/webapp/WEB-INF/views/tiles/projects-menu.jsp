@@ -45,12 +45,30 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-danger btn-xs">Delete</button>
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-project-${project.id}">Delete</button>
                                     </td>
                                     <td>
                                         <a href="/project/${project.name}"><button type="button" class="btn btn-success btn-xs">Details</button></a>
                                     </td>
                                 </tr>
+                                <div class="modal fade" role="dialog" id="confirm-drop-project-${project.id}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body text-center">
+                                                <h4>Do you really want delete ${project.name}?</h4>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="/projects/delete" method="POST" >
+                                                    <input type="hidden" class="form-control" name="id" value="${project.id}" />
+                                                    <div class="text-center">
+                                                        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Yes, delete</button>
+                                                        <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </c:forEach>
                             </tbody>
                         </table>
@@ -64,7 +82,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #337AB7">
-                        <h4 class="modal-title">Add new Employee</h4>
+                        <h4 class="modal-title">Create new project</h4>
                     </div>
                     <div class="modal-body">
                         <form:form action="/projects/add" method="POST" modelAttribute="project">
@@ -125,11 +143,12 @@
                             </div>
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-12">
-                                    <p><b>Note:</b> You can add employees, sprints, tasks after project creation</p>
+                                    <p><b>Note:</b> You can add sprints, tasks after project creation</p>
                                 </div>
                             </div>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-primary">Create project</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close menu</button>
                             </div>
                         </form:form>
                     </div>

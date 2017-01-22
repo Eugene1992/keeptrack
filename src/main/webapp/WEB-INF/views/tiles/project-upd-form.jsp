@@ -26,10 +26,10 @@
                                         <c:forEach var="manager" items="${allManagers}">
                                             <c:choose>
                                                 <c:when test="${updProject.manager.id eq manager.id}">
-                                                    <option value="${manager.id}" selected>${manager.firstName} ${manager.firstName}</option>
+                                                    <option value="${manager.id}" selected>${manager.firstName} ${manager.lastName}</option>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <option value="${manager.id}">${updProject.manager.firstName} ${updProject.manager.firstName}</option>
+                                                    <option value="${manager.id}">${manager.firstName} ${manager.lastName}</option>
                                                 </c:otherwise>
                                             </c:choose>
                                         </c:forEach>
@@ -38,17 +38,19 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
-                                <div class="form-group col-lg-4">
+                                <div class="form-group col-lg-6">
                                     <label for="name">Start date:</label>
                                     <form:input path="startDate" type="date" class="form-control" value="${updProject.startDate}"/>
                                     <form:errors path="startDate" cssClass="label label-danger"/>
                                 </div>
-                                <div class="form-group col-lg-4">
+                                <div class="form-group col-lg-6">
                                     <label for="name">End date:</label>
                                     <form:input path="endDate" type="date" class="form-control" value="${updProject.endDate}"/>
                                     <form:errors path="endDate" cssClass="label label-danger"/>
                                 </div>
-                                <div class="form-group col-lg-4">
+                            </div>
+                            <div class="form-group col-lg-12 outer">
+                                <div class="form-group col-lg-6">
                                     <label for="status">Status:</label>
                                     <form:select class="form-control" path="status" id="status">
                                         <form:option value="CREATED" label="CREATED"/>
@@ -91,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="form-group text-center">
-                                <button type="submit" class="btn btn-primary">Create project</button>
+                                <button type="submit" class="btn btn-primary">Update project</button>
                             </div>
                         </form:form>
                     </div>

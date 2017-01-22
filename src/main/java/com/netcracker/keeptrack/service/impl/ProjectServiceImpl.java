@@ -33,6 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = new Project();
         project.setName(dto.getName());
         project.setStartDate(LocalDate.now());
+        project.setEndDate(LocalDate.parse(dto.getEndDate()));
         project.setDescription(dto.getDescription());
         project.setStatus(ProjectStatus.CREATED);
         projectRepository.saveAndFlush(project);

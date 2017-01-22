@@ -50,17 +50,17 @@ public class UserValidator extends BaseValidator implements Validator {
         boolean isNew = user.getId() == null;
 
         String userName = user.getUsername();
-        validateParamName(errors, "username", userName, NAME_REQUIRED_MSG, USERNAME_LENGTH_MSG, USERNAME_REGEX);
+        validateStringField(errors, "username", userName, NAME_REQUIRED_MSG, USERNAME_LENGTH_MSG, USERNAME_REGEX);
 
         if (isNew && userRepository.getUserByUsername(userName) != null) {
             errors.rejectValue("username", EXIST_USERNAME_MSG);
         }
 
         String userFirstName = user.getFirstName();
-        validateParamName(errors, "firstName", userFirstName, NAME_REQUIRED_MSG, FIRST_NAME_LENGTH_MSG, NAME_REGEX);
+        validateStringField(errors, "firstName", userFirstName, NAME_REQUIRED_MSG, FIRST_NAME_LENGTH_MSG, NAME_REGEX);
 
         String userLastName = user.getLastName();
-        validateParamName(errors, "lastName", userFirstName, NAME_REQUIRED_MSG, LAST_NAME_LENGTH_MSG, NAME_REGEX);
+        validateStringField(errors, "lastName", userFirstName, NAME_REQUIRED_MSG, LAST_NAME_LENGTH_MSG, NAME_REGEX);
 
         if (isNew && userRepository.getUserByFirstAndLastName(userFirstName, userLastName) != null) {
             errors.rejectValue("firstName", EXIST_NAMES_MSG);

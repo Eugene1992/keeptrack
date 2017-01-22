@@ -90,6 +90,7 @@ public class ProjectController {
     /**
      * Controller that redirects to the update menu of the selected project.
      *
+     * @param id selected project identifier
      * @param model contains data about the all employees, project managers for HTML select menu
      *              and updated project data for user changes
      * @return update menu of the selected project
@@ -109,24 +110,34 @@ public class ProjectController {
      * Controller that processes data received from update form, validates and if data
      * is correct - transmits it to the service layer for further processing and saving.
      *
-     * @param model contains data about the all employees, project managersfor HTML select menu
+     * @param model contains data about the all employees, project managers for HTML select menu
      *              and updated project data for user changes
      * @return redirects to the projects menu
      */
     @RequestMapping(value = "/projects/update", method = RequestMethod.POST)
     public String updateProject(@Valid @ModelAttribute("project") ProjectDTO projectDTO, BindingResult result, Model model) {
-        Project project = projectService.getProjectByName(projectDTO.getName());
         List<User> allEmployees = userService.getAllEmployees();
         List<User> allManagers = userService.getAllManagers();
-        validator.validate(project, result);
+        validator.validate(projectDTO, result);
         if (result.hasErrors()) {
             model.addAttribute("allEmployees", allEmployees);
             model.addAttribute("allManagers", allManagers);
-            return "project-upd-form";
+            return "upd-project";
         }
-        model.addAttribute("allEmployees", allEmployees);
-        model.addAttribute("allManagers", allManagers);
         projectService.updateProject(projectDTO);
+        return "redirect:/projects";
+    }
+
+    /**
+     * The controller that delete project from data base.
+     * The operation is available for the administrator.
+     *
+     * @param id of the project which will be deleted
+     * @return redirect to the projects menu
+     */
+    @RequestMapping(value = "/projects/delete", method = RequestMethod.POST)
+    public String deleteProject(@RequestParam("id") String id) {
+        projectService.deleteProject(Integer.parseInt(id));
         return "redirect:/projects";
     }
 
@@ -141,7 +152,7 @@ public class ProjectController {
      * @return selected project profile
      */
     @RequestMapping(value = "/project/{name}", method = RequestMethod.GET)
-    public String project(Model model, @PathVariable String name) {
+    public String project(@PathVariable String name, Model model) {
         Project currentProject = projectService.getProjectByName(name);
         Integer projectId = currentProject.getId();
         User projectManager = projectService.getProjectManager(projectId);

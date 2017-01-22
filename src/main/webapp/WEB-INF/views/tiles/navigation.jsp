@@ -70,35 +70,16 @@
                 <a href="/dashboards"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistic</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-fw fa-money"></i> Customers</a>
-            </li>
-            <li>
                 <a href="/projects"><i class="fa fa-fw fa-edit"></i> Projects</a>
             </li>
             <li>
-                <a href="/users"><i class="fa fa-fw fa-user"></i> Employees</a>
+                <a href="/users"><i class="fa fa-fw fa-user"></i> Users</a>
             </li>
             <li>
                 <a href="/sprints"><i class="fa fa-fw fa-tasks"></i> Sprints</a>
             </li>
             <li>
                 <a href="/tasks"><i class="fa fa-fw fa-wrench"></i> Tasks</a>
-            </li>
-            <li>
-                <a data-toggle="collapse" data-target="#demo">
-                    <i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i>
-                </a>
-                <ul id="demo" class="collapse">
-                    <li>
-                        <a href="#">Dropdown Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Dropdown Item</a>
-                    </li>
-                </ul>
             </li>
         </ul>
     </div>
