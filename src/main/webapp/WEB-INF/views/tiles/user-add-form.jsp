@@ -8,7 +8,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">
-                            Update task
+                            Create user
                         </span>
                     </div>
                     <div class="panel-body">
@@ -90,8 +90,8 @@
                                 </div>
                             </div>
                             <div class="form-group text-center">
-                                <button type="submit" class="btn btn-primary">Save employee</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close menu</button>
+                                <button type="submit" class="btn btn-primary">Create user</button>
+                                <a href="/users"><button type="button" class="btn btn-danger">Back to users</button></a>
                             </div>
                         </form:form>
                     </div>

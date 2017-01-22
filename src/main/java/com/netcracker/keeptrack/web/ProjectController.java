@@ -63,7 +63,7 @@ public class ProjectController {
     }
 
     /**
-     * A controller for adding new projects.
+     * The controller for adding new projects.
      * Validates the incoming data using Validator and ModelAttribute.
      * If the data is correct, it is passed to the service layer via Data Transfer Object
      * for further processing, if not - redirects to a separate form with validation errors.
@@ -88,7 +88,7 @@ public class ProjectController {
     }
 
     /**
-     * Controller that redirects to the update menu of the selected project.
+     * The controller that redirects to the update menu of the selected project.
      *
      * @param id selected project identifier
      * @param model contains data about the all employees, project managers for HTML select menu
@@ -107,7 +107,7 @@ public class ProjectController {
     }
 
     /**
-     * Controller that processes data received from update form, validates and if data
+     * The controller that processes data received from update form, validates and if data
      * is correct - transmits it to the service layer for further processing and saving.
      *
      * @param model contains data about the all employees, project managers for HTML select menu
@@ -137,7 +137,7 @@ public class ProjectController {
      */
     @RequestMapping(value = "/projects/delete", method = RequestMethod.POST)
     public String deleteProject(@RequestParam("id") String id) {
-        projectService.deleteProject(Integer.parseInt(id));
+        projectService.deleteProject(Integer.valueOf(id));
         return "redirect:/projects";
     }
 
