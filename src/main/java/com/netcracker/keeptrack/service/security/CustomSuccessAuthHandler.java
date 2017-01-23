@@ -1,8 +1,6 @@
 package com.netcracker.keeptrack.service.security;
 
 import com.netcracker.keeptrack.repository.UserRepository;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -17,17 +15,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Custom success login filter.
+ * Implementation of {@link AuthenticationSuccessHandler}.
+ * Adds data about the user after authorization.
+ *
+ * @see AuthenticationSuccessHandler
  */
 public class CustomSuccessAuthHandler implements AuthenticationSuccessHandler {
-
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
-    protected Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Encapsulates the redirection logic for all classes in the framework
+     * which perform redirects.
+     */
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+    /**
+     * If the user is successfully authenticated, get his data from the database and
+     * put them to the session. After that redirects to the targetUrl.
+     *
+     * @param request provide request information for HTTP servlets
+     * @param response provide HTTP-specific functionality in sending a response
+     * @param authentication represents the token for an authentication request or for an
+     *                       authenticated principal
+     */
     @Override
     public void onAuthenticationSuccess(final HttpServletRequest request,
                                         final HttpServletResponse response,
@@ -44,9 +56,9 @@ public class CustomSuccessAuthHandler implements AuthenticationSuccessHandler {
         session.setAttribute("user", user);
 
         if (response.isCommitted()) {
-            logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
             return;
         }
+
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 }

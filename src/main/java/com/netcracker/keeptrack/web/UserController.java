@@ -20,7 +20,11 @@ import java.util.List;
 import javax.validation.Valid;
 
 /**
- * Return Apache Tiles 'home' definition by '/' GET request.
+ * User entity controller.
+ * Receives and processes requests associated with {@code User} entity.
+ *
+ * @see com.netcracker.keeptrack.model.User
+ * @see com.netcracker.keeptrack.service.UserService
  */
 @Controller
 public class UserController {
@@ -57,7 +61,7 @@ public class UserController {
     }
 
     /**
-     * A controller for adding new users.
+     * The controller for adding new users.
      * Validates the incoming data using Validator and ModelAttribute.
      * If the data is correct, it is passed to the service layer via Data Transfer Object
      * for further processing, if not - redirects to a separate form with validation errors.
@@ -79,7 +83,24 @@ public class UserController {
     }
 
     /**
-     * Controller that processes data received from update form, validates and if data
+     * The controller that redirects to the update menu of the selected user.
+     *
+     * @param id selected user id
+     * @param model contains data about the all projects for HTML select menu and updated
+     *              task data for user changes
+     * @return update menu of the selected user
+     */
+    @RequestMapping(value = "/users/update/{id}", method = RequestMethod.POST)
+    public String updateUser(@PathVariable("id") String id, Model model) {
+        List<Project> projects = projectService.getAllProjects();
+        User user = userService.getUserById(Integer.valueOf(id));
+        model.addAttribute("allProjects", projects);
+        model.addAttribute("updUser", user);
+        return "upd-user";
+    }
+
+    /**
+     * The controller that processes data received from update form, validates and if data
      * is correct - transmits it to the service layer for further processing and saving.
      *
      * @param model contains data about the all projects for HTML select menu and updated
@@ -99,23 +120,6 @@ public class UserController {
     }
 
     /**
-     * Controller that redirects to the update menu of the selected user.
-     *
-     * @param id selected user id
-     * @param model contains data about the all projects for HTML select menu and updated
-     *              task data for user changes
-     * @return update menu of the selected user
-     */
-    @RequestMapping(value = "/users/update/{id}", method = RequestMethod.POST)
-    public String updateUser(@PathVariable("id") String id, Model model) {
-        List<Project> projects = projectService.getAllProjects();
-        User user = userService.getUserById(Integer.valueOf(id));
-        model.addAttribute("allProjects", projects);
-        model.addAttribute("updUser", user);
-        return "upd-user";
-    }
-
-    /**
      * The controller that delete user from data base.
      * The operation is available for the administrator.
      *
@@ -129,7 +133,7 @@ public class UserController {
     }
 
     /**
-     * Controller that redirects to the selected user profile.
+     * The controller that redirects to the selected user profile.
      *
      * @param model selected user data
      * @return selected user profile view

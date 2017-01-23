@@ -12,6 +12,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SprintRepository extends JpaRepository<Sprint, Integer> {
 
+    /**
+     * Returns the sprint by specified name.
+     *
+     * @param name of the required sprint
+     * @return specified sprint
+     */
     @Query("select s from Sprint s where s.name  = :name")
     Sprint getSprintByName(@Param("name") String name);
 }

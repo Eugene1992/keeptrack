@@ -41,7 +41,7 @@ public class Task extends BaseEntity {
     /**
      * Task sprint.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sprint_id")
     private Sprint sprint;
 
@@ -172,7 +172,6 @@ public class Task extends BaseEntity {
         if (name != null ? !name.equals(task.name) : task.name != null) return false;
         if (status != task.status) return false;
         return description != null ? description.equals(task.description) : task.description == null;
-
     }
 
     @Override

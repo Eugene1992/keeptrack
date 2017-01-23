@@ -4,7 +4,7 @@
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-offset-3 col-lg-6">
+            <div class="col-lg-offset-2 col-lg-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">
@@ -30,17 +30,19 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
-                                <div class="form-group col-lg-4">
+                                <div class="form-group col-lg-6">
                                     <label for="name">Start date:</label>
                                     <form:input path="startDate" type="date" class="form-control" id="name" />
                                     <form:errors path="startDate" cssClass="label label-danger"/>
                                 </div>
-                                <div class="form-group col-lg-4">
+                                <div class="form-group col-lg-6">
                                     <label for="name">End date:</label>
                                     <form:input path="endDate" type="date" class="form-control" id="name" />
                                     <form:errors path="endDate" cssClass="label label-danger"/>
                                 </div>
-                                <div class="form-group col-lg-4">
+                            </div>
+                            <div class="form-group col-lg-12 outer">
+                                <div class="form-group col-lg-6">
                                     <label for="status">Status:</label>
                                     <form:select class="form-control" path="status" id="status">
                                         <form:option value="CREATED" label="CREATED"/>
@@ -70,11 +72,12 @@
                             </div>
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-12">
-                                    <p><b>Note:</b> You can add employees, sprints, tasks after project creation</p>
+                                    <p><b>Note:</b> You can add sprints, tasks after project creation</p>
                                 </div>
                             </div>
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-primary">Create project</button>
+                                <a href="/projects"><button type="button" class="btn btn-danger">Back to projects</button></a>
                             </div>
                         </form:form>
                     </div>

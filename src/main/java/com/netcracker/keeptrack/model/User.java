@@ -53,13 +53,13 @@ public class User extends BaseEntity {
     /**
      * The tasks are created by the user if he is a project manager.
      */
-    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Task> createdTasks;
 
     /**
      * The tasks are assigned by the user if he is an employee.
      */
-    @OneToMany(mappedBy = "assigner", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "assigner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Task> assignedTasks;
 
     /**

@@ -16,7 +16,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Dsdasdsdasa ds ads asd sa.
+ * Implementation of {@link TaskService} interface that provides methods for Task
+ * entity business logic.
+ *
+ * @see TaskService
+ * @see Sprint
  */
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -30,6 +34,14 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private SprintRepository sprintRepository;
 
+    /**
+     * Adds a new task to the system.
+     * A new task is created on the basis of the data parsed by {@link TaskDTO} object.
+     * Data is previously validated by TaskValidator.
+     * @see TaskService#addTask
+     *
+     * @param taskDTO object which contains information about the new task
+     */
     @Override
     public void addTask(TaskDTO taskDTO) {
         Task task = new Task();
@@ -48,24 +60,50 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(TaskStatus.valueOf(taskDTO.getStatus()));
         task.setDescription(taskDTO.getDescription());
         task.setEstimate(Integer.parseInt(taskDTO.getEstimate()));
-        taskRepository.saveAndFlush(task);
+        taskRepository.save(task);
     }
 
+    /**
+     * Deletes the task by specified identifier.
+     * @see TaskService#deleteTask
+     *
+     * @param id deleted task identifier
+     */
     @Override
     public void deleteTask(Integer id) {
         taskRepository.delete(id);
     }
 
+    /**
+     * Returns the task by specified id.
+     * @see TaskService#getTaskById
+     *
+     * @param id of the required task
+     * @return specified task
+     */
     @Override
     public Task getTaskById(Integer id) {
         return taskRepository.findOne(id);
     }
 
+    /**
+     * Returns the task by specified name.
+     * @see TaskService#getTaskByName
+     *
+     * @param name of the required task
+     * @return specified task
+     */
     @Override
     public Task getTaskByName(String name) {
         return taskRepository.getTaskByName(name);
     }
 
+    /**
+     * Updates the specified task.
+     * @see TaskService#updateTask
+     *
+     * @param taskDTO object which contains updated task information
+     */
     @Override
     public void updateTask(TaskDTO taskDTO) {
         Integer taskId = Integer.valueOf(taskDTO.getId());
@@ -88,6 +126,12 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
     }
 
+    /**
+     * Returns all tasks in the system.
+     * @see TaskService#getAllTasks
+     *
+     * @return list of all employees
+     */
     @Override
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
@@ -101,6 +145,12 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.saveAndFlush(task);
     }
 
+    /**
+     * Check whether there is a sprint with the specified name.
+     * @see TaskService#addTaskToSprint
+     *
+     * @param name of specified sprint
+     */
     @Override
     public void addTaskToSprint(String name, String endDate, String estimate,
                                 String assignerId, String description, String sprintId) {

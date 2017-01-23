@@ -19,11 +19,25 @@
                             </tr>
                             <tr>
                                 <td><b>Project:</b></td>
-                                <td>${sprint.project.name}</td>
+                                <td>
+                                    ${sprint.project.name}
+                                    <a href="/project/${sprint.project.name}">
+                                        <button class="btn btn-xs btn-success pull-right">
+                                            <i class="glyphicon glyphicon-share"></i>
+                                        </button>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td><b>Project managerId:</b></td>
-                                <td>${sprint.project.manager.firstName} ${sprint.project.manager.lastName}</td>
+                                <td>
+                                    ${sprint.project.manager.firstName} ${sprint.project.manager.lastName}
+                                    <a href="/user/${sprint.project.manager.username}">
+                                        <button class="btn btn-xs btn-success pull-right">
+                                            <i class="glyphicon glyphicon-share"></i>
+                                        </button>
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <td><b>Status:</b></td>
@@ -50,6 +64,7 @@
                             </tr>
                             </tbody>
                         </table>
+                        <a href="/sprints"><button class="btn btn-sm btn-primary pull-right">Back to sprints</button></a>
                     </div>
                 </div>
             </div>

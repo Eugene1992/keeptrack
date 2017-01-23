@@ -14,8 +14,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Service interface that describes methods for Sprint entity business logic.
+ * Implementation of {@link SprintService} interface that provides methods for Sprint
+ * entity business logic.
  *
+ * @see SprintService
  * @see Sprint
  */
 @Service
@@ -27,6 +29,14 @@ public class SprintServiceImpl implements SprintService {
     @Autowired
     private ProjectRepository projectRepository;
 
+    /**
+     * Adds a new sprint to the system.
+     * A new sprint is created on the basis of the data parsed by {@link SprintDTO} object.
+     * Data is previously validated by SprintValidator.
+     * @see SprintService#addSprint
+     *
+     * @param sprintDTO object which contains information about the new sprint
+     */
     @Override
     public void addSprint(SprintDTO sprintDTO) {
         Sprint sprint = new Sprint();
@@ -44,21 +54,47 @@ public class SprintServiceImpl implements SprintService {
         sprintRepository.saveAndFlush(sprint);
     }
 
+    /**
+     * Deletes the sprint by specified identifier.
+     * @see SprintService#deleteSprint
+     *
+     * @param id deleted sprint identifier
+     */
     @Override
     public void deleteSprint(Integer id) {
         sprintRepository.delete(id);
     }
 
+    /**
+     * Returns the sprint by specified id.
+     * @see SprintService#getSprintById
+     *
+     * @param id of the required sprint
+     * @return specified sprint
+     */
     @Override
     public Sprint getSprintById(Integer id) {
         return sprintRepository.findOne(id);
     }
 
+    /**
+     * Returns the sprint by specified name.
+     * @see SprintService#getSprintByName
+     *
+     * @param name of the required sprint
+     * @return specified sprint
+     */
     @Override
     public Sprint getSprintByName(String name) {
         return sprintRepository.getSprintByName(name);
     }
 
+    /**
+     * Updates the specified sprint.
+     * @see SprintService#updateSprint
+     *
+     * @param sprintDTO object which contains updated sprint information
+     */
     @Override
     public void updateSprint(SprintDTO sprintDTO) {
         Integer sprintId = Integer.parseInt(sprintDTO.getId());
@@ -74,18 +110,35 @@ public class SprintServiceImpl implements SprintService {
         sprintRepository.saveAndFlush(sprint);
     }
 
+    /**
+     * Returns all sprints in the system.
+     * @see SprintService#getAllSprints
+     *
+     * @return list of all sprints
+     */
     @Override
     public List<Sprint> getAllSprints() {
         return sprintRepository.findAll();
     }
 
+    /**
+     * Deletes the sprint from current project by specified identifier.
+     * @see SprintService#deleteSprintFromProject
+     *
+     * @param id deleted sprint identifier
+     */
     @Override
-    public void deleteSprintFormProject(Integer id) {
+    public void deleteSprintFromProject(Integer id) {
         Sprint sprint = sprintRepository.findOne(id);
         sprint.setProject(null);
         sprintRepository.save(sprint);
     }
 
+    /**
+     * Adds the sprint to current project by specified identifier.
+     * @see SprintService#addSprintToProject
+     *
+     */
     @Override
     public void addSprintToProject(String projectName, String sprintName, String sprintEndDate, String sprintDescription) {
         Sprint sprint = new Sprint();
@@ -101,6 +154,13 @@ public class SprintServiceImpl implements SprintService {
         sprintRepository.saveAndFlush(sprint);
     }
 
+    /**
+     * Check whether there is a sprint with the specified name.
+     * @see SprintService#checkSprintName
+     *
+     * @param name of specified sprint
+     * @return result of checking
+     */
     @Override
     public boolean checkSprintName(String name) {
         return sprintRepository.getSprintByName(name) != null;
