@@ -15,9 +15,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Implementation of {@link UserService} interface that provides methods for Task
+ * Implementation of {@link UserService} interface that provides methods for User
  * entity business logic.
  *
+ * @see UserService
  * @see User
  */
 @Service
@@ -29,6 +30,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ProjectRepository projectRepository;
 
+    /**
+     * Adds a new user to the system.
+     * A new task is created on the basis of the data parsed by {@link UserDTO} object.
+     * Data is previously validated by UserValidator.
+     * @see UserService#addUser
+     *
+     * @param userDTO object which contains information about the new user
+     */
     @Override
     public void addUser(UserDTO userDTO) {
         User user = new User();
@@ -48,21 +57,47 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Deletes the user by specified identifier.
+     * @see UserService#deleteUser
+     *
+     * @param id deleted user identifier
+     */
     @Override
     public void deleteUser(Integer id) {
         userRepository.delete(id);
     }
 
+    /**
+     * Returns the user by specified id.
+     * @see UserService#getUserById
+     *
+     * @param id of the required user
+     * @return specified user
+     */
     @Override
     public User getUserById(Integer id) {
         return userRepository.findOne(id);
     }
 
+    /**
+     * Returns the user by specified name.
+     * @see UserService#getUserByUsername
+     *
+     * @param username of the required user
+     * @return specified user
+     */
     @Override
     public User getUserByUsername(String username) {
         return userRepository.getUserByUsername(username);
     }
 
+    /**
+     * Updates the specified user.
+     * @see UserService#updateUser
+     *
+     * @param userDTO object which contains updated user information
+     */
     @Override
     public void updateUser(UserDTO userDTO) {
         Integer userId = Integer.valueOf(userDTO.getId());
@@ -83,31 +118,67 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Returns all users in the system.
+     * @see UserService#getAllUsers
+     *
+     * @return list of all users
+     */
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    /**
+     * Returns employees who are not involved in one of the projects.
+     * @see UserService#getFreeEmployees
+     *
+     * @return list of free employees
+     */
     @Override
     public List<User> getFreeEmployees() {
         return userRepository.getFreeEmployees();
     }
 
+    /**
+     * Returns all employees in the system.
+     * @see UserService#getAllEmployees
+     *
+     * @return list of all employees
+     */
     @Override
     public List<User> getAllEmployees() {
         return userRepository.getAllEmployees();
     }
 
+    /**
+     * Returns managers who are not involved in one of the projects.
+     * @see UserService#getFreeManagers
+     *
+     * @return list of free managers
+     */
     @Override
     public List<User> getFreeManagers() {
         return userRepository.getFreeManagers();
     }
 
+    /**
+     * Returns all managers in the system.
+     * @see UserService#getAllManagers
+     *
+     * @return list of all managers
+     */
     @Override
     public List<User> getAllManagers() {
         return userRepository.getAllManagers();
     }
 
+    /**
+     * Deletes employee from specified project.
+     * @see UserService#deleteEmployeeFormProject
+     *
+     * @param employeeId deleted employee identifier
+     */
     @Override
     public void deleteEmployeeFormProject(String employeeId) {
         Integer id = Integer.parseInt(employeeId);
@@ -116,6 +187,13 @@ public class UserServiceImpl implements UserService {
         userRepository.save(employee);
     }
 
+    /**
+     * Adds employee to specified project.
+     * @see UserService#addEmployeeToProject
+     *
+     * @param employeeId identifier of the added employee
+     * @param projectName identifier of the project in which employee will be added
+     */
     @Override
     public void addEmployeeToProject(String employeeId, String projectName) {
         Integer id = Integer.parseInt(employeeId);

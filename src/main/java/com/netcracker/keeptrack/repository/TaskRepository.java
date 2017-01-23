@@ -15,12 +15,29 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
+    /**
+     * Returns the task by specified name.
+     *
+     * @param name of the required task
+     * @return specified task
+     */
     @Query("select t from Task t where t.name  = :name")
     Task getTaskByName(@Param("name") String name);
 
+    /**
+     * Returns the latest by date specified number of tasks.
+     *
+     * @param pageable abstract interface for pagination information
+     * @return list of latest task
+     */
     @Query("select t from Task t order by t.startDate desc")
     List<Task> getLatestTasks(Pageable pageable);
 
+    /**
+     * Returns the total number of tasks.
+     *
+     * @return total number of tasks
+     */
     @Query("select count(t) from Task t")
     Long getTotalTasksCount();
 }

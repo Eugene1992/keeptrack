@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 /**
- * Return Apache Tiles 'home' definition by '/' GET request.
- */
+ * Dashboards menu controller.
+*/
 @Controller
 public class DashboardController {
 
@@ -20,10 +20,10 @@ public class DashboardController {
     private StatisticService statisticService;
 
     /**
-     * Employees tab controller.
+     * Redirects to dashboards menu page.
      *
-     * @param model users info
-     * @return tiles 'users' definition
+     * @param model data about total customers, employees, projects, tasks number
+     * @return tiles 'dashboards' definition page
      */
     @RequestMapping(value = "/dashboards", method = RequestMethod.GET)
     public String employees(Model model) {

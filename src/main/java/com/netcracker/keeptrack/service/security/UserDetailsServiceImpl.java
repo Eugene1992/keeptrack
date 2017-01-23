@@ -14,9 +14,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * UserDetailsService implementation which allows to perform user
- * authentication on the basis of data obtained from UserService.
+ * UserDetailsService implementation which allows to perform user authentication
+ * on the basis of data obtained from UserService.
  *
+ * @see UserDetailsService
  */
 @Service("user-details")
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -35,8 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.getUserByUsername(username);
         Set<GrantedAuthority> roles = new HashSet<>();
         roles.add(new SimpleGrantedAuthority(user.getRole().name()));
-        UserDetails userDetails =
-                new org.springframework.security.core.userdetails.User(
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
                         user.getUsername(),
                         user.getPassword(),
                         roles);

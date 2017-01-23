@@ -183,7 +183,7 @@ public class SprintController {
     public String deleteSprintFromProject(@RequestParam("sprintId") String id,
                                           @RequestParam("projectName") String name) {
         Integer sprintId = Integer.parseInt(id);
-        sprintService.deleteSprintFormProject(sprintId);
+        sprintService.deleteSprintFromProject(sprintId);
         return "redirect:/project/" + name;
     }
 }
