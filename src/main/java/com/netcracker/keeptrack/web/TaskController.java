@@ -190,7 +190,7 @@ public class TaskController {
     @RequestMapping(value = "project/tasks/delete", method = RequestMethod.POST)
     public String deleteTaskFromSprint(@RequestParam("taskId") String taskId,
                                        @RequestParam("projectName") String projectName) {
-        taskService.deleteTaskFromSprint(taskId);
+        taskService.deleteTaskFromSprint(Integer.valueOf(taskId));
         return "redirect:/project/" + projectName;
     }
 

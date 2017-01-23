@@ -138,9 +138,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void deleteTaskFromSprint(String taskId) {
-        Integer id = Integer.parseInt(taskId);
-        Task task = taskRepository.findOne(id);
+    public void deleteTaskFromSprint(Integer taskId) {
+        Task task = taskRepository.findOne(taskId);
         task.setSprint(null);
         taskRepository.saveAndFlush(task);
     }

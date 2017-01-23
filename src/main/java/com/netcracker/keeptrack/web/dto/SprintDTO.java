@@ -1,5 +1,7 @@
 package com.netcracker.keeptrack.web.dto;
 
+import com.netcracker.keeptrack.model.Sprint;
+
 /**
  * Sprint entity Data Transfer Object.
  */
@@ -41,6 +43,16 @@ public class SprintDTO {
     private String projectId;
 
     public SprintDTO() {
+    }
+
+    public SprintDTO(Sprint sprint) {
+        this.id = String.valueOf(sprint.getId());
+        this.name = sprint.getName();
+        this.startDate = sprint.getStartDate().toString();
+        this.endDate = sprint.getEndDate().toString();
+        this.status = sprint.getStatus().name();
+        this.description = sprint.getDescription();
+        this.projectId = String.valueOf(sprint.getProject().getId());
     }
 
     public String getId() {

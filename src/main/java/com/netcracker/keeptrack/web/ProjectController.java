@@ -6,6 +6,7 @@ import com.netcracker.keeptrack.service.ProjectService;
 import com.netcracker.keeptrack.service.UserService;
 import com.netcracker.keeptrack.service.validators.ProjectValidator;
 import com.netcracker.keeptrack.web.dto.ProjectDTO;
+import com.netcracker.keeptrack.web.dto.SprintDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,11 @@ public class ProjectController {
     @ModelAttribute("project")
     public ProjectDTO construct() {
         return new ProjectDTO();
+    }
+
+    @ModelAttribute("sprint")
+    public SprintDTO constructs() {
+        return new SprintDTO();
     }
 
     /**

@@ -3,9 +3,7 @@ package com.netcracker.keeptrack.service;
 import com.netcracker.keeptrack.BaseTestConfig;
 import com.netcracker.keeptrack.model.Role;
 import com.netcracker.keeptrack.model.User;
-import com.netcracker.keeptrack.repository.UserRepository;
 import com.netcracker.keeptrack.web.dto.UserDTO;
-import com.sun.org.apache.regexp.internal.RE;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -90,7 +88,7 @@ public class UserServiceTest extends BaseTestConfig {
 
     @Test
     public void getAllUsersTest() throws Exception {
-        final Integer EXPECTED_SIZE = 29;
+        final Integer EXPECTED_SIZE = 28;
         final List<User> ALL_USERS = userService.getAllUsers();
         final Integer RESULT_SIZE = ALL_USERS.size();
         Assert.assertNotNull(ALL_USERS);
@@ -108,7 +106,7 @@ public class UserServiceTest extends BaseTestConfig {
 
     @Test
     public void getAllEmployeesTest() throws Exception {
-        final Integer EXPECTED_SIZE = 19;
+        final Integer EXPECTED_SIZE = 18;
         final List<User> ALL_EMPLOYEES = userService.getAllEmployees();
         final Integer RESULT_SIZE = ALL_EMPLOYEES.size();
         Assert.assertNotNull(ALL_EMPLOYEES);

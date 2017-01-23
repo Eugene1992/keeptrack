@@ -14,21 +14,12 @@
                     <div class="panel-body">
                         <form:form action="/sprints/add" method="POST" modelAttribute="sprint" >
                             <div class="form-group col-lg-12 outer">
-                                <div class="form-group col-lg-4">
+                                <div class="form-group col-lg-6">
                                     <label for="name">Title:</label>
                                     <form:input path="name" type="text" class="form-control"/>
                                     <form:errors path="name" cssClass="label label-danger"/>
                                 </div>
-                                <div class="form-group form-group-sm col-md-4">
-                                    <label for="status">Status:</label>
-                                    <form:select path="status" class="form-control custom-select-height">
-                                        <form:option value="CREATED" />
-                                        <form:option value="IN_PROGRESS" />
-                                        <form:option value="CLOSED" />
-                                    </form:select>
-                                    <form:errors path="status" cssClass="label label-danger"/>
-                                </div>
-                                <div class="form-group form-group-sm col-lg-4">
+                                <div class="form-group form-group-sm col-lg-6">
                                     <label for="projectId">Project:</label>
                                     <form:select path="projectId" class="form-control custom-select-height">
                                         <c:forEach var="project" items="${projects}">
@@ -48,6 +39,17 @@
                                     <label for="endDate">End date:</label>
                                     <form:input path="endDate" type="date" class="form-control"/>
                                     <form:errors path="endDate" cssClass="label label-danger"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12 outer">
+                                <div class="form-group form-group-sm col-md-6">
+                                    <label for="status">Status:</label>
+                                    <form:select path="status" class="form-control custom-select-height">
+                                        <form:option value="CREATED" />
+                                        <form:option value="IN_PROGRESS" />
+                                        <form:option value="CLOSED" />
+                                    </form:select>
+                                    <form:errors path="status" cssClass="label label-danger"/>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">

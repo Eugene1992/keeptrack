@@ -21,7 +21,6 @@ public class HomeController {
         return "redirect:/login";
     }
 
-
     /**
      * Login page controller.
      * Redirects to login page.

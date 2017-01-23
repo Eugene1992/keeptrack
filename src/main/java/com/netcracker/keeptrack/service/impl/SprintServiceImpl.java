@@ -140,16 +140,16 @@ public class SprintServiceImpl implements SprintService {
      *
      */
     @Override
-    public void addSprintToProject(String projectName, String sprintName, String sprintEndDate, String sprintDescription) {
+    public void addSprintToProject(SprintDTO sprintDTO) {
         Sprint sprint = new Sprint();
-        Project project = projectRepository.getProjectByName(projectName);
+        Project project = projectRepository.findOne(Integer.valueOf(sprintDTO.getProjectId()));
         sprint.setProject(project);
-        LocalDate endDate = LocalDate.parse(sprintEndDate);
+        LocalDate endDate = LocalDate.parse(sprintDTO.getEndDate());
         sprint.setEndDate(endDate);
         LocalDate startDate = LocalDate.now();
         sprint.setStartDate(startDate);
-        sprint.setName(sprintName);
-        sprint.setDescription(sprintDescription);
+        sprint.setName(sprintDTO.getName());
+        sprint.setDescription(sprintDTO.getDescription());
         sprint.setStatus(SprintStatus.CREATED);
         sprintRepository.saveAndFlush(sprint);
     }

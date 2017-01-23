@@ -85,7 +85,7 @@ public interface TaskService {
      *
      * @param taskId deleted sprint identifier
      */
-    void deleteTaskFromSprint(String taskId);
+    void deleteTaskFromSprint(Integer taskId);
 
     // todo: 23.01.2017 refactor for dto input
     /**
