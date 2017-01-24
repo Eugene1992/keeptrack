@@ -33,14 +33,14 @@ public class TaskServiceTest extends BaseTestConfig {
         task.setAssignerId("5");
     }
 
-    /*@Test
+    @Test
     public void addTask() throws Exception {
         taskService.addTask(task);
         final Task SAVED_TASK = taskService.getTaskByName(task.getName());
         Assert.assertNotNull(SAVED_TASK);
         Assert.assertEquals(task.getName(), SAVED_TASK.getName());
         Assert.assertEquals(task.getDescription(), SAVED_TASK.getDescription());
-    }*/
+    }
 
     @Test
     public void deleteTask() throws Exception {
@@ -81,6 +81,13 @@ public class TaskServiceTest extends BaseTestConfig {
         final Integer RESULT_SIZE = ALL_TASKS.size();
         Assert.assertNotNull(ALL_TASKS);
         Assert.assertEquals(EXPECTED_SIZE, RESULT_SIZE);
+    }
+
+    @Test
+    public void addTaskToSprint() throws Exception {
+        taskService.addTaskToSprint(task);
+        final Task RESULT = taskService.getTaskByName(task.getName());
+        Assert.assertNotNull(RESULT.getSprint());
     }
 
     @Test

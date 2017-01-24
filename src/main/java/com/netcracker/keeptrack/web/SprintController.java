@@ -39,7 +39,7 @@ public class SprintController {
     private SprintValidator validator;
 
     @ModelAttribute("sprint")
-    public SprintDTO construct() {
+    public SprintDTO constructSprint() {
         return new SprintDTO();
     }
 
@@ -161,10 +161,10 @@ public class SprintController {
     public String addSprintToProject(@Valid @ModelAttribute("sprint") SprintDTO sprintDto, BindingResult result, Model model) {
         validator.validate(sprintDto, result);
         if (result.hasErrors()) {
-            return "upd-sprint";
+            return "project-add-sprint";
         }
         sprintService.addSprintToProject(sprintDto);
-        return "redirect:/projects";
+        return "redirect:/project";
     }
 
     /**

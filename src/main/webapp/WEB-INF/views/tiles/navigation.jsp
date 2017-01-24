@@ -66,9 +66,17 @@
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-            <li class="active">
-                <a href="/dashboards"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-            </li>
+            <security:authorize access="hasAnyRole('EMPLOYEE', 'CUSTOMER', 'PM')">
+                <li class="active">
+                    <a href="/dashboards"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                </li>
+            </security:authorize>
+            <security:authorize access="hasAnyRole('EMPLOYEE', 'CUSTOMER', 'PM')">
+                <li>
+                    <a href="/project"><i class="fa fa-fw fa-edit"></i> Project</a>
+                </li>
+            </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
             <li>
                 <a href="/projects"><i class="fa fa-fw fa-edit"></i> Projects</a>
             </li>
@@ -81,6 +89,7 @@
             <li>
                 <a href="/tasks"><i class="fa fa-fw fa-wrench"></i> Tasks</a>
             </li>
+            </security:authorize>
         </ul>
     </div>
 </nav>

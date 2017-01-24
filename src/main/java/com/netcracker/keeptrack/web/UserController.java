@@ -39,7 +39,7 @@ public class UserController {
     private UserValidator validator;
 
     @ModelAttribute("user")
-    public UserDTO construct() {
+    public UserDTO constructUser() {
         return new UserDTO();
     }
 

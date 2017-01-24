@@ -41,6 +41,16 @@
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
         <put-attribute name="task-add-form" value="/WEB-INF/views/tiles/task-add-form.jsp" />
     </definition>
+    <definition name="project-add-task" template="/WEB-INF/views/template/project-task-add-page.jsp">
+        <put-attribute name="title" value="Sprint" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="project-task-add-form" value="/WEB-INF/views/tiles/project-task-add-form.jsp" />
+    </definition>
+    <definition name="project-add-sprint" template="/WEB-INF/views/template/project-sprint-add-page.jsp">
+        <put-attribute name="title" value="Sprint" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="project-sprint-add-form" value="/WEB-INF/views/tiles/project-sprint-add-form.jsp" />
+    </definition>
     <definition name="upd-task" template="/WEB-INF/views/template/task-upd-page.jsp">
         <put-attribute name="title" value="Sprint" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
@@ -50,6 +60,11 @@
         <put-attribute name="title" value="Project" />
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
         <put-attribute name="project-details" value="/WEB-INF/views/tiles/project-details.jsp" />
+    </definition>
+    <definition name="user-project" template="/WEB-INF/views/template/user-project-profile.jsp">
+        <put-attribute name="title" value="Project" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="project-details" value="/WEB-INF/views/tiles/user-project-details.jsp" />
     </definition>
     <definition name="new-project" template="/WEB-INF/views/template/project-add-page.jsp">
         <put-attribute name="title" value="Project" />

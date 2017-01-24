@@ -148,23 +148,22 @@ public class TaskServiceImpl implements TaskService {
      * Check whether there is a sprint with the specified name.
      * @see TaskService#addTaskToSprint
      *
-     * @param name of specified sprint
+     * @param taskDTO of specified task
      */
     @Override
-    public void addTaskToSprint(String name, String endDate, String estimate,
-                                String assignerId, String description, String sprintId) {
+    public void addTaskToSprint(TaskDTO taskDTO) {
         Task task = new Task();
-        task.setName(name);
-        LocalDate taskEndDate = LocalDate.parse(endDate);
+        task.setName(taskDTO.getName());
+        LocalDate taskEndDate = LocalDate.parse(taskDTO.getEndDate());
         task.setEndDate(taskEndDate);
-        Integer taskEstimate = Integer.parseInt(estimate);
+        Integer taskEstimate = Integer.parseInt(taskDTO.getEstimate());
         task.setEstimate(taskEstimate);
-        task.setDescription(description);
-        Integer taskAssignerId = Integer.parseInt(assignerId);
+        task.setDescription(taskDTO.getDescription());
+        Integer taskAssignerId = Integer.parseInt(taskDTO.getAssignerId());
         User assigner = userRepository.findOne(taskAssignerId);
         task.setAssigner(assigner);
-        Integer taskSprintId = Integer.parseInt(assignerId);
-        Sprint sprint = sprintRepository.findOne(taskSprintId);
+        Integer sprintId = Integer.parseInt(taskDTO.getSprintId());
+        Sprint sprint = sprintRepository.findOne(sprintId);
         task.setSprint(sprint);
         taskRepository.saveAndFlush(task);
     }

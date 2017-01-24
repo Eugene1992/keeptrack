@@ -7,6 +7,7 @@ import com.netcracker.keeptrack.service.UserService;
 import com.netcracker.keeptrack.service.validators.ProjectValidator;
 import com.netcracker.keeptrack.web.dto.ProjectDTO;
 import com.netcracker.keeptrack.web.dto.SprintDTO;
+import com.netcracker.keeptrack.web.dto.TaskDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,13 +41,18 @@ public class ProjectController {
     private ProjectValidator validator;
 
     @ModelAttribute("project")
-    public ProjectDTO construct() {
+    public ProjectDTO constructProject() {
         return new ProjectDTO();
     }
 
     @ModelAttribute("sprint")
-    public SprintDTO constructs() {
+    public SprintDTO constructSprint() {
         return new SprintDTO();
+    }
+
+    @ModelAttribute("task")
+    public TaskDTO constructTask() {
+        return new TaskDTO();
     }
 
     /**
@@ -89,8 +95,7 @@ public class ProjectController {
             return "new-project";
         }
         projectService.addProject(projectDTO);
-        String projectName = projectDTO.getName();
-        return "redirect:/project/" + projectName;
+        return "redirect:/project/" + projectDTO.getName();
     }
 
     /**
@@ -171,6 +176,18 @@ public class ProjectController {
         model.addAttribute("totalProjectEmployees", totalProjectEmployee);
         model.addAttribute("totalProjectSprints", totalProjectSprints);
         return "project";
+    }
+
+    /**
+     * The controller that redirects to the profile of the selected project which contains
+     * full information about it. In the the profile, project manager can add employees,
+     * sprints and tasks into the project. Admin can remove them from the current project.
+     *
+     * @return selected project profile
+     */
+    @RequestMapping(value = "/project", method = RequestMethod.GET)
+    public String project() {
+        return "user-project";
     }
 
     /**
