@@ -83,17 +83,9 @@ public interface TaskService {
      * Deletes the task from current project by specified identifier.
      * This function is only available for the administrator in project profile.
      *
-     * @param taskId deleted sprint identifier
+     * @param taskId deleted task identifier
      */
-    void deleteTaskFromSprint(String taskId);
+    void deleteTaskFromSprint(Integer taskId);
 
-    // todo: 23.01.2017 refactor for dto input
-    /**
-     * Check whether there is a sprint with the specified name.
-     *
-     * @param name of specified sprint
-     * @return result of checking
-     */
-    void addTaskToSprint(String name, String endDate, String estimate,
-                         String assignerId, String description, String sprintId);
+    void addTaskToSprint(TaskDTO taskDTO);
 }

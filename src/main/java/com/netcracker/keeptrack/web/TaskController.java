@@ -44,7 +44,7 @@ public class TaskController {
     private TaskValidator validator;
 
     @ModelAttribute("task")
-    public TaskDTO construct() {
+    public TaskDTO constructTask() {
         return new TaskDTO();
     }
 
@@ -157,25 +157,16 @@ public class TaskController {
      * Takes parameters from the form and passes them to the service layer.
      * After adding redirect to the page of the current project.
      *
-     * @param assignerId id of the employee which will be assigned for the task
-     * @param taskName name of the new task
-     * @param taskEstimate estimate of the new task
-     * @param taskEndDate the estimated finish date for the task
-     * @param taskDescription description of the new task
-     * @param sprintId id of the phase to which the task will be placed
-     * @param projectName name of the current project
      * @return redirect to current project
      */
-    @RequestMapping(value = "project/task/add", method = RequestMethod.POST)
-    public String addTaskToSprint(@RequestParam("assignerId") String assignerId,
-                                  @RequestParam("taskName") String taskName,
-                                  @RequestParam("taskEstimate") String taskEstimate,
-                                  @RequestParam("taskEndDate") String taskEndDate,
-                                  @RequestParam("taskDescription") String taskDescription,
-                                  @RequestParam("sprintId") String sprintId,
-                                  @RequestParam("projectName") String projectName) {
-        taskService.addTaskToSprint(taskName, taskEndDate, taskEstimate, assignerId, taskDescription, sprintId);
-        return "redirect:/project/" + projectName;
+    @RequestMapping(value = "project/tasks/add", method = RequestMethod.POST)
+    public String addTaskToSprint(@Valid @ModelAttribute("task") TaskDTO taskDTO, BindingResult result, Model model) {
+        validator.validate(taskDTO, result);
+        if (result.hasErrors()) {
+            return "project-add-task";
+        }
+        taskService.addTaskToSprint(taskDTO);
+        return "redirect:/project";
     }
 
     /**
@@ -190,7 +181,7 @@ public class TaskController {
     @RequestMapping(value = "project/tasks/delete", method = RequestMethod.POST)
     public String deleteTaskFromSprint(@RequestParam("taskId") String taskId,
                                        @RequestParam("projectName") String projectName) {
-        taskService.deleteTaskFromSprint(taskId);
+        taskService.deleteTaskFromSprint(Integer.valueOf(taskId));
         return "redirect:/project/" + projectName;
     }
 

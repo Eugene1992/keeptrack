@@ -3,6 +3,7 @@ package com.netcracker.keeptrack.web.dto;
 import com.netcracker.keeptrack.model.Project;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Project entity Data Transfer Object.
@@ -60,6 +61,10 @@ public class ProjectDTO {
         this.startDate = project.getStartDate().toString();
         this.endDate = project.getEndDate().toString();
         this.description = project.getDescription();
+        this.employees = project.getUsers()
+                .stream()
+                .map(u -> String.valueOf(u.getId()))
+                .collect(Collectors.toSet());
     }
 
     public String getId() {

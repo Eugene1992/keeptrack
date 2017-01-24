@@ -40,8 +40,8 @@ public class TaskRepositoryTest extends BaseTestConfig {
     @Test
     public void getLatestTasks() throws Exception {
         final Integer EXPECTED_COUNT = 10;
-        List<Task> latestTasks = taskRepository.getLatestTasks(new PageRequest(0, EXPECTED_COUNT));
-        final Integer RESULT_COUNT = latestTasks.size();
+        final List<Task> LATEST_TASKS = taskRepository.getLatestTasks(new PageRequest(0, EXPECTED_COUNT));
+        final Integer RESULT_COUNT = LATEST_TASKS.size();
         Assert.assertNotNull(RESULT_COUNT);
         Assert.assertEquals(RESULT_COUNT, EXPECTED_COUNT);
     }

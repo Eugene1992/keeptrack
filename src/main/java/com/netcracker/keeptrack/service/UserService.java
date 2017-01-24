@@ -48,7 +48,7 @@ public interface UserService {
      * @param username of the required user
      * @return specified user
      */
-    @PreAuthorize(value = "hasAuthority('ADMIN')")
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'PM')")
     User getUserByUsername(String username);
 
     /**

@@ -88,7 +88,7 @@ public interface SprintService {
      * This function is available for the administrator and project manager in project profile.
      *
      */
-    void addSprintToProject(String projectName, String sprintName, String sprintEndDate, String sprintDescription);
+    void addSprintToProject(SprintDTO sprintDTO);
 
     /**
      * Check whether there is a sprint with the specified name.

@@ -39,7 +39,7 @@ public class SprintController {
     private SprintValidator validator;
 
     @ModelAttribute("sprint")
-    public SprintDTO construct() {
+    public SprintDTO constructSprint() {
         return new SprintDTO();
     }
 
@@ -155,19 +155,16 @@ public class SprintController {
      * Takes parameters from the form and passes them to the service layer.
      * After adding redirect to the page of the current project.
      *
-     * @param projectName name of the sprint project
-     * @param sprintName name of the sprint
-     * @param sprintEndDate estimated finish date for the sprint
-     * @param sprintDescription description of the sprint
      * @return redirect to current project
      */
     @RequestMapping(value = "project/sprints/add", method = RequestMethod.POST)
-    public String addSprintToProject(@RequestParam("projectName") String projectName,
-                                     @RequestParam("sprintName") String sprintName,
-                                     @RequestParam("sprintEndDate") String sprintEndDate,
-                                     @RequestParam("sprintDescription") String sprintDescription) {
-        sprintService.addSprintToProject(projectName, sprintName, sprintEndDate, sprintDescription);
-        return "redirect:/project/" + projectName;
+    public String addSprintToProject(@Valid @ModelAttribute("sprint") SprintDTO sprintDto, BindingResult result, Model model) {
+        validator.validate(sprintDto, result);
+        if (result.hasErrors()) {
+            return "project-add-sprint";
+        }
+        sprintService.addSprintToProject(sprintDto);
+        return "redirect:/project";
     }
 
     /**
@@ -182,8 +179,7 @@ public class SprintController {
     @RequestMapping(value = "project/sprints/delete", method = RequestMethod.POST)
     public String deleteSprintFromProject(@RequestParam("sprintId") String id,
                                           @RequestParam("projectName") String name) {
-        Integer sprintId = Integer.parseInt(id);
-        sprintService.deleteSprintFromProject(sprintId);
+        sprintService.deleteSprintFromProject(Integer.valueOf(id));
         return "redirect:/project/" + name;
     }
 }

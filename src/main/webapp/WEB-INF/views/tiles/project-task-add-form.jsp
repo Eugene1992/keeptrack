@@ -8,25 +8,43 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">
-                            Add new sprint
+                            Create new task ${user.id}
                         </span>
                     </div>
                     <div class="panel-body">
-                        <form:form action="/sprints/add" method="POST" modelAttribute="sprint" >
+                        <form:form action="/project/tasks/add" method="POST" modelAttribute="task" >
                             <div class="form-group col-lg-12 outer">
+                                <form:hidden path="creatorId" value="${user.id}" class="form-control"/>
+                                <form:hidden path="status" value="CREATED" class="form-control"/>
                                 <div class="form-group col-lg-6">
                                     <label for="name">Title:</label>
                                     <form:input path="name" type="text" class="form-control"/>
                                     <form:errors path="name" cssClass="label label-danger"/>
                                 </div>
                                 <div class="form-group form-group-sm col-lg-6">
-                                    <label for="projectId">Project:</label>
-                                    <form:select path="projectId" class="form-control custom-select-height">
-                                        <c:forEach var="project" items="${projects}">
-                                            <form:option value="${project.id}" label="${project.name}"/>
+                                    <label for="sprintId">Sprint:</label>
+                                    <form:select path="sprintId" class="form-control custom-select-height">
+                                        <c:forEach var="sprint" items="${user.project.sprints}">
+                                            <form:option value="${sprint.id}" label="${sprint.name}"/>
                                         </c:forEach>
                                     </form:select>
-                                    <form:errors path="projectId" cssClass="label label-danger"/>
+                                    <form:errors path="sprintId" cssClass="label label-danger"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12 outer">
+                                <div class="form-group col-lg-6">
+                                    <label for="estimate">Estimate:</label>
+                                    <form:input path="estimate" min="1" type="number" class="form-control"/>
+                                    <form:errors path="estimate" cssClass="label label-danger"/>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label for="assignerId">Assigner:</label>
+                                    <form:select path="assignerId" class="form-control custom-select-height">
+                                        <c:forEach var="employee" items="${user.project.users}">
+                                            <form:option value="${employee.id}" label="${employee.firstName} ${employee.lastName}"/>
+                                        </c:forEach>
+                                    </form:select>
+                                    <form:errors path="assignerId" cssClass="label label-danger"/>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
@@ -42,17 +60,6 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
-                                <div class="form-group form-group-sm col-md-6">
-                                    <label for="status">Status:</label>
-                                    <form:select path="status" class="form-control custom-select-height">
-                                        <form:option value="CREATED" />
-                                        <form:option value="IN_PROGRESS" />
-                                        <form:option value="CLOSED" />
-                                    </form:select>
-                                    <form:errors path="status" cssClass="label label-danger"/>
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-12">
                                     <p><b>Description: </b></p>
                                     <form:textarea path="description" rows="5" cssClass="text-area-margin"/>
@@ -60,8 +67,8 @@
                                 </div>
                             </div>
                             <div class="form-group text-center">
-                                <button type="submit" class="btn btn-primary">Create sprint</button>
-                                <a href="/sprints"><button type="button" class="btn btn-danger">Cancel</button></a>
+                                <button type="submit" class="btn btn-primary">Create task</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close menu</button>
                             </div>
                         </form:form>
                     </div>

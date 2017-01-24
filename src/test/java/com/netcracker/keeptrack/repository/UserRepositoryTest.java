@@ -75,7 +75,7 @@ public class UserRepositoryTest extends BaseTestConfig {
         final List<User> EMPLOYEES_LIST = userRepository.getAllEmployees();
         final Integer EXPECTED_SIZE = 18;
         final Integer RESULT_SIZE = EMPLOYEES_LIST.size();
-        Assert.assertEquals(RESULT_SIZE, EXPECTED_SIZE);
+        Assert.assertEquals(EXPECTED_SIZE, RESULT_SIZE);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class UserRepositoryTest extends BaseTestConfig {
         final List<User> MANAGERS_LIST = userRepository.getAllManagers();
         final Integer EXPECTED_SIZE = 8;
         final Integer RESULT_SIZE = MANAGERS_LIST.size();
-        Assert.assertEquals(RESULT_SIZE, EXPECTED_SIZE);
+        Assert.assertEquals(EXPECTED_SIZE, RESULT_SIZE);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class UserRepositoryTest extends BaseTestConfig {
         final Long RESULT_COUNT = userRepository.getTotalCustomersCount();
         final Long EXPECTED_COUNT = 1L;
         Assert.assertNotNull(RESULT_COUNT);
-        Assert.assertEquals(RESULT_COUNT, EXPECTED_COUNT);
+        Assert.assertEquals(EXPECTED_COUNT, RESULT_COUNT);
     }
 
     @Test
@@ -99,6 +99,6 @@ public class UserRepositoryTest extends BaseTestConfig {
         final Long EXPECTED_COUNT = 18L;
         final Long RESULT_COUNT = userRepository.getTotalEmployeesCount();
         Assert.assertNotNull(RESULT_COUNT);
-        Assert.assertEquals(RESULT_COUNT, EXPECTED_COUNT);
+        Assert.assertEquals(EXPECTED_COUNT, EXPECTED_COUNT);
     }
 }

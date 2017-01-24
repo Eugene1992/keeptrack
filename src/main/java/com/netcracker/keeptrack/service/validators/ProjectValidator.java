@@ -2,7 +2,6 @@ package com.netcracker.keeptrack.service.validators;
 
 import com.netcracker.keeptrack.service.ProjectService;
 import com.netcracker.keeptrack.web.dto.ProjectDTO;
-import com.netcracker.keeptrack.web.dto.SprintDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -38,7 +37,7 @@ public class ProjectValidator extends BaseValidator implements Validator {
      */
     @Override
     public boolean supports(Class<?> aClass) {
-        return SprintDTO.class.isAssignableFrom(aClass);
+        return ProjectDTO.class.isAssignableFrom(aClass);
     }
 
     /**

@@ -3,6 +3,7 @@ package com.netcracker.keeptrack.repository;
 import com.netcracker.keeptrack.BaseTestConfig;
 import com.netcracker.keeptrack.model.Project;
 import com.netcracker.keeptrack.model.User;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
