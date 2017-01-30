@@ -111,4 +111,19 @@
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
         <put-attribute name="user-profile-menu" value="/WEB-INF/views/tiles/user-profile-menu.jsp" />
     </definition>
+    <definition name="reports" template="/WEB-INF/views/template/reports.jsp">
+        <put-attribute name="title" value="User Profile" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="report-menu" value="/WEB-INF/views/tiles/reports-menu.jsp" />
+    </definition>
+    <definition name="project-report" template="/WEB-INF/views/template/project-report.jsp">
+        <put-attribute name="title" value="User Profile" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="project-report-menu" value="/WEB-INF/views/tiles/project-report-menu.jsp" />
+    </definition>
+    <definition name="employee-report" template="/WEB-INF/views/template/employee-report.jsp">
+        <put-attribute name="title" value="User Profile" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="employee-report-menu" value="/WEB-INF/views/tiles/employee-report-menu.jsp" />
+    </definition>
 </tiles-definitions>

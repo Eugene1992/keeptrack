@@ -191,13 +191,13 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${user.project.sprints}" var="sprint">
-                                <c:forEach items="${sprint.tasks}" var="task">
+                                <c:forEach items="${sprint.tasks}" var="dto">
                                 <tr>
-                                    <td>${task.name}</td>
-                                    <td>${task.assigner.firstName} ${task.assigner.lastName}</td>
-                                    <td>${task.creator.firstName} ${task.creator.lastName}</td>
-                                    <td>${task.status}</td>
-                                    <td>${task.estimate}</td>
+                                    <td>${dto.name}</td>
+                                    <td>${dto.assigner.firstName} ${dto.assigner.lastName}</td>
+                                    <td>${dto.creator.firstName} ${dto.creator.lastName}</td>
+                                    <td>${dto.status}</td>
+                                    <td>${dto.estimate}</td>
                                     <security:authorize access="hasRole('PM')">
                                     <td><button class="btn btn-warning btn-xs pull-right">Update</button></td>
                                     </security:authorize>

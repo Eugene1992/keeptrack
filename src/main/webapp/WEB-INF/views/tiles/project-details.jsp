@@ -291,32 +291,32 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${currentProject.sprints}" var="sprint">
-                                <c:forEach items="${sprint.tasks}" var="task">
+                                <c:forEach items="${sprint.tasks}" var="dto">
                                 <tr>
-                                    <td>${task.name}</td>
-                                    <td>${task.assigner.firstName} ${task.assigner.lastName}</td>
-                                    <td>${task.creator.firstName} ${task.creator.lastName}</td>
-                                    <td>${task.status}</td>
-                                    <td>${task.estimate}</td>
+                                    <td>${dto.name}</td>
+                                    <td>${dto.assigner.firstName} ${dto.assigner.lastName}</td>
+                                    <td>${dto.creator.firstName} ${dto.creator.lastName}</td>
+                                    <td>${dto.status}</td>
+                                    <td>${dto.estimate}</td>
                                     <td>
                                         <button class="btn btn-info btn-xs">Details</button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-task-${task.id}">
+                                        <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-task-${dto.id}">
                                             <i class="glyphicon glyphicon-remove"></i>
                                         </button>
                                     </td>
                                 </tr>
-                                    <div class="modal fade" role="dialog" id="confirm-drop-task-${task.id}">
+                                    <div class="modal fade" role="dialog" id="confirm-drop-task-${dto.id}">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-body text-center">
-                                                    <h4>Do you really want delete ${task.name} form ${currentProject.name} project?</h4>
+                                                    <h4>Do you really want delete ${dto.name} form ${currentProject.name} project?</h4>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <form action="/project/tasks/delete" method="POST" >
                                                         <input type="hidden" class="form-control" name="projectName" value="${currentProject.name}" />
-                                                        <input type="hidden" class="form-control" name="taskId" value="${task.id}" />
+                                                        <input type="hidden" class="form-control" name="taskId" value="${dto.id}" />
                                                         <div class="text-center">
                                                             <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Yes, delete</button>
                                                             <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>

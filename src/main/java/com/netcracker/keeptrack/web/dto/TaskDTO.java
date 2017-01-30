@@ -1,5 +1,7 @@
 package com.netcracker.keeptrack.web.dto;
 
+import com.netcracker.keeptrack.model.Task;
+
 /**
  * Task entity Data Transfer Object.
  */
@@ -8,17 +10,17 @@ public class TaskDTO {
     /**
      * Task id.
      */
-    private String id;
+    protected String id;
 
     /**
      * Task name.
      */
-    private String name;
+    protected String name;
 
     /**
      * Task start date.
      */
-    private String startDate;
+    protected String startDate;
 
     /**
      * Task end date.
@@ -28,34 +30,47 @@ public class TaskDTO {
     /**
      * Task end date.
      */
-    private String status;
+    protected String status;
 
     /**
      * Task sprint id.
      */
-    private String sprintId;
+    protected String sprintId;
 
     /**
      * Task creator id.
      */
-    private String creatorId;
+    protected String creatorId;
 
     /**
      * Task assigner id.
      */
-    private String assignerId;
+    protected String assignerId;
 
     /**
      * Task description.
      */
-    private String description;
+    protected String description;
 
     /**
      * Task estimate.
      */
-    private String estimate;
+    protected String estimate;
 
     public TaskDTO() {
+    }
+
+    public TaskDTO(Task task) {
+        this.id = String.valueOf(task.getId());
+        this.name = task.getName();
+        this.startDate = task.getStartDate().toString();
+        this.endDate = task.getEndDate().toString();
+        this.status = task.getStatus().name();
+        this.sprintId = String.valueOf(task.getSprint().getId());
+        this.creatorId = String.valueOf(task.getCreator().getId());
+        this.assignerId = String.valueOf(task.getAssigner().getId());
+        this.description = task.getDescription();
+        this.estimate = String.valueOf(task.getEstimate());
     }
 
     public String getId() {

@@ -23,7 +23,7 @@ import javax.validation.Valid;
 
 /**
  * Task entity Controller.
- * Receives and processes requests associated with {@code Task} entity
+ * Receives and processes requests associated with {@code Task} entity.
  *
  * @see com.netcracker.keeptrack.model.Task
  * @see TaskService

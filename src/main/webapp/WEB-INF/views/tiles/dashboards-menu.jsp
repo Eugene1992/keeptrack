@@ -226,12 +226,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="task" items="${latestTasks}">
+                                <c:forEach var="dto" items="${latestTasks}">
                                     <tr>
-                                        <td>${task.name}</td>
-                                        <td>${task.status}</td>
-                                        <td>${task.sprint.project.name}</td>
-                                        <td>${task.startDate}</td>
+                                        <td>${dto.name}</td>
+                                        <td>${dto.status}</td>
+                                        <td>${dto.sprint.project.name}</td>
+                                        <td>${dto.startDate}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
