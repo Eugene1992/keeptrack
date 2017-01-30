@@ -89,6 +89,9 @@
             <li>
                 <a href="/tasks"><i class="fa fa-fw fa-wrench"></i> Tasks</a>
             </li>
+                <li>
+                    <a href="/reports"><i class="fa fa-fw fa-folder-open"></i> Reports</a>
+                </li>
             </security:authorize>
         </ul>
     </div>

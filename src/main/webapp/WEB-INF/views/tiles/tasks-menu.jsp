@@ -33,39 +33,39 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${tasksList}" var="task">
+                            <c:forEach items="${tasksList}" var="dto">
                                 <jsp:useBean id="task" scope="page" type="com.netcracker.keeptrack.model.Task"/>
                                 <tr>
-                                    <td>${task.name}</td>
-                                    <td>${task.sprint.project.name}</td>
-                                    <td>${task.sprint.name}</td>
-                                    <td>${task.status}</td>
-                                    <td>${task.startDate}</td>
-                                    <td>${task.endDate}</td>
-                                    <td>${task.estimate}</td>
-                                    <td>${task.creator.firstName} ${task.creator.lastName}</td>
-                                    <td>${task.assigner.firstName} ${task.assigner.lastName}</td>
+                                    <td>${dto.name}</td>
+                                    <td>${dto.sprint.project.name}</td>
+                                    <td>${dto.sprint.name}</td>
+                                    <td>${dto.status}</td>
+                                    <td>${dto.startDate}</td>
+                                    <td>${dto.endDate}</td>
+                                    <td>${dto.estimate}</td>
+                                    <td>${dto.creator.firstName} ${dto.creator.lastName}</td>
+                                    <td>${dto.assigner.firstName} ${dto.assigner.lastName}</td>
                                     <td>
-                                        <form action="/tasks/update/${task.id}" method="POST">
+                                        <form action="/tasks/update/${dto.id}" method="POST">
                                             <button type="submit" class="btn btn-warning btn-xs">Update</button>
                                         </form>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-task-${task.id}">Delete</button>
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-task-${dto.id}">Delete</button>
                                     </td>
                                     <td>
-                                        <a href="task/${task.name}"><button type="button" class="btn btn-success btn-xs">Profile</button></a>
+                                        <a href="task/${dto.name}"><button type="button" class="btn btn-success btn-xs">Profile</button></a>
                                     </td>
                                 </tr>
-                                <div class="modal fade" role="dialog" id="confirm-drop-task-${task.id}">
+                                <div class="modal fade" role="dialog" id="confirm-drop-task-${dto.id}">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-body text-center">
-                                                <h4>Do you really want delete ${task.name}?</h4>
+                                                <h4>Do you really want delete ${dto.name}?</h4>
                                             </div>
                                             <div class="modal-footer">
                                                 <form action="/tasks/delete" method="POST" >
-                                                    <input type="hidden" class="form-control" name="id" value="${task.id}" />
+                                                    <input type="hidden" class="form-control" name="id" value="${dto.id}" />
                                                     <div class="text-center">
                                                         <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Yes, delete</button>
                                                         <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>

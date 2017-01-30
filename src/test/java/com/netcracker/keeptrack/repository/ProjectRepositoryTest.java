@@ -21,7 +21,7 @@ public class ProjectRepositoryTest extends BaseTestConfig {
     @Before
     public void setUp() throws Exception {
         projectId = 1;
-        projectName = "Rivecore";
+        projectName = "Rivercore";
     }
 
     @Test
