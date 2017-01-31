@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Spring Data JPA repository interface for Sprint entity.
  */
@@ -20,4 +22,13 @@ public interface SprintRepository extends JpaRepository<Sprint, Integer> {
      */
     @Query("select s from Sprint s where s.name  = :name")
     Sprint getSprintByName(@Param("name") String name);
+
+    /**
+     * Returns specified project sprints.
+     *
+     * @param projectId id of the specified project
+     * @return project sprints
+     */
+    @Query("select s from Sprint s where s.project.id = :id")
+    List<Sprint> getProjectSprints(@Param("id") Integer projectId);
 }

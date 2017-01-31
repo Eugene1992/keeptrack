@@ -28,6 +28,7 @@ public class TaskValidator extends BaseValidator implements Validator {
     private static final String DESCRIPTION_MSG = "valid.required.description";
     private static final String SPRINT_MSG = "valid.required.sprint";
     private static final String NUMBER_MSG = "valid.invalid.number";
+    private static final String STARTDATE_MSG = "valid.required.start-date";
 
     /**
      * Register which {@code Class} must support the validation.
@@ -53,8 +54,7 @@ public class TaskValidator extends BaseValidator implements Validator {
         validateName(errors, taskName, NAME_LENGTH_MSG, NAME_REGEX);
 
         String taskStartDate = task.getStartDate();
-        String taskEndDate = task.getEndDate();
-        validateDates(errors, taskStartDate, taskEndDate);
+        validateNotNullAndEmpty(errors, "startDate", taskStartDate, STARTDATE_MSG);
 
         String taskStatus = task.getStatus();
         validateNotNullAndEmpty(errors, "status", taskStatus, STATUS_MSG);

@@ -98,4 +98,12 @@ public interface TaskService {
      * @param status new task status
      */
     void changeTaskStatus(Integer taskId, TaskStatus status);
+
+    /**
+     * Close selected task.
+     * Used when user complete the task.
+     *
+     * @param taskId task id
+     */
+    void closeTask(Integer taskId);
 }

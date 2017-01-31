@@ -1,6 +1,8 @@
 package com.netcracker.keeptrack.repository;
 
+import com.netcracker.keeptrack.model.Task;
 import com.netcracker.keeptrack.model.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -90,4 +92,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      */
     @Query("select count(u) from User u where u.role = 'EMPLOYEE'")
     Long getTotalEmployeesCount();
+
+    /**
+     * Returns the latest hired employees.
+     *
+     * @param pageable abstract interface for pagination information
+     * @return list of latest hired employees
+     */
+    @Query("select u from User u where u.role = 'EMPLOYEE' order by u.hireDay desc")
+    List<Task> getLatestHiredEmployees(Pageable pageable);
 }

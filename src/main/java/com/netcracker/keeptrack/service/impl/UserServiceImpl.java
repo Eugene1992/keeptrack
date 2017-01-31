@@ -11,6 +11,7 @@ import com.netcracker.keeptrack.repository.UserRepository;
 import com.netcracker.keeptrack.service.UserService;
 import com.netcracker.keeptrack.web.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -219,5 +220,16 @@ public class UserServiceImpl implements UserService {
                 .filter(task -> task.getAssigner().equals(user)
                              && task.getStatus() == status)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the latest hired employees.
+     *
+     * @param limit of employees
+     * @return list of latest hired employees
+     */
+    @Override
+    public List<Task> getLatestHiredEmployees(Integer limit) {
+        return userRepository.getLatestHiredEmployees(new PageRequest(0, limit));
     }
 }

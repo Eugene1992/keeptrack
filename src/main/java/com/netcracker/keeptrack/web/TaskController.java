@@ -200,9 +200,10 @@ public class TaskController {
     }
 
     /**
-     * Ssdsas.
-     * @param taskId d dfdf
-     * @return fdfdfd
+     * Accept selected task.
+     * Used when user accept the assigned task.
+     *
+     * @param taskId task id
      */
     @RequestMapping(value = "project/task/accept", method = RequestMethod.POST)
     public String acceptTask(@RequestParam("taskId") String taskId) {
@@ -211,20 +212,22 @@ public class TaskController {
     }
 
     /**
-     * Ssdsas.
-     * @param taskId d dfdf
-     * @return fdfdfd
+     * Close selected task.
+     * Used when user complete the task.
+     *
+     * @param taskId task id
      */
-    @RequestMapping(value = "project/task/complete", method = RequestMethod.POST)
+    @RequestMapping(value = "project/task/close", method = RequestMethod.POST)
     public String closeTask(@RequestParam("taskId") String taskId) {
-        taskService.changeTaskStatus(Integer.valueOf(taskId), TaskStatus.CLOSED);
+        taskService.closeTask(Integer.valueOf(taskId));
         return "redirect:/project/tasks";
     }
 
     /**
-     * Ssdsas.
-     * @param taskId d dfdf
-     * @return fdfdfd
+     * Reject selected task.
+     * Used when user reject the task.
+     *
+     * @param taskId task id
      */
     @RequestMapping(value = "project/task/reject", method = RequestMethod.POST)
     public String rejectTask(@RequestParam("taskId") String taskId) {

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -33,13 +34,16 @@
                                 <td><b>Project:</b></td>
                                 <td>
                                     ${user.project.name}
+                                    <security:authorize access="hasRole('ADMIN')">
                                     <a href="/project/${user.project.name}">
                                         <button class="btn btn-xs btn-success pull-right">
                                             <i class="glyphicon glyphicon-share"></i>
                                         </button>
                                     </a>
+                                    </security:authorize>
                                 </td>
                             </tr>
+                            <security:authorize access="hasRole('ADMIN')">
                             <tr>
                                 <td><b>Tasks:</b></td>
                                 <td>
@@ -69,9 +73,13 @@
                                 <td><b>Hire day:</b></td>
                                 <td>${user.hireDay}</td>
                             </tr>
+                            </security:authorize>
                             </tbody>
                         </table>
+                        <security:authorize access="hasRole('ADMIN')">
                         <a href="/users"><button class="btn btn-sm btn-primary pull-right">Back to users</button></a>
+                        </security:authorize>
+                        <p><i>Tip: full information about the user is available only to the administrator.</i></p>
                     </div>
                 </div>
             </div>

@@ -8,9 +8,10 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">
-                            Create new task ${user.id}
+                            Create new task
                         </span>
                     </div>
+                    <c:set var="project" value="${user.role == 'PM' ? user.managedProject : user.project}"/>
                     <div class="panel-body">
                         <form:form action="/project/tasks/add" method="POST" modelAttribute="task" >
                             <div class="form-group col-lg-12 outer">
@@ -24,8 +25,11 @@
                                 <div class="form-group form-group-sm col-lg-6">
                                     <label for="sprintId">Sprint:</label>
                                     <form:select path="sprintId" class="form-control custom-select-height">
-                                        <c:forEach var="sprint" items="${user.project.sprints}">
-                                            <form:option value="${sprint.id}" label="${sprint.name}"/>
+                                        <c:forEach var="sprint" items="${project.sprints}">
+                                            <c:choose>
+                                                <c:when test="${sprint.status != 'CLOSED'}">
+                                                    <form:option value="${sprint.id}" label="${sprint.name}"/>                                                </c:when>
+                                            </c:choose>
                                         </c:forEach>
                                     </form:select>
                                     <form:errors path="sprintId" cssClass="label label-danger"/>
@@ -33,18 +37,22 @@
                             </div>
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-6">
-                                    <label for="estimate">Estimate:</label>
-                                    <form:input path="estimate" min="1" type="number" class="form-control"/>
-                                    <form:errors path="estimate" cssClass="label label-danger"/>
-                                </div>
-                                <div class="form-group col-lg-6">
                                     <label for="assignerId">Assigner:</label>
                                     <form:select path="assignerId" class="form-control custom-select-height">
-                                        <c:forEach var="employee" items="${user.project.users}">
-                                            <form:option value="${employee.id}" label="${employee.firstName} ${employee.lastName}"/>
+                                        <c:forEach var="employee" items="${project.users}">
+                                            <c:choose>
+                                                <c:when test="${employee.role == 'EMPLOYEE'}">
+                                                    <form:option value="${employee.id}" label="${employee.firstName} ${employee.lastName}"/>
+                                                </c:when>
+                                            </c:choose>
                                         </c:forEach>
                                     </form:select>
                                     <form:errors path="assignerId" cssClass="label label-danger"/>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label for="estimate">Estimate:</label>
+                                    <form:input path="estimate" min="1" type="number" class="form-control"/>
+                                    <form:errors path="estimate" cssClass="label label-danger"/>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">
@@ -52,11 +60,6 @@
                                     <label for="startDate">Start date:</label>
                                     <form:input path="startDate" type="date" class="form-control"/>
                                     <form:errors path="startDate" cssClass="label label-danger"/>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label for="endDate">End date:</label>
-                                    <form:input path="endDate" type="date" class="form-control"/>
-                                    <form:errors path="endDate" cssClass="label label-danger"/>
                                 </div>
                             </div>
                             <div class="form-group col-lg-12 outer">

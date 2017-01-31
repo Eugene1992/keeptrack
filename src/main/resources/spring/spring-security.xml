@@ -17,7 +17,8 @@
         <intercept-url pattern="/home" access="hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />
         <intercept-url pattern="/login*" access="permitAll" />
         <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
-        <intercept-url pattern="/user/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/project/dashboards" access="hasRole('CUSTOMER')" />
+        <intercept-url pattern="/dashboards" access="hasRole('ADMIN')" />
 
         <form-login
                 login-page="/login"

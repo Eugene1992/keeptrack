@@ -21,17 +21,20 @@
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tasks" role="tab"><b>Tasks</b></a>
                             </li>
+                            <security:authorize access="hasRole('PM')">
                             <li class="nav-item pull-right">
                                 <a class="nav-link" data-toggle="modal" href="#" data-target="#addTaskModal" role="tab"><b>New Task</b></a>
                             </li>
                             <li class="nav-item pull-right">
                                 <a class="nav-link" data-toggle="modal" href="#" data-target="#addSprintModal" role="tab"><b>New Sprint</b></a>
                             </li>
+                            </security:authorize>
                         </ul>
                     </div>
                 </div>
                 <br>
                 <div class="tab-content">
+                    <c:set var="project" value="${user.role == 'PM' ? userData.managedProject : userData.project}"/>
                     <div class="tab-pane active" id="summary" role="tabpanel">
                         <div class="col-lg-12">
                             <!-- Project Summary Panel -->
@@ -46,33 +49,33 @@
                                         <tbody>
                                         <tr>
                                             <td><b>Project name:</b></td>
-                                            <td>${user.project.name}</td>
+                                            <td>${project.name}</td>
                                         </tr>
                                         <tr>
                                             <td><b>Project managerId:</b></td>
-                                            <td>${user.project.manager.firstName} ${user.project.manager.lastName}</td>
+                                            <td>${project.manager.firstName} ${project.manager.lastName}</td>
                                         </tr>
                                         <tr>
                                             <td><b>Status</b></td>
-                                            <td>${user.project.status}</td>
+                                            <td>${project.status}</td>
                                         </tr>
                                         <tr>
                                             <td><b>Start date</b></td>
                                             <td><c:out
-                                                    value="${user.project.startDate == null ? 'Not started': user.project.startDate}"/></td>
+                                                    value="${project.startDate == null ? 'Not started': project.startDate}"/></td>
                                         </tr>
                                         <tr>
                                             <td><b>End date</b></td>
                                             <td><c:out
-                                                    value="${user.project.endDate == null ? 'Not ended': user.project.startDate}"/></td>
+                                                    value="${project.endDate == null ? 'Not ended': project.startDate}"/></td>
                                         </tr>
                                         <tr>
                                             <td><b>Employees</b></td>
-                                            <td>${fn:length(user.project.users)}</td>
+                                            <td>${fn:length(project.users)}</td>
                                         </tr>
                                         <tr>
                                             <td><b>Sprints</b></td>
-                                            <td>${fn:length(user.project.sprints)}</td>
+                                            <td>${fn:length(project.sprints)}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -100,17 +103,21 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${user.project.users}" var="employee">
-                                            <tr>
-                                                <td>${employee.firstName}</td>
-                                                <td>${employee.lastName}</td>
-                                                <td>${employee.role}</td>
-                                                <td>
-                                                    <a href="/user/${employee.username}">
-                                                        <button class="btn btn-info btn-xs pull-right">Details</button>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                        <c:forEach items="${project.users}" var="employee">
+                                            <c:choose>
+                                                <c:when test="${employee.role == 'EMPLOYEE'}">
+                                                    <tr>
+                                                        <td>${employee.firstName}</td>
+                                                        <td>${employee.lastName}</td>
+                                                        <td>${employee.role}</td>
+                                                        <td>
+                                                            <a href="/user/${employee.username}">
+                                                                <button class="btn btn-info btn-xs pull-right">Details</button>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </c:when>
+                                            </c:choose>
                                         </c:forEach>
                                         </tbody>
                                     </table>
@@ -140,15 +147,25 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${userData.project.sprints}" var="sprint">
+                                        <c:forEach items="${project.sprints}" var="sprint">
                                             <tr>
                                                 <td>${sprint.name}</td>
                                                 <td>${sprint.description}</td>
-                                                <td>${sprint.status}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${sprint.status == 'CLOSED'}">
+                                                            <span class="label label-danger">${sprint.status}</span>
+                                                        </c:when>
+                                                        <c:when test="${sprint.status == 'IN_PROGRESS'}">
+                                                            <span class="label label-success">${sprint.status}</span>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </td>
+
                                                 <td>${sprint.startDate}</td>
                                                 <td>${sprint.endDate}</td>
                                                 <td>
-                                                    <a href="/sprint/${sprint.id}">
+                                                    <a href="/sprint/${sprint.name}">
                                                         <button class="btn btn-info btn-xs pull-right">Details</button>
                                                     </a>
                                                 </td>
@@ -176,7 +193,7 @@
                                     </h3>
                                 </div>
                                 <div class="panel-body">
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered" id="project-tasks">
                                         <thead>
                                         <tr>
                                             <th>Title</th>
@@ -190,18 +207,30 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${userData.project.sprints}" var="sprint">
+                                        <c:forEach items="${project.sprints}" var="sprint">
                                             <c:forEach items="${sprint.tasks}" var="dto">
                                                 <tr>
                                                     <td>${dto.name}</td>
                                                     <td>${dto.assigner.firstName} ${dto.assigner.lastName}</td>
                                                     <td>${dto.creator.firstName} ${dto.creator.lastName}</td>
-                                                    <td>${dto.status}</td>
+                                                    <td>
+                                                        <c:choose>
+                                                            <c:when test="${dto.status == 'CLOSED'}">
+                                                                <span class="label label-danger">${dto.status}</span>
+                                                            </c:when>
+                                                            <c:when test="${dto.status == 'IN_PROGRESS'}">
+                                                                <span class="label label-success">${dto.status}</span>
+                                                            </c:when>
+                                                            <c:when test="${dto.status == 'ASSIGNED'}">
+                                                                <span class="label label-info">${dto.status}</span>
+                                                            </c:when>
+                                                        </c:choose>
+                                                    </td>
                                                     <td>${dto.startDate}</td>
                                                     <td>${dto.endDate}</td>
                                                     <td>${dto.estimate}</td>
                                                     <td>
-                                                        <a href="/task/${dto.id}">
+                                                        <a href="/task/${dto.name}">
                                                             <button class="btn btn-info btn-xs pull-right">Details</button>
                                                         </a>
                                                     </td>
@@ -230,7 +259,7 @@
                     <div class="modal-header">
                         <form:form action="project/sprints/add" method="POST"
                                    modelAttribute="sprint">
-                            <form:hidden path="projectId" value="${user.project.id}"/>
+                            <form:hidden path="projectId" value="${project.id}"/>
                             <form:hidden path="status" value="CREATED"/>
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-6">
@@ -294,7 +323,7 @@
                                         <label for="sprintId">Sprint:</label>
                                         <form:select path="sprintId"
                                                      class="form-control custom-select-height">
-                                            <c:forEach var="sprint" items="${user.project.sprints}">
+                                            <c:forEach var="sprint" items="${project.sprints}">
                                                 <form:option value="${sprint.id}"
                                                              label="${sprint.name}"/>
                                             </c:forEach>
@@ -313,7 +342,7 @@
                                         <label for="assignerId">Assigner:</label>
                                         <form:select path="assignerId"
                                                      class="form-control custom-select-height">
-                                            <c:forEach var="employee" items="${user.project.users}">
+                                            <c:forEach var="employee" items="${project.users}">
                                                 <form:option value="${employee.id}"
                                                              label="${employee.firstName} ${employee.lastName}"/>
                                             </c:forEach>
@@ -330,12 +359,12 @@
                                         <form:errors path="startDate"
                                                      cssClass="label label-danger"/>
                                     </div>
-                                    <div class="form-group col-lg-6">
+                                    <%--<div class="form-group col-lg-6">
                                         <label for="endDate">End date:</label>
                                         <form:input path="endDate" type="date"
                                                     class="form-control"/>
                                         <form:errors path="endDate" cssClass="label label-danger"/>
-                                    </div>
+                                    </div>--%>
                                 </div>
                                 <div class="form-group col-lg-12 outer">
                                     <div class="form-group col-lg-12">

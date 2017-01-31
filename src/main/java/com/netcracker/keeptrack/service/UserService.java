@@ -50,7 +50,6 @@ public interface UserService {
      * @param username of the required user
      * @return specified user
      */
-    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'PM', 'EMPLOYEE')")
     User getUserByUsername(String username);
 
     /**
@@ -133,4 +132,12 @@ public interface UserService {
      * @return list of the filtered tasks
      */
     List<Task> getUserTasksByStatus(User user, TaskStatus status);
+
+    /**
+     * Returns the latest hired employees.
+     *
+     * @param limit of employees
+     * @return list of latest hired employees
+     */
+    List<Task> getLatestHiredEmployees(Integer limit);
 }

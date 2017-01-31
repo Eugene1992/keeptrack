@@ -1,6 +1,8 @@
 package com.netcracker.keeptrack.service;
 
+import com.netcracker.keeptrack.model.Project;
 import com.netcracker.keeptrack.model.Task;
+import com.netcracker.keeptrack.web.dto.ProjectStatsDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,4 +48,11 @@ public interface StatisticService {
      * @return list of latest tasks
      */
     List<Task> getLatestTasks(Integer limit);
+
+    /**
+     * Returns project statistic.
+     *
+     * @return project statistic data
+     */
+    ProjectStatsDTO getProjectStatistic(Project project);
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div id="page-wrapper">
     <div class="container-fluid">
         <br>
@@ -11,12 +12,12 @@
                                 <i class="fa fa-money fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">${totalCustomers}</div>
-                                <div>Customers</div>
+                                <h4>${user.project.name}</h4>
+                                <div>Project</div>
                             </div>
                         </div>
                     </div>
-                    <a href="/users">
+                    <a href="/project">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -30,15 +31,15 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-folder-open fa-5x"></i>
+                                <i class="fa fa-users fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">${totalProjects}</div>
-                                <div>Projects</div>
+                                <div class="huge">${fn:length(user.project.users)}</div>
+                                <div>Employees</div>
                             </div>
                         </div>
                     </div>
-                    <a href="/projects">
+                    <a href="/project">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -52,15 +53,15 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-users fa-5x"></i>
+                                <i class="fa fa-folder-open fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">${totalEmployees}</div>
-                                <div>Employees</div>
+                                <div class="huge">${fn:length(user.project.sprints)}</div>
+                                <div>Sprints</div>
                             </div>
                         </div>
                     </div>
-                    <a href="/users">
+                    <a href="/project">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -77,12 +78,17 @@
                                 <i class="fa fa-tasks fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">${totalTasks}</div>
+                                <div class="huge">
+                                    ${projectStats.inProgressTasksNum +
+                                    projectStats.assignedTasksNum +
+                                    projectStats.closedTasksNum +
+                                    projectStats.rejectedTasksNum}
+                                </div>
                                 <div>Tasks</div>
                             </div>
                         </div>
                     </div>
-                    <a href="/tasks">
+                    <a href="/project">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -93,75 +99,46 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6">
-                <div class="panel panel-default">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Latest Hired Employees</h3>
+                        <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Time left</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="${usedTimePercent}" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                                <span class="sr-only">45% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Tasks</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                <tr>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Hire date</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="employee" items="${latestEmployees}">
-                                    <tr>
-                                        <td>${employee.firstName}</td>
-                                        <td>${employee.lastName}</td>
-                                        <td>${employee.hireDay}</td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="text-right">
-                            <a href="/users">View All <i class="fa fa-arrow-circle-right"></i></a>
+                            <div id="tasksChart" style="height: 300px; width: 100%;"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Latest Tasks</h3>
+                        <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Sprints</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Project</th>
-                                    <th>Created</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="dto" items="${latestTasks}">
-                                    <a href="">
-                                        <tr>
-                                            <td>${dto.name}</td>
-                                            <td>${dto.status}</td>
-                                            <td>${dto.sprint.project.name}</td>
-                                            <td>${dto.startDate}</td>
-                                        </tr>
-                                    </a>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="text-right">
-                            <a href="/tasks">View All <i class="fa fa-arrow-circle-right"></i></a>
+                            <div id="sprintsChart" style="height: 300px; width: 100%;"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
