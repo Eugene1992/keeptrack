@@ -167,4 +167,18 @@ public class TaskServiceImpl implements TaskService {
         task.setSprint(sprint);
         taskRepository.saveAndFlush(task);
     }
+
+    /**
+     * Change task status.
+     * Used when user accept, reject, close task.
+     *
+     * @param taskId task id
+     * @param status new task status
+     */
+    @Override
+    public void changeTaskStatus(Integer taskId, TaskStatus status) {
+        Task task = taskRepository.findOne(taskId);
+        task.setStatus(status);
+        taskRepository.save(task);
+    }
 }

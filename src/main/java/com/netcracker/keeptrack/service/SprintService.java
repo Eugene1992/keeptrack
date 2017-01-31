@@ -51,7 +51,7 @@ public interface SprintService {
      * @param name of the required sprint
      * @return specified sprint
      */
-    @PreAuthorize(value = "hasAuthority('ADMIN')")
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'PM')")
     Sprint getSprintByName(String name);
 
     /**

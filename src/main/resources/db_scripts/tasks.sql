@@ -163,3 +163,11 @@ insert into task (name, startdate, enddate, estimate, status, description, assig
 insert into task (name, startdate, enddate, estimate, status, description, assigner_id, creator_id, sprint_id) values ('Task 59', '2017-01-12', '2017-01-15', 23, 'CLOSED', 'Some description', 15, 3, 10);
 insert into task (name, startdate, enddate, estimate, status, description, assigner_id, creator_id, sprint_id) values ('Task 60', '2017-01-14', '2017-01-16', 11, 'CLOSED', 'Some description', 15, 3, 10);
 insert into task (name, startdate, enddate, estimate, status, description, assigner_id, creator_id, sprint_id) values ('Task 61', '2017-01-18', '2017-01-21', 24, 'CLOSED', 'Some description', 15, 3, 10);
+
+insert into task (name, startdate, estimate, status, description, assigner_id, creator_id, sprint_id) values ('Task 62', '2017-01-30', 17, 'IN_PROGRESS', 'Some description', 1, 3, 11);
+insert into task (name, startdate, estimate, status, description, assigner_id, creator_id, sprint_id) values ('Task 63', '2017-02-01', 15, 'IN_PROGRESS', 'Some description', 1, 3, 11);
+
+insert into task (name, startdate, estimate, status, description, assigner_id, creator_id, sprint_id) values ('Task 64', '2017-02-04', 12, 'ASSIGNED', 'Some description', 1, 3, 11);
+insert into task (name, startdate, estimate, status, description, assigner_id, creator_id, sprint_id) values ('Task 65', '2017-02-03', 19, 'ASSIGNED', 'Some description', 1, 3, 11);
+
+

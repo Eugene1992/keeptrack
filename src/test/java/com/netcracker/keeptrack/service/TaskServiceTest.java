@@ -23,7 +23,7 @@ public class TaskServiceTest extends BaseTestConfig {
     public void setUp() throws Exception {
         task = new TaskDTO();
         task.setName("Some task");
-        task.setStatus(TaskStatus.OPEN.name());
+        task.setStatus(TaskStatus.IN_PROGRESS.name());
         task.setDescription("Some description");
         task.setStartDate("2017-01-21");
         task.setEndDate("2017-02-21");

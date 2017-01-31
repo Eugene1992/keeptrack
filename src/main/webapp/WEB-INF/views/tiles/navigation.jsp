@@ -76,6 +76,11 @@
                     <a href="/project"><i class="fa fa-fw fa-edit"></i> Project</a>
                 </li>
             </security:authorize>
+            <security:authorize access="hasAnyRole('EMPLOYEE', 'PM')">
+                <li>
+                    <a href="/project/tasks"><i class="fa fa-fw fa-edit"></i> Tasks</a>
+                </li>
+            </security:authorize>
             <security:authorize access="hasRole('ADMIN')">
             <li>
                 <a href="/projects"><i class="fa fa-fw fa-edit"></i> Projects</a>

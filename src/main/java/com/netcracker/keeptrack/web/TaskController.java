@@ -2,6 +2,7 @@ package com.netcracker.keeptrack.web;
 
 import com.netcracker.keeptrack.model.Sprint;
 import com.netcracker.keeptrack.model.Task;
+import com.netcracker.keeptrack.model.TaskStatus;
 import com.netcracker.keeptrack.model.User;
 import com.netcracker.keeptrack.service.SprintService;
 import com.netcracker.keeptrack.service.TaskService;
@@ -196,5 +197,38 @@ public class TaskController {
         Task task = taskService.getTaskByName(name);
         model.addAttribute("task", task);
         return "task-profile";
+    }
+
+    /**
+     * Ssdsas.
+     * @param taskId d dfdf
+     * @return fdfdfd
+     */
+    @RequestMapping(value = "project/task/accept", method = RequestMethod.POST)
+    public String acceptTask(@RequestParam("taskId") String taskId) {
+        taskService.changeTaskStatus(Integer.valueOf(taskId), TaskStatus.IN_PROGRESS);
+        return "redirect:/project/tasks";
+    }
+
+    /**
+     * Ssdsas.
+     * @param taskId d dfdf
+     * @return fdfdfd
+     */
+    @RequestMapping(value = "project/task/complete", method = RequestMethod.POST)
+    public String closeTask(@RequestParam("taskId") String taskId) {
+        taskService.changeTaskStatus(Integer.valueOf(taskId), TaskStatus.CLOSED);
+        return "redirect:/project/tasks";
+    }
+
+    /**
+     * Ssdsas.
+     * @param taskId d dfdf
+     * @return fdfdfd
+     */
+    @RequestMapping(value = "project/task/reject", method = RequestMethod.POST)
+    public String rejectTask(@RequestParam("taskId") String taskId) {
+        taskService.changeTaskStatus(Integer.valueOf(taskId), TaskStatus.REJECTED);
+        return "redirect:/project/tasks";
     }
 }
