@@ -31,7 +31,7 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                         <span class="panel-title">
-                            Project report
+                            Employee report
                         </span>
                         </div>
                         <div class="panel-body">
