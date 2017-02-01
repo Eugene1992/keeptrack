@@ -9,19 +9,19 @@
     <title>KeepTrack</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${param.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../../../resources/css/sb-admin.css" rel="stylesheet">
+    <link href="${param.contextPath}/resources/css/sb-admin.css" rel="stylesheet">
 
     <!-- isteven multi select -->
-    <link href="../../../resources/css/isteven-multi-select.css" rel="stylesheet">
+    <link href="${param.contextPath}/resources/css/isteven-multi-select.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../../../resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="${param.contextPath}/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Morris Charts CSS -->
-    <link href="../../../resources/css/plugins/morris.css" rel="stylesheet">
+    <link href="${param.contextPath}/resources/css/plugins/morris.css" rel="stylesheet">
 </head>
 <body>
 <div class="container" style="margin-top:40px">
