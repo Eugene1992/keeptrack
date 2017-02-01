@@ -19,7 +19,7 @@
     <!-- Задаем активный профиль Спринг -->
     <context-param>
         <param-name>spring.profiles.active</param-name>
-        <param-value>postgres</param-value>
+        <param-value>heroku</param-value>
     </context-param>
 
     <!--Соединяет контейнера Спринга и Веб для ихней нормальной совместной работы-->
