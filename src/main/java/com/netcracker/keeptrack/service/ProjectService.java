@@ -51,7 +51,7 @@ public interface ProjectService {
      * @param name of the required project
      * @return specified project
      */
-    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'PM')")
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'PM', 'EMPLOYEE')")
     Project getProjectByName(String name);
 
     /**

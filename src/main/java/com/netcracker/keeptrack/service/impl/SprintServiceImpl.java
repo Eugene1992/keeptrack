@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -136,8 +137,8 @@ public class SprintServiceImpl implements SprintService {
 
     /**
      * Adds the sprint to current project by specified identifier.
-     * @see SprintService#addSprintToProject
      *
+     * @see SprintService#addSprintToProject
      */
     @Override
     public void addSprintToProject(SprintDTO sprintDTO) {
@@ -146,7 +147,7 @@ public class SprintServiceImpl implements SprintService {
         sprint.setProject(project);
         LocalDate endDate = LocalDate.parse(sprintDTO.getEndDate());
         sprint.setEndDate(endDate);
-        LocalDate startDate = LocalDate.now();
+        LocalDate startDate = LocalDate.parse(sprintDTO.getStartDate());
         sprint.setStartDate(startDate);
         sprint.setName(sprintDTO.getName());
         sprint.setDescription(sprintDTO.getDescription());
@@ -164,5 +165,19 @@ public class SprintServiceImpl implements SprintService {
     @Override
     public boolean checkSprintName(String name) {
         return sprintRepository.getSprintByName(name) != null;
+    }
+
+    /**
+     * Returns latest project sprint by date.
+     *
+     * @param projectId specified project
+     * @return latest project sprint
+     */
+    @Override
+    public Sprint getProjectLatestSprint(Integer projectId) {
+        List<Sprint> projectSprints = sprintRepository.getProjectSprints(projectId);
+        return projectSprints.stream()
+                .max(Comparator.comparing(Sprint::getEndDate))
+                .get();
     }
 }

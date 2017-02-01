@@ -1,5 +1,7 @@
 package com.netcracker.keeptrack.service;
 
+import com.netcracker.keeptrack.model.Task;
+import com.netcracker.keeptrack.model.TaskStatus;
 import com.netcracker.keeptrack.model.User;
 import com.netcracker.keeptrack.web.dto.UserDTO;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -48,7 +50,6 @@ public interface UserService {
      * @param username of the required user
      * @return specified user
      */
-    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'PM')")
     User getUserByUsername(String username);
 
     /**
@@ -123,4 +124,20 @@ public interface UserService {
      */
     @PreAuthorize(value = "hasAuthority('ADMIN')")
     void addEmployeeToProject(String employeeId, String projectName);
+
+    /**
+     * Returns user tasks by specified status.
+     * @param user specified user
+     * @param status specified status
+     * @return list of the filtered tasks
+     */
+    List<Task> getUserTasksByStatus(User user, TaskStatus status);
+
+    /**
+     * Returns the latest hired employees.
+     *
+     * @param limit of employees
+     * @return list of latest hired employees
+     */
+    List<Task> getLatestHiredEmployees(Integer limit);
 }

@@ -3,16 +3,20 @@ package com.netcracker.keeptrack.service.impl;
 import com.netcracker.keeptrack.model.Gender;
 import com.netcracker.keeptrack.model.Project;
 import com.netcracker.keeptrack.model.Role;
+import com.netcracker.keeptrack.model.Task;
+import com.netcracker.keeptrack.model.TaskStatus;
 import com.netcracker.keeptrack.model.User;
 import com.netcracker.keeptrack.repository.ProjectRepository;
 import com.netcracker.keeptrack.repository.UserRepository;
 import com.netcracker.keeptrack.service.UserService;
 import com.netcracker.keeptrack.web.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Implementation of {@link UserService} interface that provides methods for User
@@ -201,5 +205,31 @@ public class UserServiceImpl implements UserService {
         Project project = projectRepository.getProjectByName(projectName);
         employee.setProject(project);
         userRepository.save(employee);
+    }
+
+    /**
+     * Returns user tasks by specified status.
+     * @param user specified user
+     * @param status specified status
+     * @return list of the filtered tasks
+     */
+    @Override
+    public List<Task> getUserTasksByStatus(User user, TaskStatus status) {
+        return user.getProject().getSprints().stream()
+                .flatMap(sprint -> sprint.getTasks().stream())
+                .filter(task -> task.getAssigner().equals(user)
+                             && task.getStatus() == status)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the latest hired employees.
+     *
+     * @param limit of employees
+     * @return list of latest hired employees
+     */
+    @Override
+    public List<Task> getLatestHiredEmployees(Integer limit) {
+        return userRepository.getLatestHiredEmployees(new PageRequest(0, limit));
     }
 }

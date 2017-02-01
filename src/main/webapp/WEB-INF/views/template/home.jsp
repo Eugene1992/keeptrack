@@ -25,7 +25,11 @@
 <body>
 <div id="wrapper">
     <tiles:insertAttribute name="navigation" />
-
+    <div class="text-center" style="color: #9d9d9d; margin-top: 200px">
+        <h1><i class="fa fa-clock-o fa-3x"></i></h1>
+        <h1>Welcome to KeepTrack, ${user.firstName}!</h1>
+        <h3>Click on the menu items for the further work.</h3>
+    </div>
 </div>
 
 <!-- isteven multi select -->

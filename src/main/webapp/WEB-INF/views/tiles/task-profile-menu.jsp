@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -8,7 +9,6 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">${task.name}</h3>
-
                     </div>
                     <div class="panel-body">
                         <table class="table table-user-information ">
@@ -25,11 +25,13 @@
                                 <td><b>Project:</b></td>
                                 <td>
                                     ${task.sprint.project.name}
+                                    <security:authorize access="hasRole('ADMIN')">
                                     <a href="/project/${task.sprint.project.name}">
                                         <button class="btn btn-xs btn-success pull-right">
                                             <i class="glyphicon glyphicon-share"></i>
                                         </button>
                                     </a>
+                                    </security:authorize>
                                 </td>
                             </tr>
                             <tr>
@@ -83,7 +85,9 @@
                             </tr>
                             </tbody>
                         </table>
+                        <security:authorize access="hasRole('ADMIN')">
                         <a href="/tasks"><button class="btn btn-sm btn-primary pull-right">Back to tasks</button></a>
+                        </security:authorize>
                     </div>
                 </div>
             </div>

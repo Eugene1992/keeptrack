@@ -77,7 +77,9 @@
                                     <td>${employee.lastName}</td>
                                     <td>${employee.role}</td>
                                     <td>
-                                        <button class="btn btn-info btn-xs">Details</button>
+                                        <a href="/user/${employee.username}">
+                                            <button class="btn btn-info btn-xs">Details</button>
+                                        </a>
                                     </td>
                                     <td>
                                         <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-employee-${employee.id}">
@@ -204,29 +206,6 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <%--<form action="/project/sprints/add" method="POST" >
-                                            <input type="hidden" name="projectName" value="${currentProject.name}" class="form-control" required>
-                                            <div class="form-group col-lg-6">
-                                                <label for="title">Title:</label>
-                                                <input type="text" name="sprintName" class="form-control" id="title" required>
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <label for="title">End date:</label>
-                                                <input type="date" name="sprintEndDate" class="form-control" id="endDate" required>
-                                            </div>
-                                            <div class="form-group col-lg-12">
-                                                <label for="description">Description:</label>
-                                                <textarea name="sprintDescription" class="form-control" id="description" rows="5" required></textarea>
-                                            </div>
-                                            <div class="form-group col-lg-12">
-                                                <p><b>Note:</b> New Sprint can start only after the previous one.
-                                                    The current sprint can be queued and will start after the completion of the previous sprint.</p>
-                                            </div>
-                                            <div class="form-group col-lg-12 text-center">
-                                                <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Add sprint</button>
-                                                <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
-                                            </div>
-                                        </form>--%>
                                         <form:form action="/sprints/add" method="POST" modelAttribute="sprint" >
                                             <form:hidden path="projectId" value="${currentProject.id}"/>
                                             <form:hidden path="status" value="CREATED"/>
@@ -330,7 +309,6 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                        <button class="btn btn-warning pull-left">Edit Task</button>
                         <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addTaskModal">Add
                             Task
                         </button>

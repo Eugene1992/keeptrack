@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
+import java.security.Principal;
+
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -151,7 +153,7 @@ public class ProjectControllerTest extends BaseWebTestConfig {
 
     @Test
     public void userProjectTest() throws Exception {
-        mockMvc.perform(get("/project"))
+        mockMvc.perform(get("/project").principal(() -> "employee"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(view().name("user-project"));

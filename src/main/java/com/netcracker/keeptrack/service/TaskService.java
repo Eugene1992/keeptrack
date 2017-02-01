@@ -1,6 +1,7 @@
 package com.netcracker.keeptrack.service;
 
 import com.netcracker.keeptrack.model.Task;
+import com.netcracker.keeptrack.model.TaskStatus;
 import com.netcracker.keeptrack.web.dto.TaskDTO;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -54,7 +55,7 @@ public interface TaskService {
      * @param name of the required task
      * @return specified task
      */
-    @PreAuthorize(value = "hasAuthority('ADMIN')")
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'PM')")
     Task getTaskByName(String name);
 
     /**
@@ -88,4 +89,21 @@ public interface TaskService {
     void deleteTaskFromSprint(Integer taskId);
 
     void addTaskToSprint(TaskDTO taskDTO);
+
+    /**
+     * Change task status.
+     * Used when user accept, reject, close task.
+     *
+     * @param taskId task id
+     * @param status new task status
+     */
+    void changeTaskStatus(Integer taskId, TaskStatus status);
+
+    /**
+     * Close selected task.
+     * Used when user complete the task.
+     *
+     * @param taskId task id
+     */
+    void closeTask(Integer taskId);
 }

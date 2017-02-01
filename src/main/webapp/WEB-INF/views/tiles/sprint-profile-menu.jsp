@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -64,7 +65,9 @@
                             </tr>
                             </tbody>
                         </table>
+                        <security:authorize access="hasRole('ADMIN')">
                         <a href="/sprints"><button class="btn btn-sm btn-primary pull-right">Back to sprints</button></a>
+                        </security:authorize>
                     </div>
                 </div>
             </div>

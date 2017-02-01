@@ -154,11 +154,15 @@ public class TaskServiceImpl implements TaskService {
     public void addTaskToSprint(TaskDTO taskDTO) {
         Task task = new Task();
         task.setName(taskDTO.getName());
-        LocalDate taskEndDate = LocalDate.parse(taskDTO.getEndDate());
-        task.setEndDate(taskEndDate);
+        LocalDate taskStartDate = LocalDate.parse(taskDTO.getStartDate());
+        task.setStartDate(taskStartDate);
         Integer taskEstimate = Integer.parseInt(taskDTO.getEstimate());
         task.setEstimate(taskEstimate);
+        task.setStatus(TaskStatus.ASSIGNED);
         task.setDescription(taskDTO.getDescription());
+        Integer taskCreatorId = Integer.parseInt(taskDTO.getCreatorId());
+        User creator = userRepository.findOne(taskCreatorId);
+        task.setCreator(creator);
         Integer taskAssignerId = Integer.parseInt(taskDTO.getAssignerId());
         User assigner = userRepository.findOne(taskAssignerId);
         task.setAssigner(assigner);
@@ -166,5 +170,33 @@ public class TaskServiceImpl implements TaskService {
         Sprint sprint = sprintRepository.findOne(sprintId);
         task.setSprint(sprint);
         taskRepository.saveAndFlush(task);
+    }
+
+    /**
+     * Change task status.
+     * Used when user accept, reject, close task.
+     *
+     * @param taskId task id
+     * @param status new task status
+     */
+    @Override
+    public void changeTaskStatus(Integer taskId, TaskStatus status) {
+        Task task = taskRepository.findOne(taskId);
+        task.setStatus(status);
+        taskRepository.save(task);
+    }
+
+    /**
+     * Close selected task.
+     * Used when user complete the task.
+     *
+     * @param taskId task id
+     */
+    @Override
+    public void closeTask(Integer taskId) {
+        Task task = taskRepository.findOne(taskId);
+        task.setStatus(TaskStatus.CLOSED);
+        task.setEndDate(LocalDate.now());
+        taskRepository.save(task);
     }
 }

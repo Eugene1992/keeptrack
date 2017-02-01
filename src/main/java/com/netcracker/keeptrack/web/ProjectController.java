@@ -1,6 +1,8 @@
 package com.netcracker.keeptrack.web;
 
 import com.netcracker.keeptrack.model.Project;
+import com.netcracker.keeptrack.model.Task;
+import com.netcracker.keeptrack.model.TaskStatus;
 import com.netcracker.keeptrack.model.User;
 import com.netcracker.keeptrack.service.ProjectService;
 import com.netcracker.keeptrack.service.UserService;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 import javax.validation.Valid;
 
@@ -186,7 +189,9 @@ public class ProjectController {
      * @return selected project profile
      */
     @RequestMapping(value = "/project", method = RequestMethod.GET)
-    public String project() {
+    public String project(Model model, Principal principal) {
+        User userData = userService.getUserByUsername(principal.getName());
+        model.addAttribute("userData", userData);
         return "user-project";
     }
 
@@ -219,5 +224,26 @@ public class ProjectController {
                                        @RequestParam("projectName") String name) {
         userService.addEmployeeToProject(id, name);
         return "redirect:/project/" + name;
+    }
+
+    /**
+     * Ssdsas.
+     * @param principal d dfdf
+     * @return fdfdfd
+     */
+    @RequestMapping(value = "project/tasks", method = RequestMethod.GET)
+    public String projectTasks(Principal principal, Model model) {
+        User user = userService.getUserByUsername(principal.getName());
+        List<Task> createdTasks = userService.getUserTasksByStatus(user, TaskStatus.CREATED);
+        List<Task> assignedTasks = userService.getUserTasksByStatus(user, TaskStatus.ASSIGNED);
+        List<Task> closedTasks = userService.getUserTasksByStatus(user, TaskStatus.CLOSED);
+        List<Task> inProgressTasks = userService.getUserTasksByStatus(user, TaskStatus.IN_PROGRESS);
+        List<Task> rejectedTasks = userService.getUserTasksByStatus(user, TaskStatus.REJECTED);
+        model.addAttribute("createdTasks", createdTasks);
+        model.addAttribute("assignedTasks", assignedTasks);
+        model.addAttribute("closedTasks", closedTasks);
+        model.addAttribute("inProgressTasks", inProgressTasks);
+        model.addAttribute("rejectedTasks", rejectedTasks);
+        return "user-tasks";
     }
 }

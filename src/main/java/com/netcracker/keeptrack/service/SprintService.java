@@ -51,7 +51,7 @@ public interface SprintService {
      * @param name of the required sprint
      * @return specified sprint
      */
-    @PreAuthorize(value = "hasAuthority('ADMIN')")
+    @PreAuthorize(value = "hasAnyAuthority('ADMIN', 'PM', 'EMPLOYEE')")
     Sprint getSprintByName(String name);
 
     /**
@@ -82,7 +82,6 @@ public interface SprintService {
      */
     void deleteSprintFromProject(Integer id);
 
-    // todo: 23.01.2017 refactor for dto input
     /**
      * Adds the sprint to current project by specified identifier.
      * This function is available for the administrator and project manager in project profile.
@@ -97,4 +96,12 @@ public interface SprintService {
      * @return result of checking
      */
     boolean checkSprintName(String name);
+
+    /**
+     * Returns latest project sprint by date.
+     *
+     * @param projectId specified project
+     * @return latest project sprint
+     */
+    Sprint getProjectLatestSprint(Integer projectId);
 }

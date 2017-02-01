@@ -32,7 +32,7 @@ public class UserValidator extends BaseValidator implements Validator {
     private static final String FIRST_NAME_LENGTH_MSG = "valid.length.user.firstname";
     private static final String LAST_NAME_LENGTH_MSG = "valid.length.user.lastname";
     private static final String EXIST_NAMES_MSG = "valid.exist.user.names";
-    private static final String PASSWORD_MSG = "valid.user.password";
+    private static final String PASSWORD_MSG = "valid.required.password";
     private static final String PASSWORD_REGEX = "[\\w]{6,20}";
     private static final String PROJECT_MSG = "valid.required.user.project";
     private static final String ROLE_MSG = "valid.required.user.role";

@@ -305,3 +305,7 @@ ul.alert-dropdown {
 #acceess-denied {
     margin-top: 200px;
 }
+
+.panel-bottom-margin {
+    margin-bottom: 0;
+}

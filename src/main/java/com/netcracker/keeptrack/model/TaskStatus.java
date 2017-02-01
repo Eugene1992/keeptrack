@@ -13,9 +13,9 @@ public enum TaskStatus {
     CREATED,
 
     /**
-     * The task is opened by the Project Manager, but the assigner had not yet accepted her.
+     * The task is assigned by the Project Manager, but the assigner had not yet accepted her.
      */
-    OPEN,
+    ASSIGNED,
 
     /**
      * The assignee has accepted the task and it is in execution progress.
@@ -25,7 +25,7 @@ public enum TaskStatus {
     /**
      * The task is solved, but requires review or clarification.
      */
-    RESOLVED,
+    REJECTED,
 
     /**
      * The task is solved and closed.

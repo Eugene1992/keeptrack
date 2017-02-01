@@ -34,7 +34,6 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${tasksList}" var="dto">
-                                <jsp:useBean id="task" scope="page" type="com.netcracker.keeptrack.model.Task"/>
                                 <tr>
                                     <td>${dto.name}</td>
                                     <td>${dto.sprint.project.name}</td>
