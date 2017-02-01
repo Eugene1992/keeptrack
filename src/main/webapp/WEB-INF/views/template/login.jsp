@@ -19,9 +19,6 @@
 
     <!-- Custom Fonts -->
     <link href="../../../resources/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Morris Charts CSS -->
-    <link href="../../../resources/css/plugins/morris.css" rel="stylesheet">
 </head>
 <body>
 <div class="container" style="margin-top:40px">
@@ -78,18 +75,10 @@
     </div>
 </div>
 
-<!-- isteven multi select -->
-<%--<script src="../../../resources/js/libs/isteven-multi-select.js"></script>--%>
-
 <!-- jQuery -->
 <script src="../../../resources/js/jquery.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="../../../resources/js/bootstrap.min.js"></script>
-
-<!-- Morris Charts JavaScript -->
-<%--<script src="../../../resources/js/plugins/morris/raphael.min.js"></script>
-<script src="../../../resources/js/plugins/morris/morris.min.js"></script>
-<script src="../../../resources/js/plugins/morris/morris-data.js"></script>--%>
 </body>
 </html>

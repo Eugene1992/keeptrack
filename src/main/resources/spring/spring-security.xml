@@ -14,10 +14,9 @@
         <remember-me/>
         <access-denied-handler error-page="/access-denied" />
 
-        <intercept-url pattern="**/resources/**" access="permitAll" />
         <intercept-url pattern="/login*" access="permitAll" />
         <intercept-url pattern="/" access="permitAll" />
-        <intercept-url pattern="/**" access="hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />
+        <!--<intercept-url pattern="/**" access="hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />-->
         <intercept-url pattern="/project/dashboards" access="hasRole('CUSTOMER')" />
         <intercept-url pattern="/dashboards" access="hasRole('ADMIN')" />
 
