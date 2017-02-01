@@ -10,13 +10,15 @@
 
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
+    <http pattern="/resources/**" security="none"/>
+
     <http auto-config="true" use-expressions="true">
         <remember-me/>
         <access-denied-handler error-page="/access-denied" />
 
         <intercept-url pattern="/login*" access="permitAll" />
         <intercept-url pattern="/" access="permitAll" />
-        <!--<intercept-url pattern="/**" access="hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />-->
+        <intercept-url pattern="/**" access="hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />
         <intercept-url pattern="/project/dashboards" access="hasRole('CUSTOMER')" />
         <intercept-url pattern="/dashboards" access="hasRole('ADMIN')" />
 
