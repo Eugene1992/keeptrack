@@ -154,7 +154,6 @@
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Status</th>
-                                    <th>Update</th>
                                     <th>Details</th>
                                     <th class="th-del-btn">
                                         <i class="glyphicon glyphicon-remove"></i>
@@ -168,10 +167,9 @@
                                     <td>${sprint.description}</td>
                                     <td>${sprint.status}</td>
                                     <td>
-                                        <button class="btn btn-warning btn-xs">Update</button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-info btn-xs">Details</button>
+                                        <a href="/sprint/${sprint.name}">
+                                            <button class="btn btn-info btn-xs">Details</button>
+                                        </a>
                                     </td>
                                     <td>
                                         <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-sprint-${sprint.id}"><i class="glyphicon glyphicon-remove"></i></button>
@@ -278,7 +276,9 @@
                                     <td>${dto.status}</td>
                                     <td>${dto.estimate}</td>
                                     <td>
-                                        <button class="btn btn-info btn-xs">Details</button>
+                                        <a href="/task/${dto.name}">
+                                            <button class="btn btn-info btn-xs">Details</button>
+                                        </a>
                                     </td>
                                     <td>
                                         <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirm-drop-task-${dto.id}">

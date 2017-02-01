@@ -4,10 +4,6 @@
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row">
-            <div class="alert alert-success" role="alert">
-                <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-                Choose report type and press generate button:
-            </div>
             <div class="col-lg-12">
                 <div class="col-lg-6">
                     <div class="panel panel-primary">
@@ -25,18 +21,6 @@
                                             <option value="${project.name}">${project.name}</option>
                                         </c:forEach>
                                     </select>
-                                </div>
-                                <div class="form-group col-lg-12">
-                                    <p>Select the contents of the report:</p>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Employees</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Sprints</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Tasks</label>
-                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary center-block">Generate</button>
                             </form>

@@ -10,17 +10,17 @@ public class TaskDTO {
     /**
      * Task id.
      */
-    protected String id;
+    private String id;
 
     /**
      * Task name.
      */
-    protected String name;
+    private String name;
 
     /**
      * Task start date.
      */
-    protected String startDate;
+    private String startDate;
 
     /**
      * Task end date.
@@ -30,32 +30,32 @@ public class TaskDTO {
     /**
      * Task end date.
      */
-    protected String status;
+    private String status;
 
     /**
      * Task sprint id.
      */
-    protected String sprintId;
+    private String sprintId;
 
     /**
      * Task creator id.
      */
-    protected String creatorId;
+    private String creatorId;
 
     /**
      * Task assigner id.
      */
-    protected String assignerId;
+    private String assignerId;
 
     /**
      * Task description.
      */
-    protected String description;
+    private String description;
 
     /**
      * Task estimate.
      */
-    protected String estimate;
+    private String estimate;
 
     public TaskDTO() {
     }

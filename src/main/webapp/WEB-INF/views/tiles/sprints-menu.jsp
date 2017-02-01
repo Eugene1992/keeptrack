@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-12"><br>
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
+                    <div class="panel-heading" style="height: 42px;">
                         <span class="panel-title">
                             Sprints list
                         </span>

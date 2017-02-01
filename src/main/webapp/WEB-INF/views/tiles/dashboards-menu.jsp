@@ -94,7 +94,7 @@
         </div>
         <div class="row">
             <div class="col-lg-6">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Latest Hired Employees</h3>
                     </div>
@@ -126,7 +126,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Latest Tasks</h3>
                     </div>

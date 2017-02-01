@@ -1,4 +1,5 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -46,14 +47,20 @@
 												</span>
                                             <input class="form-control" placeholder="Username" name="user_name" type="text" autofocus>
                                         </div>
+                                        <c:if test="${not empty error}">
+                                            <span class="label label-danger">${error}</span>
+                                        </c:if>
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group">
 												<span class="input-group-addon">
 													<i class="glyphicon glyphicon-lock"></i>
 												</span>
-                                            <input class="form-control" placeholder="Password" name="user_password" type="password" value="">
+                                            <input class="form-control" placeholder="Password" name="user_password" type="password">
                                         </div>
+                                        <c:if test="${not empty error}">
+                                            <span class="label label-danger">${error}</span>
+                                        </c:if>
                                     </div>
                                     <div class="checkbox">
                                         <label><input type="checkbox" name="_spring_security_remember_me" >Remember me</label>
