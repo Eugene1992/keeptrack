@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-12"><br>
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
+                    <div class="panel-heading" style="height: 42px;">
                         <span class="panel-title">
                             Projects list
                         </span>
@@ -133,7 +133,7 @@
                             <div class="form-group col-lg-12 outer">
                                 <div class="form-group col-lg-12">
                                     <label for="employees">Employees:</label>
-                                    <form:select class="form-control" path="employees" id="employees" size="10">
+                                    <form:select class="form-control" path="employees" id="employees" size="6">
                                         <c:forEach var="employee" items="${freeEmployees}">
                                             <form:option value="${employee.id}" label="${employee.firstName} ${employee.lastName}"/>
                                         </c:forEach>

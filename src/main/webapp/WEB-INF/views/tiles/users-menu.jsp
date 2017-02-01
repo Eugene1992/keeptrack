@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-12"><br>
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
+                    <div class="panel-heading" style="height: 42px;">
                         <span class="panel-title">
                             Users list
                         </span>
@@ -19,7 +19,6 @@
                                 <tr>
                                     <th>First Name</th>
                                     <th>Last Name</th>
-                                    <th>Username</th>
                                     <th>Role</th>
                                     <th>Birthday</th>
                                     <th>Hire Date</th>
@@ -37,7 +36,6 @@
                                 <tr>
                                     <td>${user.firstName}</td>
                                     <td>${user.lastName}</td>
-                                    <td>${user.username}</td>
                                     <td>${user.role}</td>
                                     <td>${user.birthday}</td>
                                     <td>${user.hireDay}</td>

@@ -45,8 +45,6 @@ public interface ProjectService {
 
     /**
      * Returns the project by specified name.
-     * This function is only available for the administrator.
-     * The manager and the user only know about the project in which work.
      *
      * @param name of the required project
      * @return specified project

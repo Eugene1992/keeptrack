@@ -45,8 +45,6 @@ public interface SprintService {
 
     /**
      * Returns the sprint by specified name.
-     * This function is only available for the administrator.
-     * The manager and the user only know about the sprint of the project in which they work.
      *
      * @param name of the required sprint
      * @return specified sprint

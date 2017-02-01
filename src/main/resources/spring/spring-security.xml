@@ -2,7 +2,6 @@
 <bean:beans xmlns="http://www.springframework.org/schema/security"
             xmlns:bean="http://www.springframework.org/schema/beans"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:beans="http://www.springframework.org/schema/beans"
             xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/security
@@ -10,13 +9,15 @@
 
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
+    <http pattern="/resources/**" security="none"/>
+
     <http auto-config="true" use-expressions="true">
         <remember-me/>
         <access-denied-handler error-page="/access-denied" />
 
-        <intercept-url pattern="/home" access="hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />
-        <intercept-url pattern="/login*" access="permitAll" />
-        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/login*" access="permitAll"/>
+        <intercept-url pattern="/" access="permitAll" />
+        <intercept-url pattern="/**" access="hasAnyRole('ADMIN', 'EMPLOYEE', 'CUSTOMER', 'PM')" />
         <intercept-url pattern="/project/dashboards" access="hasRole('CUSTOMER')" />
         <intercept-url pattern="/dashboards" access="hasRole('ADMIN')" />
 
@@ -26,7 +27,7 @@
                 username-parameter="user_name"
                 password-parameter="user_password"
                 authentication-success-handler-ref="authenticationSuccessHandler"
-                authentication-failure-url="/login"
+                authentication-failure-url="/login?error"
         />
         <logout logout-success-url="/login" />
         <remember-me/>

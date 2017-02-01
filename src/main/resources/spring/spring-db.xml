@@ -7,7 +7,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <jpa:repositories base-package="com.netcracker.keeptrack.repository"/>
-    <!--<tx:annotation-driven proxy-target-class="true" transaction-managerId="transactionManager"/>-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean id="persistenceExceptionTranslationPostProcessor"
@@ -21,7 +20,7 @@
                 <property name="generateDdl" value="true"/>
             </bean>
         </property>
-        <!-- spring based scanning for entity classes-->
+
         <property name="packagesToScan" value="com.netcracker.keeptrack"/>
         <property name="jpaProperties">
             <props>
@@ -36,11 +35,9 @@
                     db_scripts/tasks.sql
                 </prop>
                 <prop key="hibernate.enable_lazy_load_no_trans">true</prop>
-                <!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>-->
             </props>
         </property>
     </bean>
-
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>
 
@@ -62,5 +59,19 @@
             <jdbc:script location="classpath:db_scripts/sprints.sql" />
             <jdbc:script location="classpath:db_scripts/tasks.sql" />
         </jdbc:embedded-database>
+    </beans>
+
+    <beans profile="heroku">
+        <context:property-placeholder location="classpath:/db_props/heroku.properties" system-properties-mode="OVERRIDE"/>
+
+        <bean class="java.net.URI" id="dbUrl">
+            <constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/>
+        </bean>
+
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+            <property name="url" value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }"/>
+            <property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }"/>
+            <property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }"/>
+        </bean>
     </beans>
 </beans>
