@@ -27,21 +27,21 @@ public class Task extends BaseEntity {
     /**
      * Project manager which creates current task.
      */
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "creator_id")
     private User creator;
 
     /**
      * The employee to whom the task is assigned.
      */
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "assigner_id")
     private User assigner;
 
     /**
      * Task sprint.
      */
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "sprint_id")
     private Sprint sprint;
 

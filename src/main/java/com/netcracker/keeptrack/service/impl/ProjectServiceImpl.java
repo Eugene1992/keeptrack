@@ -103,12 +103,11 @@ public class ProjectServiceImpl implements ProjectService {
     public void updateProject(ProjectDTO projectDTO) {
         Integer projectId = Integer.parseInt(projectDTO.getId());
         Project project = projectRepository.findOne(projectId);
-        project.setName(project.getName());
-        project.setStatus(project.getStatus());
+        project.setName(projectDTO.getName());
+        project.setStatus(ProjectStatus.valueOf(projectDTO.getStatus()));
         project.setStartDate(LocalDate.parse(projectDTO.getStartDate()));
         project.setEndDate(LocalDate.parse(projectDTO.getEndDate()));
         project.setDescription(projectDTO.getDescription());
-        projectRepository.saveAndFlush(project);
         Integer managerId = Integer.parseInt(projectDTO.getManagerId());
         User manager = userRepository.findOne(managerId);
         project.setManager(manager);
@@ -117,6 +116,7 @@ public class ProjectServiceImpl implements ProjectService {
             User user = userRepository.findOne(employeeId);
             user.setProject(project);
         }
+        projectRepository.save(project);
     }
 
     /**

@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -30,19 +31,19 @@ public class Project extends BaseEntity {
     /**
      * The manager of the current project.
      */
-    @OneToOne(mappedBy = "managedProject")
+    @OneToOne(mappedBy = "managedProject", cascade = CascadeType.REMOVE)
     private User manager;
 
     /**
      * Employees who works on a current project.
      */
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<User> users;
 
     /**
      * The sprints of the project.
      */
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
     private Set<Sprint> sprints;
 
     /**

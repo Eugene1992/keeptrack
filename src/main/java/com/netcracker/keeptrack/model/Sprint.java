@@ -37,7 +37,7 @@ public class Sprint extends BaseEntity {
     /**
      * Sprint tasks.
      */
-    @OneToMany(mappedBy = "sprint", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sprint", cascade = CascadeType.REMOVE)
     private Set<Task> tasks;
 
     /**
