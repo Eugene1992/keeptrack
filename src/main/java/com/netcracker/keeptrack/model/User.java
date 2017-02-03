@@ -281,10 +281,6 @@ public class User extends BaseEntity {
         return "User{"
                 + "username='" + username + '\''
                 + ", password='" + password + '\''
-                + ", project=" + project
-                + ", managedProject=" + managedProject
-                + ", createdTasks=" + createdTasks
-                + ", assignedTasks=" + assignedTasks
                 + ", role=" + role
                 + ", firstName='" + firstName + '\''
                 + ", lastName='" + lastName + '\''

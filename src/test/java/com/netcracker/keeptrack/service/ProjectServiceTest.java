@@ -50,7 +50,7 @@ public class ProjectServiceTest extends BaseTestConfig {
         Assert.assertNotNull(PROJECT_BEFORE_DELETING);
         projectService.deleteProject(DELETED_PROJECT_ID);
         final Project PROJECT_AFTER_DELETING = projectService.getProjectById(DELETED_PROJECT_ID);
-        Assert.assertNotNull(PROJECT_AFTER_DELETING);
+        Assert.assertNull(PROJECT_AFTER_DELETING);
     }
 
     @Test
@@ -81,8 +81,7 @@ public class ProjectServiceTest extends BaseTestConfig {
         final Project UPD_PROJECT = projectService.getProjectById(PROJECT_ID);
         final String UPD_PROJECT_NAME = UPD_PROJECT.getName();
         Assert.assertNotNull(UPD_PROJECT);
-        Assert.assertNotEquals(UPD_PROJECT, PROJECT);
-        Assert.assertEquals(UPD_PROJECT.getName(), UPD_PROJECT_NAME);
+        Assert.assertEquals(PROJECT.getName(), UPD_PROJECT_NAME);
     }
 
     @Test

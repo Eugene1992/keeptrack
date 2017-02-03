@@ -93,23 +93,6 @@ public class ProjectControllerTest extends BaseWebTestConfig {
     }
 
     @Test
-    public void updateProject1Test() throws Exception {
-        mockMvc.perform(post("/projects/update")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("name", "Google")
-                .param("managerId", "1")
-                .param("id", "1")
-                .param("status", "CREATED")
-                .param("startDate", "2017-02-21")
-                .param("endDate", "2018-02-21")
-                .param("description", "Some description")
-                .param("employees", "1", "2")
-        )
-                .andExpect(view().name("redirect:/projects"))
-                .andExpect(status().is3xxRedirection());
-    }
-
-    @Test
     public void updateProjectValidationErrorTest() throws Exception {
         mockMvc.perform(post("/projects/update")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
