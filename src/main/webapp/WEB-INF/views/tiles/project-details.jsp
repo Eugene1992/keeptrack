@@ -152,8 +152,10 @@
                             <thead>
                                 <tr>
                                     <th>Title</th>
-                                    <th>Description</th>
                                     <th>Status</th>
+                                    <th>Start date</th>
+                                    <th>End date</th>
+                                    <th>Description</th>
                                     <th>Details</th>
                                     <th class="th-del-btn">
                                         <i class="glyphicon glyphicon-remove"></i>
@@ -164,8 +166,10 @@
                             <c:forEach items="${currentProject.sprints}" var="sprint">
                                 <tr>
                                     <td>${sprint.name}</td>
-                                    <td>${sprint.description}</td>
                                     <td>${sprint.status}</td>
+                                    <td>${sprint.startDate}</td>
+                                    <td>${sprint.endDate}</td>
+                                    <td>${sprint.description}</td>
                                     <td>
                                         <a href="/sprint/${sprint.name}">
                                             <button class="btn btn-info btn-xs">Details</button>
@@ -235,7 +239,7 @@
                                             </div>
                                             <div class="form-group text-center">
                                                 <button type="submit" class="btn btn-primary">Create sprint</button>
-                                                <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
+                                                <button type="button" data-dismiss="modal" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i> Close menu</button>
                                             </div>
                                         </form:form>
                                     </div>

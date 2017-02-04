@@ -1,11 +1,14 @@
 package com.netcracker.keeptrack.service.validators;
 
+import com.netcracker.keeptrack.model.Sprint;
 import com.netcracker.keeptrack.service.SprintService;
 import com.netcracker.keeptrack.web.dto.SprintDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import java.time.LocalDate;
 
 /**
  * Class provide validation behavior for the Sprint by implementing the
@@ -29,6 +32,7 @@ public class SprintValidator extends BaseValidator implements Validator {
     private static final String STATUS_MSG = "valid.required.status";
     private static final String DESCRIPTION_MSG = "valid.required.description";
     private static final String PROJECT_MSG = "valid.required.sprint.project";
+    private static final String SPRINT_DELAY_MSG = "valid.sprint.delay";
 
     /**
      * Register which {@code Class} must support the validation.
@@ -73,5 +77,13 @@ public class SprintValidator extends BaseValidator implements Validator {
         String startDate = sprint.getStartDate();
         String endDate = sprint.getEndDate();
         validateDates(errors, startDate, endDate);
+
+        Sprint latestSprint = sprintService.getProjectLatestSprint(Integer.parseInt(projectId));
+        if (latestSprint != null && startDate != null && !startDate.isEmpty()) {
+            LocalDate newSprintStartDate = LocalDate.parse(startDate);
+            if (latestSprint.getEndDate().isAfter(newSprintStartDate)) {
+                errors.rejectValue("startDate", SPRINT_DELAY_MSG);
+            }
+        }
     }
 }

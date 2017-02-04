@@ -55,6 +55,7 @@ public class SprintControllerTest extends BaseWebTestConfig {
         mockMvc.perform(post("/sprints/add")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("name", "New Sprint")
+                .param("projectId", "1")
         )
                 .andExpect(view().name("new-sprint"))
                 .andExpect(model().attributeExists("projects"));
@@ -90,6 +91,7 @@ public class SprintControllerTest extends BaseWebTestConfig {
         mockMvc.perform(post("/sprints/update")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", "1")
+                .param("projectId", "1")
                 .param("name", "New Sprint")
         )
                 .andExpect(view().name("upd-sprint"))

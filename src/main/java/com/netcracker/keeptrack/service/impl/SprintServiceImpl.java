@@ -178,6 +178,6 @@ public class SprintServiceImpl implements SprintService {
         List<Sprint> projectSprints = sprintRepository.getProjectSprints(projectId);
         return projectSprints.stream()
                 .max(Comparator.comparing(Sprint::getEndDate))
-                .get();
+                .orElse(null);
     }
 }
