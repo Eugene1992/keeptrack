@@ -1,9 +1,13 @@
 package com.netcracker.keeptrack.service.impl;
 
+import com.netcracker.keeptrack.model.Request;
+import com.netcracker.keeptrack.model.RequestStatus;
 import com.netcracker.keeptrack.model.Sprint;
 import com.netcracker.keeptrack.model.Task;
+import com.netcracker.keeptrack.model.TaskEstimateRequest;
 import com.netcracker.keeptrack.model.TaskStatus;
 import com.netcracker.keeptrack.model.User;
+import com.netcracker.keeptrack.repository.RequestRepository;
 import com.netcracker.keeptrack.repository.SprintRepository;
 import com.netcracker.keeptrack.repository.TaskRepository;
 import com.netcracker.keeptrack.repository.UserRepository;
@@ -33,6 +37,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private SprintRepository sprintRepository;
+
+    @Autowired
+    private RequestRepository requestRepository;
 
     /**
      * Adds a new task to the system.
@@ -198,5 +205,61 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(TaskStatus.CLOSED);
         task.setEndDate(LocalDate.now());
         taskRepository.save(task);
+    }
+
+    /**
+     * Processes a request to change the estimate time.
+     *
+     * @param taskId specified task
+     * @param tittle specified task tittle
+     * @param reqEstimate requested estimate
+     * @param description specified task description
+     */
+    @Override
+    public void handleEstimateRequest(Integer taskId, String tittle, Integer reqEstimate, String description) {
+        TaskEstimateRequest request = new TaskEstimateRequest();
+        Task task = taskRepository.findOne(taskId);
+        request.setTittle(tittle);
+        request.setAssigner(task.getCreator());
+        request.setCreator(task.getAssigner());
+        request.setReqEstimate(reqEstimate);
+        request.setTask(task);
+        request.setDescription(description);
+        request.setStatus(RequestStatus.OPENED);
+        requestRepository.save(request);
+    }
+
+    /**
+     * Accepts the specified request.
+     * Finds the request for a given id, define the request type and cast the base class.
+     * At this point we have only one request type, but in the future it will allow flexibility
+     * to expand it with new request types.
+     *
+     * @param requestId request identifier
+     */
+    @Override
+    public void acceptRequest(Integer requestId) {
+        Request request = requestRepository.findOne(requestId);
+        if (request instanceof TaskEstimateRequest) {
+            TaskEstimateRequest estimateRequest = (TaskEstimateRequest) request;
+            Task task = estimateRequest.getTask();
+            int requestedEstimate = estimateRequest.getReqEstimate();
+            task.setEstimate(requestedEstimate);
+            taskRepository.save(task);
+            request.setStatus(RequestStatus.ACCEPTED);
+        }
+        requestRepository.save(request);
+    }
+
+    /**
+     * Rejects the specified request.
+     *
+     * @param requestId request identifier
+     */
+    @Override
+    public void rejectRequest(Integer requestId) {
+        Request request = requestRepository.findOne(requestId);
+        request.setStatus(RequestStatus.REJECTED);
+        requestRepository.save(request);
     }
 }

@@ -1,6 +1,9 @@
 package com.netcracker.keeptrack.service.security;
 
+import com.netcracker.keeptrack.model.Request;
+import com.netcracker.keeptrack.model.RequestStatus;
 import com.netcracker.keeptrack.repository.UserRepository;
+import com.netcracker.keeptrack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -9,6 +12,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +28,9 @@ public class CustomSuccessAuthHandler implements AuthenticationSuccessHandler {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * Encapsulates the redirection logic for all classes in the framework
@@ -45,19 +52,22 @@ public class CustomSuccessAuthHandler implements AuthenticationSuccessHandler {
                                         final HttpServletResponse response,
                                         final Authentication authentication) throws IOException, ServletException {
 
-        String targetUrl = "/home";
-
         HttpSession session = request.getSession(true);
 
         User credentials = (User) authentication.getPrincipal();
         String username = credentials.getUsername();
         com.netcracker.keeptrack.model.User user = userRepository.getUserByUsername(username);
 
+        List<Request> userOpenedRequests = userService.getUserRequestsByStatus(user, RequestStatus.OPENED);
+
         session.setAttribute("user", user);
+        session.setAttribute("userOpenedRequests", userOpenedRequests);
 
         if (response.isCommitted()) {
             return;
         }
+
+        String targetUrl = "/home";
 
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }

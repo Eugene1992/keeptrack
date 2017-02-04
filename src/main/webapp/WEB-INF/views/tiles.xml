@@ -136,4 +136,9 @@
         <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
         <put-attribute name="user-tasks-menu" value="/WEB-INF/views/tiles/user-tasks-menu.jsp" />
     </definition>
+    <definition name="user-requests" template="/WEB-INF/views/template/user-requests.jsp">
+        <put-attribute name="title" value="User Profile" />
+        <put-attribute name="navigation" value="/WEB-INF/views/tiles/navigation.jsp" />
+        <put-attribute name="user-requests" value="/WEB-INF/views/tiles/user-requests-menu.jsp" />
+    </definition>
 </tiles-definitions>

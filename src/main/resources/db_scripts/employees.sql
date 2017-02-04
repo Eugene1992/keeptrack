@@ -24,3 +24,9 @@ insert into app_user (username, password, first_name, last_name, birthday, hired
 
 INSERT INTO app_user (username, password, first_name, last_name, birthday, hireday, salary, role, email, gender) VALUES ('sbutler2', 'gmGVqKeT', 'Stephen', 'Butler', '1975/08/22', '2015/12/29', 30412, 'PM', 'sbutler2@discuz.net', 'MALE');
 INSERT INTO app_user (username, password, first_name, last_name, birthday, hireday, salary, role, email, gender) VALUES ('mrodriguez7', 't3TsZbScr', 'Marilyn', 'Rodriguez', '1977/06/29', '2015/07/08', 34384, 'PM', 'mrodriguez7@liveinternet.ru', 'FEMALE');
+
+INSERT INTO request(tittle, description, status, reqestimate, assigner_id, creator_id, task_id, dtype)
+VALUES ('Need time', 'Some description', 'OPENED', '77', '3', '1', 134, 'TaskEstimateRequest');
+
+INSERT INTO request(tittle, description, status, reqestimate, assigner_id, creator_id, task_id, dtype)
+VALUES ('Need time','Some description', 'OPENED', '24', '3', '1', 133, 'TaskEstimateRequest');

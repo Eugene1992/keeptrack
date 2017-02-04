@@ -1,5 +1,7 @@
 package com.netcracker.keeptrack.service;
 
+import com.netcracker.keeptrack.model.Request;
+import com.netcracker.keeptrack.model.RequestStatus;
 import com.netcracker.keeptrack.model.Task;
 import com.netcracker.keeptrack.model.TaskStatus;
 import com.netcracker.keeptrack.model.User;
@@ -140,4 +142,12 @@ public interface UserService {
      * @return list of latest hired employees
      */
     List<Task> getLatestHiredEmployees(Integer limit);
+
+    /**
+     * Returns user requests by specified status.
+     * @param user specified user
+     * @param status specified status
+     * @return list of the filtered requests
+     */
+    List<Request> getUserRequestsByStatus(User user, RequestStatus status);
 }
