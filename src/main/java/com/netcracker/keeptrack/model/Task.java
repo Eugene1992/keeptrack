@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * The smallest piece of a job that serves as a unit of work a project.
@@ -44,6 +45,12 @@ public class Task extends BaseEntity {
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "sprint_id")
     private Sprint sprint;
+
+    /**
+     * Estimate increase request.
+     */
+    @OneToOne(mappedBy = "task", cascade = CascadeType.REMOVE)
+    private TaskEstimateRequest request;
 
     /**
      * Estimated time to complete the task.
@@ -159,6 +166,14 @@ public class Task extends BaseEntity {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public TaskEstimateRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(TaskEstimateRequest request) {
+        this.request = request;
     }
 
     @Override

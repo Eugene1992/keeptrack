@@ -1,6 +1,8 @@
 package com.netcracker.keeptrack.web;
 
 import com.netcracker.keeptrack.model.Project;
+import com.netcracker.keeptrack.model.Request;
+import com.netcracker.keeptrack.model.RequestStatus;
 import com.netcracker.keeptrack.model.Task;
 import com.netcracker.keeptrack.model.TaskStatus;
 import com.netcracker.keeptrack.model.User;
@@ -227,9 +229,11 @@ public class ProjectController {
     }
 
     /**
-     * Ssdsas.
-     * @param principal d dfdf
-     * @return fdfdfd
+     * The controller that return specified project tasks.
+     *
+     * @param principal authorized user data object
+     * @param model project created, assigned, closed, in progress, rejected tasks data
+     * @return user tasks menu
      */
     @RequestMapping(value = "project/tasks", method = RequestMethod.GET)
     public String projectTasks(Principal principal, Model model) {
@@ -245,5 +249,24 @@ public class ProjectController {
         model.addAttribute("inProgressTasks", inProgressTasks);
         model.addAttribute("rejectedTasks", rejectedTasks);
         return "user-tasks";
+    }
+
+    /**
+     * The controller that return specified project requests.
+     *
+     * @param principal authorized user data object
+     * @param model project opened, accepted, rejected requests data
+     * @return user requests menu
+     */
+    @RequestMapping(value = "project/requests", method = RequestMethod.GET)
+    public String projectRequests(Principal principal, Model model) {
+        User user = userService.getUserByUsername(principal.getName());
+        List<Request> openedRequests = userService.getUserRequestsByStatus(user, RequestStatus.OPENED);
+        List<Request> acceptedRequests = userService.getUserRequestsByStatus(user, RequestStatus.ACCEPTED);
+        List<Request> rejectedRequests = userService.getUserRequestsByStatus(user, RequestStatus.REJECTED);
+        model.addAttribute("openedRequests", openedRequests);
+        model.addAttribute("acceptedRequests", acceptedRequests);
+        model.addAttribute("rejectedRequests", rejectedRequests);
+        return "user-requests";
     }
 }

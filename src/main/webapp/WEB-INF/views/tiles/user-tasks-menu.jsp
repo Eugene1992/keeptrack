@@ -183,9 +183,14 @@
                                                     </tr>
                                                     </tbody>
                                                 </table>
-                                                <button type="button" class="btn btn-success center-block" data-toggle="modal" data-target="#close-task-${task.id}">
-                                                    <span class="glyphicon glyphicon-ok"></span> Close
-                                                </button>
+                                                <div class="text-center">
+                                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#close-task-${task.id}">
+                                                        <span class="glyphicon glyphicon-ok"></span> Close
+                                                    </button>
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#prolongate-task-${task.id}">
+                                                        <span class="glyphicon glyphicon-ok"></span> Request
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -200,6 +205,33 @@
                                                         <input type="hidden" class="form-control" name="taskId" value="${task.id}" />
                                                         <div class="text-center">
                                                             <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Yes, close</button>
+                                                            <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" role="dialog" id="prolongate-task-${task.id}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <form action="/project/task/request" method="POST" >
+                                                        <input type="hidden" class="form-control" name="taskId" value="${task.id}" />
+                                                        <div class="form-group col-lg-6">
+                                                            <label for="estimate">Tittle:</label>
+                                                            <input class="form-control" id="tittle" type="text" name="tittle" required/>
+                                                        </div>
+                                                        <div class="form-group col-lg-6">
+                                                            <label for="estimate">New estimate:</label>
+                                                            <input class="form-control" id="estimate" type="number" min="1" name="estimate" required/>
+                                                        </div>
+                                                        <div class="form-group col-lg-12">
+                                                            <label for="description">Description:</label>
+                                                            <textarea class="form-control" rows="5" name="description" id="description" required>Please prolongate this task.</textarea>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Send request</button>
                                                             <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
                                                         </div>
                                                     </form>

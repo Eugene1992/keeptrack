@@ -63,6 +63,18 @@ public class User extends BaseEntity {
     private Set<Task> assignedTasks;
 
     /**
+     * User's created requests.
+     */
+    @OneToMany(mappedBy = "creator", fetch = FetchType.EAGER)
+    private Set<Request> createdRequests;
+
+    /**
+     * User's assigned requests.
+     */
+    @OneToMany(mappedBy = "assigner", fetch = FetchType.EAGER)
+    private Set<Request> assignedRequests;
+
+    /**
      * User role for system functions separation.
      */
     @Enumerated(value = EnumType.STRING)
@@ -239,6 +251,22 @@ public class User extends BaseEntity {
 
     public void setAssignedTasks(Set<Task> assignedTasks) {
         this.assignedTasks = assignedTasks;
+    }
+
+    public Set<Request> getCreatedRequests() {
+        return createdRequests;
+    }
+
+    public void setCreatedRequests(Set<Request> createdRequests) {
+        this.createdRequests = createdRequests;
+    }
+
+    public Set<Request> getAssignedRequests() {
+        return assignedRequests;
+    }
+
+    public void setAssignedRequests(Set<Request> assignedRequests) {
+        this.assignedRequests = assignedRequests;
     }
 
     @Override

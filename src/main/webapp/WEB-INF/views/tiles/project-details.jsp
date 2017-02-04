@@ -317,45 +317,6 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <%--<form action="/project/task/add" method="POST" >
-                                        <input class="form-control" type="hidden" name="projectName" value="${currentProject.name}" required>
-                                        <div class="form-group col-lg-6">
-                                            <label for="task-title">Title:</label>
-                                            <input class="form-control" type="text" name="taskName" id="task-title" required>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <label for="assigner">Assign for:</label>
-                                            <select class="form-control" id="assigner" name="assignerId">
-                                                <c:forEach var="employee" items="${currentProject.users}">
-                                                    <option value="${employee.id}">${employee.firstName} ${employee.lastName}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <label for="assigner">Sprint:</label>
-                                            <select class="form-control" name="sprintId" required>
-                                                <c:forEach var="sprint" items="${currentProject.sprints}">
-                                                    <option value="${sprint.id}">${sprint.name}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <label for="taskEstimate">Estimate:</label>
-                                            <input class="form-control" type="number" name="taskEstimate" id="taskEstimate" required>
-                                        </div>
-                                        <div class="form-group col-lg-offset-3 col-lg-6">
-                                            <label for="taskEndDate">End date:</label>
-                                            <input type="date" name="taskEndDate" class="form-control" id="taskEndDate" required>
-                                        </div>
-                                        <div class="form-group col-lg-12">
-                                            <label for="taskDescription">Description:</label>
-                                            <textarea class="form-control" name="taskDescription" id="taskDescription" rows="5" required></textarea>
-                                        </div>
-                                        <div class="form-group col-lg-12 text-center">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i> Add task</button>
-                                            <button type="button" data-dismiss="modal" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> No, cancel</button>
-                                        </div>
-                                    </form>--%>
                                     <form:form action="/project/tasks/add" method="POST" modelAttribute="task" >
                                         <div class="form-group col-lg-12 outer">
                                             <div class="form-group col-lg-6">

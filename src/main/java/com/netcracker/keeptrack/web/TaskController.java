@@ -234,4 +234,46 @@ public class TaskController {
         taskService.changeTaskStatus(Integer.valueOf(taskId), TaskStatus.REJECTED);
         return "redirect:/project/tasks";
     }
+
+    /**
+     * Handles task estimate change request.
+     *
+     * @param taskId task identifier
+     * @param tittle task tittle
+     * @param estimate task estimate
+     * @param description task description
+     * @return redirects to project tasks menu
+     */
+    @RequestMapping(value = "project/task/request", method = RequestMethod.POST)
+    public String estimateRequest(@RequestParam("taskId") String taskId,
+                                  @RequestParam("tittle") String tittle,
+                                  @RequestParam("estimate") String estimate,
+                                  @RequestParam("description") String description) {
+        taskService.handleEstimateRequest(Integer.parseInt(taskId), tittle, Integer.parseInt(estimate), description);
+        return "redirect:/project/tasks";
+    }
+
+    /**
+     * Rejects selected task request.
+     * Used when user accept the task request.
+     *
+     * @param requestId task request id
+     */
+    @RequestMapping(value = "task/request/accept", method = RequestMethod.POST)
+    public String acceptRequest(@RequestParam("requestId") String requestId) {
+        taskService.acceptRequest(Integer.parseInt(requestId));
+        return "redirect:/project/requests";
+    }
+
+    /**
+     * Rejects selected task request.
+     * Used when user reject the task request.
+     *
+     * @param requestId task request id
+     */
+    @RequestMapping(value = "task/request/reject", method = RequestMethod.POST)
+    public String rejectRequest(@RequestParam("requestId") String requestId) {
+        taskService.rejectRequest(Integer.parseInt(requestId));
+        return "redirect:/project/requests";
+    }
 }

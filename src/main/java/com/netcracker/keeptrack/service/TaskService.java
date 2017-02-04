@@ -106,4 +106,28 @@ public interface TaskService {
      * @param taskId task id
      */
     void closeTask(Integer taskId);
+
+    /**
+     * Processes a request to change the estimate time.
+     *
+     * @param taskId specified task
+     * @param tittle specified task tittle
+     * @param reqEstimate requested estimate
+     * @param description specified task description
+     */
+    void handleEstimateRequest(Integer taskId, String tittle, Integer reqEstimate, String description);
+
+    /**
+     * Accepts the specified request.
+     *
+     * @param requestId request identifier
+     */
+    void acceptRequest(Integer requestId);
+
+    /**
+     * Rejects the specified request.
+     *
+     * @param requestId request identifier
+     */
+    void rejectRequest(Integer requestId);
 }

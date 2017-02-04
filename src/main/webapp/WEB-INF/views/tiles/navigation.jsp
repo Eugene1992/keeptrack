@@ -1,4 +1,6 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -9,37 +11,29 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"><i class="fa fa-clock-o"></i> KeepTrack</a>
+        <a class="navbar-brand" href="/home"><i class="fa fa-clock-o"></i> KeepTrack</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell"></i> <b class="caret"></b>
+                <i class="fa fa-bell"> <span class="badge" style="background-color: #337AB7">${fn:length(userOpenedRequests)}</span></i> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu alert-dropdown">
-                <li>
-                    <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                </li>
-                <li>
-                    <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">View All</a>
-                </li>
+                <c:choose>
+                    <c:when test="${not empty userOpenedRequests}">
+                        <c:forEach var="request" items="${userOpenedRequests}">
+                            <li style="font-size: 16px">
+                                <a href="/project/requests"><span class="label label-primary">${request.task.name}</span> - ${request.tittle}</a>
+                            </li>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <li style="font-size: 16px; text-align: center">
+                            <span> No assigned requests found.</span>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </li>
         <li class="dropdown">
@@ -84,6 +78,11 @@
             <security:authorize access="hasAnyRole('EMPLOYEE')">
                 <li>
                     <a href="/project/tasks"><i class="fa fa-fw fa-edit"></i> Tasks</a>
+                </li>
+            </security:authorize>
+            <security:authorize access="hasAnyRole('PM', 'EMPLOYEE')">
+                <li>
+                    <a href="/project/requests"><i class="fa fa-fw fa-edit"></i> Requests</a>
                 </li>
             </security:authorize>
             <security:authorize access="hasRole('ADMIN')">

@@ -359,12 +359,6 @@
                                         <form:errors path="startDate"
                                                      cssClass="label label-danger"/>
                                     </div>
-                                    <%--<div class="form-group col-lg-6">
-                                        <label for="endDate">End date:</label>
-                                        <form:input path="endDate" type="date"
-                                                    class="form-control"/>
-                                        <form:errors path="endDate" cssClass="label label-danger"/>
-                                    </div>--%>
                                 </div>
                                 <div class="form-group col-lg-12 outer">
                                     <div class="form-group col-lg-12">

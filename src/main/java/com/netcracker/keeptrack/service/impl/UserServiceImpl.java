@@ -2,6 +2,8 @@ package com.netcracker.keeptrack.service.impl;
 
 import com.netcracker.keeptrack.model.Gender;
 import com.netcracker.keeptrack.model.Project;
+import com.netcracker.keeptrack.model.Request;
+import com.netcracker.keeptrack.model.RequestStatus;
 import com.netcracker.keeptrack.model.Role;
 import com.netcracker.keeptrack.model.Task;
 import com.netcracker.keeptrack.model.TaskStatus;
@@ -231,5 +233,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Task> getLatestHiredEmployees(Integer limit) {
         return userRepository.getLatestHiredEmployees(new PageRequest(0, limit));
+    }
+
+    /**
+     * Returns user requests by specified status.
+     * @param user specified user
+     * @param status specified status
+     * @return list of the filtered requests
+     */
+    @Override
+    public List<Request> getUserRequestsByStatus(User user, RequestStatus status) {
+        return user.getAssignedRequests().stream()
+                .filter(request -> request.getAssigner().equals(user)
+                        && request.getStatus() == status)
+                .collect(Collectors.toList());
     }
 }
