@@ -299,7 +299,7 @@
                             <c:otherwise>
                                 <div class="col-lg-12"><br>
                                     <div class="alert alert-success" role="alert">
-                                        <p>No rejected requests found.</p>
+                                        <p>No created requests found.</p>
                                     </div>
                                 </div>
                             </c:otherwise>
